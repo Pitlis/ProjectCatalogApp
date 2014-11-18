@@ -1,0 +1,4 @@
+ProjectCatalogApp
+=================
+
+Project for training.
