@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddRecordCategory</title>
+</head>
+<body>
+    <p>Шаг 1: выберите категорию</p>
+    <div> 
+        @using (Html.BeginForm())
+        { 
+            @Html.DropDownList("CategorySelected", ViewBag.Categories as SelectList)
+            <p><input type="submit" value="Далее" /></p>
+        }
+    </div>
+</body>
+</html>

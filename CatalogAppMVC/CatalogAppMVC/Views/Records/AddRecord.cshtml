@@ -1,0 +1,36 @@
+﻿@model CatalogAppMVC.Models.Record
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddRecord</title>
+</head>
+<body>
+    <p>Шаг 2: описание</p>
+    <div> 
+        @using (Html.BeginForm())
+        {
+            <p>Название:</p>
+            @Html.TextBoxFor(name => Model.Name)
+            <p>Описание:</p>
+            @Html.TextAreaFor(description => Model.Description)
+            
+            <div>
+                <p>Спецификации:</p>
+                @for (int i = 0; i < Model.Specifications.Count; ++i)
+                {   
+                    <p><b>@Model.Specifications[i].Name</b> @Html.TextBoxFor(val => Model.Specifications[i].Value)</p>
+                }
+
+            </div>
+        <p><input type="submit" value="Далее" /></p>
+        }
+    </div>
+</body>
+</html>
