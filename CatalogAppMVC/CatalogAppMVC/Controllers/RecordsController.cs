@@ -27,10 +27,12 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddRecord(Record recordNew)
+        public ActionResult AddRecord(Record recordNew, string TagsString)
         {
             Record record = Session["Record"] as Record;
             record.LoadFromPage(recordNew);
+            record.LoadTagsFromString(TagsString);
+
             Session["Record"] = record;
             return RedirectToAction("AddRecordFiles");
         }
