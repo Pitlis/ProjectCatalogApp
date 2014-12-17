@@ -1,0 +1,19 @@
+﻿#photo {
+    width: 185px;
+    height: 185px;
+    float: left;
+    margin-left: 5px;
+    background-color:#b6d9f1;
+}
+
+#text {
+    margin: 10px 5px 0 200px;
+    min-height:200px;
+}
+
+#content {
+    margin-top: 20px;
+}
+#tags{
+    margin-top:30px;
+}
