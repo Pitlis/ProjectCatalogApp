@@ -18,7 +18,7 @@ namespace CatalogAppMVC.Controllers
         IUser user;//активный пользователь
         ICategory categories = new TestICategory();
         ISpecification specification = new TestISpecification();
-        IRepository repository;
+        IRepository repository = new TESTRepository();
 
         #region newRecord
 
@@ -79,22 +79,25 @@ namespace CatalogAppMVC.Controllers
 
         #endregion
 
-        Record record1 = new Record() { ID = 1, Name = "Test Record", Description = "Помните такой телефон — Nokia 3310? Разумеется, помните! А такую штуку как синтезатор мелодий в нем? Тоже помните, отлично. А по старым, теплым и ламповым мелодиям скучаете? Вот и я скучаю. А еще мне на глаза попался сайтик с более чем сотней нотных листов для этого редактора. И что я должен был оставить эту прелесть без внимания? Нет уж. Что я сделал? Правильно! Взял и написал точно такой же генератор мелодий, который позволяет на выходе получить" };
+
         public ActionResult RecordView(Record record)
         {
-            record = record1;
-            record.Specifications = specification.GetMandatSpecifications(1);
-            record.Files = TESTDocuments.GetFilesTEST();
-            record.Tags = Tag.CreateTagsFromString("test1, test2, test3, test4");
-
-
+            record = repository.GetRecord(111);
             return View(record);
         }
-        public FileResult DownloadFile()
+        public ActionResult TryDownloadFile(int fileID)
         {
-            Record r = new Record();
-            r.Files = TESTDocuments.GetFilesTEST();
-            return File((ConfigurationManager.AppSettings["pathToFiles"] as string) + r.Files[0].PachToFile, r.Files[0].type);
+            if (Access.CanDownloadFile(user, fileID))
+            {
+                return RedirectToAction("DownloadFile", new { FileID = fileID });
+            }
+            return View("DownloadFileError");
+        }
+
+        public FileResult DownloadFile(int FileID)
+        {
+            CatalogAppMVC.Models.File file = repository.GetFile(FileID);
+            return File(file.GetPatchToFile(), CatalogAppMVC.Models.File.TYPEFILES, file.GetFileName());
         }
 
 

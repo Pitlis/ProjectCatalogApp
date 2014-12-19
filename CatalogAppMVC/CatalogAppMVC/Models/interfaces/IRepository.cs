@@ -9,5 +9,8 @@ namespace CatalogAppMVC.Models.interfaces
     public interface IRepository
     {
         bool CreateRecord(Record record);
+        CatalogAppMVC.Models.Record GetRecord(int RecordID);
+        CatalogAppMVC.Models.File GetFile(int fileID);
+
     }
 }

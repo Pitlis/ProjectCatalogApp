@@ -65,7 +65,7 @@
                     {
                         <tr>
                             <td>
-                                @file.Name &#91; @file.typeName &#93;
+                                @file.DocumentName &#91; @file.DocumentType &#93;
                             </td>
                             <td>
                                 размер: @file.Size Мб
@@ -74,7 +74,7 @@
                                 загрузил: @file.AuthorName
                             </td>
                             <td>
-                                @Ajax.ActionLink("скачать", "DownloadFile", new AjaxOptions { }) спасибо
+                                @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
                             </td>
                         </tr>
                     }

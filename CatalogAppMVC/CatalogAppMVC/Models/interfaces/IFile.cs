@@ -9,5 +9,7 @@ namespace CatalogAppMVC.Models.interfaces
 {
     interface IFile
     {
+        string GetPatchToFile();
+        string GetFileName();
     }
 }
