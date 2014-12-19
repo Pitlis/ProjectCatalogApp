@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 
 using CatalogAppMVC.Models.TESTCODE;
+using System.Configuration;
 
 
 namespace CatalogAppMVC.Controllers
@@ -83,11 +84,19 @@ namespace CatalogAppMVC.Controllers
         {
             record = record1;
             record.Specifications = specification.GetMandatSpecifications(1);
+            record.Files = TESTDocuments.GetFilesTEST();
             record.Tags = Tag.CreateTagsFromString("test1, test2, test3, test4");
 
 
             return View(record);
         }
+        public FileResult DownloadFile()
+        {
+            Record r = new Record();
+            r.Files = TESTDocuments.GetFilesTEST();
+            return File((ConfigurationManager.AppSettings["pathToFiles"] as string) + r.Files[0].PachToFile, r.Files[0].type);
+        }
+
 
 
     }

@@ -155,6 +155,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\interfaces\ICategory.cs" />
+    <Compile Include="Models\interfaces\IFile.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
     <Compile Include="Models\interfaces\ISpecification.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />
@@ -185,7 +186,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Documents\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

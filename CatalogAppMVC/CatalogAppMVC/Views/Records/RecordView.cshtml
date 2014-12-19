@@ -59,7 +59,28 @@
             </div>
             <div class="tab-pane" id="photos">Фото</div>
             <div class="tab-pane" id="videos">Видео</div>
-            <div class="tab-pane" id="documents">Документы</div>
+            <div class="tab-pane" id="documents">
+                <table>
+                    @foreach (CatalogAppMVC.Models.File file in Model.Files)
+                    {
+                        <tr>
+                            <td>
+                                @file.Name &#91; @file.typeName &#93;
+                            </td>
+                            <td>
+                                размер: @file.Size Мб
+                            </td>
+                            <td>
+                                загрузил: @file.AuthorName
+                            </td>
+                            <td>
+                                @Ajax.ActionLink("скачать", "DownloadFile", new AjaxOptions { }) спасибо
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
         </div>
 
     </div>
