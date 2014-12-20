@@ -79,6 +79,7 @@ namespace CatalogAppMVC.Controllers
 
         #endregion
 
+        #region OneRecordView
 
         public ActionResult RecordView(Record record)
         {
@@ -101,6 +102,28 @@ namespace CatalogAppMVC.Controllers
         }
 
 
+        #endregion
 
+        public ActionResult TwoRecordsView(IEnumerable<Record> records)
+        {
+
+            //TODO Удалить заглушку
+            List<Record> records1 = new List<Record>();
+            records1.Add(repository.GetRecord(1));
+            records1[0].Name = "Запись 1";
+            records1.Add(repository.GetRecord(1));
+            records1[1].Name = "Запись 2";
+            records1[0].Specifications.Add(new Specification() { Name = "цвет1", Value = "зеленый" });
+            records1[0].Specifications.Add(new Specification() { Name = "цвет2", Value = "синий" });
+            records1[0].Specifications.Add(new Specification() { Name = "цвет3", Value = "желтый" });
+
+            records1[1].Specifications.Add(new Specification() { Name = "цвет2", Value = "фиолетовый" });
+            records1[1].Specifications.Add(new Specification() { Name = "цвет4", Value = "красный" });
+            records1[1].Specifications.Add(new Specification() { Name = "цвет5", Value = "голубой" });
+            records = records1;
+            //---
+            MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
+            return View(multRecords);
+        }
     }
 }

@@ -169,6 +169,7 @@
     <Compile Include="Models\interfaces\IRepository.cs" />
     <Compile Include="Models\interfaces\ISpecification.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />
+    <Compile Include="Models\MultipleRecordsForCompare.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -194,6 +195,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Records\DownloadFileError.cshtml" />
+    <Content Include="Views\Records\TwoRecordsView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

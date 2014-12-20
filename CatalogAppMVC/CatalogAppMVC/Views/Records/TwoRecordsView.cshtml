@@ -1,0 +1,36 @@
+﻿@model CatalogAppMVC.Models.MultipleRecordsForCompare
+
+@{
+    ViewBag.Title = "TwoRecordsView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TwoRecordsView</h2>
+
+<table class="table">
+    <tr>
+        <th>Характеристика</th>
+        @foreach(string recordName in Model.RecordNames)
+        {
+            <th>@recordName</th>
+        }
+    </tr>
+    @foreach (KeyValuePair<string, List<string>> sp in Model.GetSpecifications())
+    {
+        <tr>
+            <td>@sp.Key</td>
+            @foreach (string val in Model.GetSpecifications()[sp.Key])
+            {
+                if (val != null)
+                {
+                    <td>@val</td>
+                }
+                else
+                {
+                    <td>&mdash;</td>
+                }
+            }
+        </tr>
+    }
+</table>
+
