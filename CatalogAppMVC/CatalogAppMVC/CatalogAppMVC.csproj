@@ -176,6 +176,7 @@
     <Compile Include="Models\TESTCODE\TESTDocuments.cs" />
     <Compile Include="Models\TESTCODE\TestICategory.cs" />
     <Compile Include="Models\TESTCODE\TestISpecification.cs" />
+    <Compile Include="Models\TESTCODE\TESTRecords.cs" />
     <Compile Include="Models\TESTCODE\TESTRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -196,6 +197,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Records\DownloadFileError.cshtml" />
     <Content Include="Views\Records\TwoRecordsView.cshtml" />
+    <Content Include="Views\Records\RecordsOfCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

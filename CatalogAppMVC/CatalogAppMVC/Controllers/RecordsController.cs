@@ -125,5 +125,14 @@ namespace CatalogAppMVC.Controllers
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);
         }
+
+        public ActionResult RecordsOfCategory(int categoryID)
+        {
+            if (Access.CanReadCategory(user, categoryID))
+            {
+                return View(TESTRecords.GetRecords());
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

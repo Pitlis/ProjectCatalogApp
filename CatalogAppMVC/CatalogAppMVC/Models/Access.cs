@@ -14,5 +14,12 @@ namespace CatalogAppMVC.Models
             //заглушка!!
             return fileID == 1 ? true : false;
         }
+
+        public static bool CanReadCategory(IUser user, int categoryID)
+        {
+            //TODO: Разрешение на просмотр категории (для защиты от подделки запроса)
+            //заглушка!!
+            return categoryID == 0 ? true : false;
+        }
     }
 }
