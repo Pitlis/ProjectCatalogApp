@@ -1,0 +1,88 @@
+﻿@model CatalogAppMVC.Models.Record
+@using CatalogAppMVC.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RecordView</title>
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/RecordView.js")" type="text/javascript"></script>
+
+    <link href="@Url.Content("~/Content/RecordView.css")" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="page-header">
+        <h1><small>@Model.Name</small></h1>
+    </div>
+        <div id="photo">
+            photo
+        </div>
+        <div id="text">
+            @Model.Description
+        </div>
+
+    <div id="tags">
+        @foreach (Tag t in Model.Tags)
+        {
+            <text>&lt;</text>@t.Name<text>&gt;</text>
+        }
+    </div>
+
+    <div id="content">
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#specifications" data-toggle="tab">Технические характеристики</a></li>
+            <li><a href="#photos" data-toggle="tab">Фото</a></li>
+            <li><a href="#videos" data-toggle="tab">Видео</a></li>
+            <li><a href="#documents" data-toggle="tab">Документы</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="specifications">
+                <table class="table">
+                    <tr>
+                        <th>Характеристика</th>
+                        <th>Значение</th>
+                    </tr>
+                    @foreach (Specification sp in Model.Specifications)
+                    {
+                        <tr>
+                            <td>@sp.Name</td>
+                            <td>@sp.Value</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane" id="photos">Фото</div>
+            <div class="tab-pane" id="videos">Видео</div>
+            <div class="tab-pane" id="documents">
+                <table>
+                    @foreach (CatalogAppMVC.Models.File file in Model.Files)
+                    {
+                        <tr>
+                            <td>
+                                @file.DocumentName &#91; @file.DocumentType &#93;
+                            </td>
+                            <td>
+                                размер: @file.Size Мб
+                            </td>
+                            <td>
+                                загрузил: @file.AuthorName
+                            </td>
+                            <td>
+                                @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

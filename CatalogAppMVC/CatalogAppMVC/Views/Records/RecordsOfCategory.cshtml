@@ -1,0 +1,14 @@
+﻿@model IEnumerable<CatalogAppMVC.Models.Record>
+
+@{
+    ViewBag.Title = "RecordsOfCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>RecordsOfCategory</h2>
+<ul class="list-group">
+    @foreach (CatalogAppMVC.Models.Record record in Model)
+    {
+        <li class="list-group-item">@Html.ActionLink(record.Name, "RecordsOfCategory", "Record", null, new { recordID = record.ID })</li>
+    }
+</ul>

@@ -10,5 +10,6 @@ namespace CatalogAppMVC.Models.interfaces
     {
         //возвращает список категорий, в которые может писать данный пользователь
         List<Category> GetCategoriesForWrite(IUser user);
+        List<Category> GetOpenCategory(IUser user);
     }
 }

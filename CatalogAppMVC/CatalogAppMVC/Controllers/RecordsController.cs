@@ -8,8 +8,12 @@ using System.Web.Mvc;
 
 
 using CatalogAppMVC.Models.TESTCODE;
+<<<<<<< HEAD
 using Ninject;
 using CatalogAppMVC.Models.LinqToSqlMdl;
+=======
+using System.Configuration;
+>>>>>>> a7292b63813708bece0642ba686214e122732f97
 
 
 namespace CatalogAppMVC.Controllers
@@ -19,9 +23,15 @@ namespace CatalogAppMVC.Controllers
         IUser user;//активный пользователь
         ICategory categories = new TestICategory();
         ISpecification specification = new TestISpecification();
+<<<<<<< HEAD
 
         [Inject]
         public IRepository repo { get; set; }
+=======
+        IRepository repository = new TESTRepository();
+
+        #region newRecord
+>>>>>>> a7292b63813708bece0642ba686214e122732f97
 
         [HttpGet]
         public ActionResult AddRecord()
@@ -75,6 +85,65 @@ namespace CatalogAppMVC.Controllers
             Record record = Session["Record"] as Record;
            
             return View("Добавлено");
+        }
+
+
+        #endregion
+
+        #region OneRecordView
+
+        public ActionResult RecordView(Record record)
+        {
+            record = repository.GetRecord(111);
+            return View(record);
+        }
+        public ActionResult TryDownloadFile(int fileID)
+        {
+            if (Access.CanDownloadFile(user, fileID))
+            {
+                return RedirectToAction("DownloadFile", new { FileID = fileID });
+            }
+            return View("DownloadFileError");
+        }
+
+        public FileResult DownloadFile(int FileID)
+        {
+            CatalogAppMVC.Models.File file = repository.GetFile(FileID);
+            return File(file.GetPatchToFile(), CatalogAppMVC.Models.File.TYPEFILES, file.GetFileName());
+        }
+
+
+        #endregion
+
+        public ActionResult TwoRecordsView(IEnumerable<Record> records)
+        {
+
+            //TODO Удалить заглушку
+            List<Record> records1 = new List<Record>();
+            records1.Add(repository.GetRecord(1));
+            records1[0].Name = "Запись 1";
+            records1.Add(repository.GetRecord(1));
+            records1[1].Name = "Запись 2";
+            records1[0].Specifications.Add(new Specification() { Name = "цвет1", Value = "зеленый" });
+            records1[0].Specifications.Add(new Specification() { Name = "цвет2", Value = "синий" });
+            records1[0].Specifications.Add(new Specification() { Name = "цвет3", Value = "желтый" });
+
+            records1[1].Specifications.Add(new Specification() { Name = "цвет2", Value = "фиолетовый" });
+            records1[1].Specifications.Add(new Specification() { Name = "цвет4", Value = "красный" });
+            records1[1].Specifications.Add(new Specification() { Name = "цвет5", Value = "голубой" });
+            records = records1;
+            //---
+            MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
+            return View(multRecords);
+        }
+
+        public ActionResult RecordsOfCategory(int categoryID)
+        {
+            if (Access.CanReadCategory(user, categoryID))
+            {
+                return View(TESTRecords.GetRecords());
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

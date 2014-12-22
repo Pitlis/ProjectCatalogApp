@@ -9,6 +9,7 @@ namespace CatalogAppMVC.Models.interfaces
 {
     public interface IRepository
     {
+<<<<<<< HEAD
        
 
         #region CatalogCategories
@@ -59,5 +60,11 @@ namespace CatalogAppMVC.Models.interfaces
         
         
         
+=======
+        bool CreateRecord(Record record);
+        CatalogAppMVC.Models.Record GetRecord(int RecordID);
+        CatalogAppMVC.Models.File GetFile(int fileID);
+
+>>>>>>> a7292b63813708bece0642ba686214e122732f97
     }
 }

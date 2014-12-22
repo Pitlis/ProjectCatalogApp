@@ -9,15 +9,16 @@ namespace CatalogAppMVC.Models
     enum Status {moder, good}
     public class Record
     {
+        public int ID {get;  set;}
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Tag> Tags { get; private set; }
+        public List<Tag> Tags { get; set; }
         public List<Specification> Specifications { get; set; }
+        public List<File> Files {get; set;}
 
         private IUser _userAuthor;
         private Status _status;
         private int _categoryID;
-        private List<File> _files;
 
         public Record(IUser user, int categoryID, ISpecification specification)
         {
