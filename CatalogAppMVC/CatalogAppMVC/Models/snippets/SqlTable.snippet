@@ -1,0 +1,71 @@
+﻿<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0" >
+    <Header>
+      <Title>
+        Sql repository
+      </Title>
+      <Shortcut>sqltable</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Table</ID>
+          <ToolTip>Table name for create.</ToolTip>
+          <Default>Table</Default>
+        </Literal>
+      </Declarations>
+
+      <Code Language="CSharp">
+        <![CDATA[
+        
+        public IQueryable<$Table$> $Table$s
+        {
+            get
+            {
+                return Db.$Table$s;
+            }
+        }
+
+        public bool Create$Table$($Table$ instance)
+        {
+            if (instance.ID == 0)
+            {
+                Db.$Table$s.InsertOnSubmit(instance);
+                Db.$Table$s.Context.SubmitChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Update$Table$($Table$ instance)
+        {
+            $Table$ cache = Db.$Table$s.Where(p => p.ID == instance.ID).FirstOrDefault();
+            if (cache != null)
+            {
+                //TODO : Update fields for $Table$
+                Db.$Table$s.Context.SubmitChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Remove$Table$(int id$Table$)
+        {
+            $Table$ instance = Db.$Table$s.Where(p => p.ID == id$Table$).FirstOrDefault();
+            if (instance != null)
+            {
+                Db.$Table$s.DeleteOnSubmit(instance);
+                Db.$Table$s.Context.SubmitChanges();
+                return true;
+            }
+
+            return false;
+        }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
