@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CatalogAppMVC.Models
 {
-    public class File: IFile
+    public class File
     {
         public const string TYPEFILES = "multipart/form-data";
 
@@ -33,6 +33,7 @@ namespace CatalogAppMVC.Models
             PachToFile = pachToFile;
         }
 
+
         public string GetPatchToFile()
         {
             string filesDirectory = ConfigurationManager.AppSettings["FilesDirectory"] as string;
@@ -42,6 +43,12 @@ namespace CatalogAppMVC.Models
         {
             return FileName + "." + FileType;
         }
+
+
+
+        //Методы для работы с БД
+
+
 
     }
 }

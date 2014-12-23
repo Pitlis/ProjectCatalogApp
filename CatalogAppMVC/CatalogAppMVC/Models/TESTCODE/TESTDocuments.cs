@@ -18,5 +18,11 @@ namespace CatalogAppMVC.Models.TESTCODE
             list.Add(new File(5, "Вася Пупкин5", "Какой-то чертеж5", "чертеж", "testFile", "pdf", 1.3, "/"));
             return list;
         }
+
+        public static File GetFile(int fileID)
+        {
+            //TODO добавить в класс репозитория метод получения файла
+            return new File(1, "Вася Пупкин1", "Какой-то чертеж1", "чертеж", "testFile", "pdf", 1.3, "/");
+        }
     }
 }

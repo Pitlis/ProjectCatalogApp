@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 namespace CatalogAppMVC.Models.interfaces
 {
     public interface IRepository
-    {
-        bool CreateMachinery(Machinery instance);
-        CatalogAppMVC.Models.Record GetRecord(int RecordID);
-        CatalogAppMVC.Models.File GetFile(int fileID);
-
-       
+    {      
 
         #region CatalogCategories
 
@@ -29,6 +24,8 @@ namespace CatalogAppMVC.Models.interfaces
         #region Machinery
 
         IQueryable<Machinery> Machinerys { get; }
+
+        bool CreateMachinery(Machinery instance);
 
         bool UpdateMachinery(Machinery instance);
 
@@ -57,8 +54,6 @@ namespace CatalogAppMVC.Models.interfaces
         bool RemoveTags(int idTags);
 
         #endregion 
-        
-        
         
         
     }

@@ -6,21 +6,19 @@ using System.Web.Mvc;
 
 using CatalogAppMVC.Models.interfaces;
 using CatalogAppMVC.Models.TESTCODE;
+using CatalogAppMVC.Models;
 
 namespace CatalogAppMVC.Controllers
 {
     public class HomeController : Controller
     {
         IUser user;//активный пользователь
-        ICategory categories = new TestICategory();
-        ISpecification specification = new TestISpecification();
-        IRepository repository = new TESTRepository();
 
 
         // GET: Home
         public ActionResult Index()
         {
-            return View(categories.GetOpenCategory(user));
+            return View(TestICategory.GetOpenCategory(user));
         }
     }
 }

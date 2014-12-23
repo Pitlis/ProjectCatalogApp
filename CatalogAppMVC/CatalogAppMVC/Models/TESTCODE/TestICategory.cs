@@ -6,9 +6,9 @@ using System.Web;
 
 namespace CatalogAppMVC.Models.TESTCODE
 {
-    public class TestICategory: ICategory
+    public class TestICategory
     {
-        public List<Category> GetCategoriesForWrite(IUser user)
+        public static List<Category> GetCategoriesForWrite(IUser user)
         {
             Category cat1 = new Category() { Name = "Категория 1", ID = 0 };
             Category cat2 = new Category() { Name = "Категория 2", ID = 1 };
@@ -20,7 +20,7 @@ namespace CatalogAppMVC.Models.TESTCODE
             return list;
         }
 
-        public List<Category> GetOpenCategory(IUser user)
+        public static List<Category> GetOpenCategory(IUser user)
         {
             Category cat1 = new Category() { Name = "Категория 1", ID = 0 };
             Category cat2 = new Category() { Name = "Категория 2", ID = 1 };

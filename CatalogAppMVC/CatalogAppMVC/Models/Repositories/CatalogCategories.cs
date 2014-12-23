@@ -9,11 +9,6 @@ namespace CatalogAppMVC.Models.Repositories
 {
    public partial class SqlRepositoryMain
     {
-       CatalogAppMVC.Models.File IRepository.GetFile(int fileID)
-       {
-           throw new NotImplementedException();
-       }
-
         public IQueryable<CatalogCategories> CatalogCategories
         {
             get

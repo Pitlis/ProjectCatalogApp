@@ -185,10 +185,7 @@
     <Compile Include="Models\Identity\ApplicationUser.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
-    <Compile Include="Models\interfaces\ICategory.cs" />
-    <Compile Include="Models\interfaces\IFile.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
-    <Compile Include="Models\interfaces\ISpecification.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />
     <Compile Include="Models\MultipleRecordsForCompare.cs" />
     <Compile Include="Models\LinqToSqlMdl\DataClasses.designer.cs">
@@ -209,7 +206,6 @@
     <Compile Include="Models\TESTCODE\TestICategory.cs" />
     <Compile Include="Models\TESTCODE\TestISpecification.cs" />
     <Compile Include="Models\TESTCODE\TESTRecords.cs" />
-    <Compile Include="Models\TESTCODE\TESTRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

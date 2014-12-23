@@ -18,9 +18,6 @@ namespace CatalogAppMVC.Controllers
     public class RecordsController : Controller
     {
         IUser user;//активный пользователь
-        ICategory categories = new TestICategory();
-        ISpecification specification = new TestISpecification();
-        IRepository repository = new TESTRepository();
 
         #region newRecord
 
@@ -51,16 +48,15 @@ namespace CatalogAppMVC.Controllers
         [HttpGet]
         public ActionResult AddRecordCategory()
         {
-            ViewBag.Categories = new SelectList(categories.GetCategoriesForWrite(user), "Id", "Name");
+            ViewBag.Categories = new SelectList(TestICategory.GetCategoriesForWrite(user), "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddRecordCategory(Machinery someMachine)
+        public ActionResult AddRecordCategory(int CategorySelected)
         {
-            //TODO Добавить проверку, правда ли пользователь выбрал одну из доступных ему категорий 
-            int CategoryID = 1;//TODO Страница создания записи не работает
-            Session["Record"] = new Record(user, CategoryID, specification);
+            //TODO Добавить проверку, правда ли пользователь выбрал одну из доступных ему категорий
+            Session["Record"] = new Record(user, CategorySelected);
             return RedirectToAction("AddRecord");
         }
 
@@ -88,7 +84,7 @@ namespace CatalogAppMVC.Controllers
 
         public ActionResult RecordView(Record record)
         {
-            record = repository.GetRecord(111);
+            record = TESTRecords.GetRecord(111);
             return View(record);
         }
         public ActionResult TryDownloadFile(int fileID)
@@ -102,7 +98,7 @@ namespace CatalogAppMVC.Controllers
 
         public FileResult DownloadFile(int FileID)
         {
-            CatalogAppMVC.Models.File file = repository.GetFile(FileID);
+            CatalogAppMVC.Models.File file = TESTDocuments.GetFile(FileID);
             return File(file.GetPatchToFile(), CatalogAppMVC.Models.File.TYPEFILES, file.GetFileName());
         }
 
@@ -114,9 +110,9 @@ namespace CatalogAppMVC.Controllers
 
             //TODO Удалить заглушку
             List<Record> records1 = new List<Record>();
-            records1.Add(repository.GetRecord(1));
+            records1.Add(TESTRecords.GetRecord(1));
             records1[0].Name = "Запись 1";
-            records1.Add(repository.GetRecord(1));
+            records1.Add(TESTRecords.GetRecord(2));
             records1[1].Name = "Запись 2";
             records1[0].Specifications.Add(new Specification() { Name = "цвет1", Value = "зеленый" });
             records1[0].Specifications.Add(new Specification() { Name = "цвет2", Value = "синий" });

@@ -6,10 +6,10 @@ using System.Web;
 
 namespace CatalogAppMVC.Models.TESTCODE
 {
-    public class TestISpecification: ISpecification
+    public class TestISpecification
     {
 
-        public List<Specification> GetMandatSpecifications(int categoryID)
+        public static List<Specification> GetMandatSpecifications(int categoryID)
         {
             Specification cat1 = new Specification() { Name = "Вес", Value = "1000"};
             Specification cat2 = new Specification() { Name = "Ширина", Value = "61"};

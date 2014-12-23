@@ -1,4 +1,5 @@
 ﻿using CatalogAppMVC.Models.interfaces;
+using CatalogAppMVC.Models.TESTCODE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,11 @@ namespace CatalogAppMVC.Models
         private Status _status;
         private int _categoryID;
 
-        public Record(IUser user, int categoryID, ISpecification specification)
+        public Record(IUser user, int categoryID)
         {
             _categoryID = categoryID;
             _userAuthor = user;
-            Specifications = specification.GetMandatSpecifications(_categoryID);
+            Specifications = TestISpecification.GetMandatSpecifications(_categoryID);
         }
         
         public Record()
@@ -45,6 +46,16 @@ namespace CatalogAppMVC.Models
         public void LoadTagsFromString(string tagsString)
         {
             Tags = Tag.CreateTagsFromString(tagsString);
+        }
+
+
+
+
+        //Методы для работы с БД
+
+        public static Record GetRecord(int recordID)
+        {
+            throw new NotImplementedException();
         }
     }
 }
