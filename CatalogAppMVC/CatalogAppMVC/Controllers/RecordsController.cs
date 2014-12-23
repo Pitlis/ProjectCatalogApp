@@ -9,6 +9,8 @@ using System.Web.Mvc;
 
 using CatalogAppMVC.Models.TESTCODE;
 using System.Configuration;
+using Ninject;
+using CatalogAppMVC.Models.LinqToSqlMdl;
 
 
 namespace CatalogAppMVC.Controllers
@@ -21,6 +23,9 @@ namespace CatalogAppMVC.Controllers
         IRepository repository = new TESTRepository();
 
         #region newRecord
+
+        [Inject]
+        public IRepository repo { get; set; }
 
         [HttpGet]
         public ActionResult AddRecord()
@@ -46,13 +51,13 @@ namespace CatalogAppMVC.Controllers
         [HttpGet]
         public ActionResult AddRecordCategory()
         {
-            SelectList categoriesList = new SelectList(categories.GetCategoriesForWrite(user), "ID", "Name");
-            ViewBag.Categories = categoriesList;
+             
+            ViewBag.Categories = new SelectList(repo.CatalogCategories, "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddRecordCategory(int CategorySelected)
+        public ActionResult AddRecordCategory(Machinery someMachine)
         {
             //TODO Добавить проверку, правда ли пользователь выбрал одну из доступных ему категорий 
             Session["Record"] = new Record(user, CategorySelected, specification);
@@ -72,7 +77,7 @@ namespace CatalogAppMVC.Controllers
         public ActionResult AddRecordFiles(object obl)
         {
             Record record = Session["Record"] as Record;
-            repository.CreateRecord(record);
+           
             return View("Добавлено");
         }
 

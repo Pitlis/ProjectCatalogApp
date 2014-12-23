@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CatalogDatabase" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\DB\CatalogDatabase.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CatalogDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PathToPhoto" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Users_AspNetUserClaims" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaims" />
+      <Association Name="Users_AspNetUserLogins" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogins" />
+      <Association Name="Users_Documents" Member="Documents" ThisKey="Id" OtherKey="UserAuthor" Type="Documents" />
+      <Association Name="Users_Machinery" Member="Machinery" ThisKey="Id" OtherKey="UserAuthor" Type="Machinery" />
+      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleID" OtherKey="Id" Type="Roles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccessCatalogCategories" Member="AccessCatalogCategories">
+    <Type Name="AccessCatalogCategories">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="R" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="W" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="CatalogCategories_AccessCatalogCategories" Member="CatalogCategories" ThisKey="CategoryID" OtherKey="Id" Type="CatalogCategories" IsForeignKey="true" />
+      <Association Name="Roles_AccessCatalogCategories" Member="Roles" ThisKey="RoleID" OtherKey="Id" Type="Roles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaims">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Users_AspNetUserClaims" Member="Users" ThisKey="UserId" OtherKey="Id" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogins">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Users_AspNetUserLogins" Member="Users" ThisKey="UserId" OtherKey="Id" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatalogCategories" Member="CatalogCategories">
+    <Type Name="CatalogCategories">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="CatalogCategories_AccessCatalogCategories" Member="AccessCatalogCategories" ThisKey="Id" OtherKey="CategoryID" Type="AccessCatalogCategories" />
+      <Association Name="CatalogCategories_Machinery" Member="Machinery" ThisKey="Id" OtherKey="Category" Type="Machinery" />
+      <Association Name="CatalogCategories_MandatSpecificCatalogCategories" Member="MandatSpecificCatalogCategories" ThisKey="Id" OtherKey="CatalogCategoryID" Type="MandatSpecificCatalogCategories" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documents" Member="Documents">
+    <Type Name="Documents">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserAuthor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PathToFile" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MachineID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Users_Documents" Member="Users" ThisKey="UserAuthor" OtherKey="Id" Type="Users" IsForeignKey="true" />
+      <Association Name="Machinery_Documents" Member="Machinery" ThisKey="MachineID" OtherKey="Id" Type="Machinery" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Machinery" Member="Machinery">
+    <Type Name="Machinery">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserAuthor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PathToPhoto" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Machinery_Documents" Member="Documents" ThisKey="Id" OtherKey="MachineID" Type="Documents" />
+      <Association Name="Machinery_MachineSpecifications" Member="MachineSpecifications" ThisKey="Id" OtherKey="MachineID" Type="MachineSpecifications" />
+      <Association Name="Machinery_MachineTags" Member="MachineTags" ThisKey="Id" OtherKey="MachineID" Type="MachineTags" />
+      <Association Name="CatalogCategories_Machinery" Member="CatalogCategories" ThisKey="Category" OtherKey="Id" Type="CatalogCategories" IsForeignKey="true" />
+      <Association Name="Users_Machinery" Member="Users" ThisKey="UserAuthor" OtherKey="Id" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MachineSpecifications" Member="MachineSpecifications">
+    <Type Name="MachineSpecifications">
+      <Column Name="MachineID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SpecificationID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Machinery_MachineSpecifications" Member="Machinery" ThisKey="MachineID" OtherKey="Id" Type="Machinery" IsForeignKey="true" />
+      <Association Name="Specifications_MachineSpecifications" Member="Specifications" ThisKey="SpecificationID" OtherKey="Id" Type="Specifications" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MachineTags" Member="MachineTags">
+    <Type Name="MachineTags">
+      <Column Name="MachineID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TagID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Machinery_MachineTags" Member="Machinery" ThisKey="MachineID" OtherKey="Id" Type="Machinery" IsForeignKey="true" />
+      <Association Name="Tags_MachineTags" Member="Tags" ThisKey="TagID" OtherKey="Id" Type="Tags" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MandatSpecificCatalogCategories" Member="MandatSpecificCatalogCategories">
+    <Type Name="MandatSpecificCatalogCategories">
+      <Column Name="SpecificationID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CatalogCategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CatalogCategories_MandatSpecificCatalogCategories" Member="CatalogCategories" ThisKey="CatalogCategoryID" OtherKey="Id" Type="CatalogCategories" IsForeignKey="true" />
+      <Association Name="Specifications_MandatSpecificCatalogCategories" Member="Specifications" ThisKey="SpecificationID" OtherKey="Id" Type="Specifications" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Roles">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="LimitSizeFileExternal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LimitSizeFileInternal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LimitTraffic" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDownloadFile" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Roles_Users" Member="Users" ThisKey="Id" OtherKey="RoleID" Type="Users" />
+      <Association Name="Roles_AccessCatalogCategories" Member="AccessCatalogCategories" ThisKey="Id" OtherKey="RoleID" Type="AccessCatalogCategories" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Specifications" Member="Specifications">
+    <Type Name="Specifications">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Specifications_MachineSpecifications" Member="MachineSpecifications" ThisKey="Id" OtherKey="SpecificationID" Type="MachineSpecifications" />
+      <Association Name="Specifications_MandatSpecificCatalogCategories" Member="MandatSpecificCatalogCategories" ThisKey="Id" OtherKey="SpecificationID" Type="MandatSpecificCatalogCategories" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tags" Member="Tags">
+    <Type Name="Tags">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Tags_MachineTags" Member="MachineTags" ThisKey="Id" OtherKey="TagID" Type="MachineTags" />
+    </Type>
+  </Table>
+</Database>

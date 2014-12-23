@@ -1,4 +1,4 @@
-﻿
+﻿@model CatalogAppMVC.Models.LinqToSqlMdl.CatalogCategories
 @{
     Layout = null;
 }
@@ -15,7 +15,7 @@
     <div> 
         @using (Html.BeginForm())
         { 
-            @Html.DropDownList("CategorySelected", ViewBag.Categories as SelectList)
+            @Html.DropDownList("Categories", "Выберите")
             <p><input type="submit" value="Далее" /></p>
         }
     </div>
