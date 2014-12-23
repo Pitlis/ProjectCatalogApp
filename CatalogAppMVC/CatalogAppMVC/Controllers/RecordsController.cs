@@ -60,7 +60,8 @@ namespace CatalogAppMVC.Controllers
         public ActionResult AddRecordCategory(Machinery someMachine)
         {
             //TODO Добавить проверку, правда ли пользователь выбрал одну из доступных ему категорий 
-            Session["Record"] = new Record(user, CategorySelected, specification);
+            int CategoryID = 1;//TODO Страница создания записи не работает
+            Session["Record"] = new Record(user, CategoryID, specification);
             return RedirectToAction("AddRecord");
         }
 

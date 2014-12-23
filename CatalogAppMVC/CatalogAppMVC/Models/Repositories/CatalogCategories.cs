@@ -1,4 +1,5 @@
-﻿using CatalogAppMVC.Models.LinqToSqlMdl;
+﻿using CatalogAppMVC.Models.interfaces;
+using CatalogAppMVC.Models.LinqToSqlMdl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,10 @@ namespace CatalogAppMVC.Models.Repositories
 {
    public partial class SqlRepositoryMain
     {
-
+       CatalogAppMVC.Models.File IRepository.GetFile(int fileID)
+       {
+           throw new NotImplementedException();
+       }
 
         public IQueryable<CatalogCategories> CatalogCategories
         {

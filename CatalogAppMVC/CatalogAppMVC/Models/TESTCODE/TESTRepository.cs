@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatalogAppMVC.Models.LinqToSqlMdl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,7 +8,7 @@ namespace CatalogAppMVC.Models.TESTCODE
 {
     public class TESTRepository: CatalogAppMVC.Models.interfaces.IRepository
     {
-        public bool CreateRecord(Record record)
+        public bool CreateMachinery(Machinery instance)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +19,7 @@ namespace CatalogAppMVC.Models.TESTCODE
             return new File(1, "Вася Пупкин1", "Какой-то чертеж1", "чертеж", "testFile", "pdf", 1.3, "/");
         }
 
-        public Record GetRecord(int RecordID)
+        public CatalogAppMVC.Models.Record GetRecord(int RecordID)
         {
             //TODO добавить в класс репозитория метод получения записи
             //Все ниже - заглушка!!!
@@ -29,6 +30,87 @@ namespace CatalogAppMVC.Models.TESTCODE
             record.Tags = Tag.CreateTagsFromString("test1, test2, test3, test4");
             record.Files = TESTDocuments.GetFilesTEST();
             return record;
+        }
+
+
+        IQueryable<LinqToSqlMdl.CatalogCategories> interfaces.IRepository.CatalogCategories
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        bool interfaces.IRepository.CreateCatalogCategories(LinqToSqlMdl.CatalogCategories instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.UpdateCatalogCategories(LinqToSqlMdl.CatalogCategories instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.RemoveCatalogCategories(int idCatalogCategories)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<LinqToSqlMdl.Machinery> interfaces.IRepository.Machinerys
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        bool interfaces.IRepository.CreateMachinery(LinqToSqlMdl.Machinery instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.UpdateMachinery(LinqToSqlMdl.Machinery instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.RemoveMachinery(int idMachinery)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<LinqToSqlMdl.Specifications> interfaces.IRepository.Specifications
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        bool interfaces.IRepository.CreateSpecifications(LinqToSqlMdl.Specifications instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.UpdateSpecifications(LinqToSqlMdl.Specifications instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.RemoveSpecifications(int idSpecifications)
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<LinqToSqlMdl.Tags> interfaces.IRepository.Tags
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        bool interfaces.IRepository.CreateTags(LinqToSqlMdl.Tags instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.UpdateTags(LinqToSqlMdl.Tags instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool interfaces.IRepository.RemoveTags(int idTags)
+        {
+            throw new NotImplementedException();
         }
     }
 }

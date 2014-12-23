@@ -8,7 +8,10 @@ namespace CatalogAppMVC.Models.Repositories
 {
      partial class SqlRepositoryMain
     {
-
+         public Record GetRecord(int recordID)
+         {
+             return new Record();
+         }
 
         public IQueryable<Machinery> Machinerys
         {

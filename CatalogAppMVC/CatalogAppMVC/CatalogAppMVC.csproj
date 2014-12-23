@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Repositories\CatalogCategories.cs" />
+    <Compile Include="Models\Repositories\Files.cs" />
     <Compile Include="Models\Repositories\Machinery.cs" />
     <Compile Include="Models\Repositories\Specifications.cs" />
     <Compile Include="Models\Repositories\SqlRepositoryMain.cs" />

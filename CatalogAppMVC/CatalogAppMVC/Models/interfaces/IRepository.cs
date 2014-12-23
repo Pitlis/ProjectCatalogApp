@@ -9,7 +9,7 @@ namespace CatalogAppMVC.Models.interfaces
 {
     public interface IRepository
     {
-        bool CreateRecord(Record record);
+        bool CreateMachinery(Machinery instance);
         CatalogAppMVC.Models.Record GetRecord(int RecordID);
         CatalogAppMVC.Models.File GetFile(int fileID);
 
@@ -29,8 +29,6 @@ namespace CatalogAppMVC.Models.interfaces
         #region Machinery
 
         IQueryable<Machinery> Machinerys { get; }
-
-        bool CreateMachinery(Machinery instance);
 
         bool UpdateMachinery(Machinery instance);
 
