@@ -51,8 +51,7 @@ namespace CatalogAppMVC.Controllers
         [HttpGet]
         public ActionResult AddRecordCategory()
         {
-             
-            ViewBag.Categories = new SelectList(repo.CatalogCategories, "Id", "Name");
+            ViewBag.Categories = new SelectList(categories.GetCategoriesForWrite(user), "Id", "Name");
             return View();
         }
 
