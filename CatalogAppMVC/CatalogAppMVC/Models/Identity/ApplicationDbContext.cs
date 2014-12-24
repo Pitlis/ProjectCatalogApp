@@ -3,11 +3,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CatalogAppMVC.Models.Identity
 {
-    internal class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    internal class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
     {
 
         public ApplicationDbContext()
-            : base("CatalogConnection", throwIfV1Schema: false)
+            : base("CatalogDatabaseConnectionString")
         {
         }
 

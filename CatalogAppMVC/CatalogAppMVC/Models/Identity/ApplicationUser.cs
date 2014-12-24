@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CatalogAppMVC.Models.Identity
 {
-    class ApplicationUser : IdentityUser
+    class ApplicationUser : IdentityUser, CatalogAppMVC.Models.interfaces.IUser
     {
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -21,15 +21,47 @@ namespace CatalogAppMVC.Models.Identity
             return userIdentity;
         }
 
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get;
+            set;
+        }
 
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get;
+            set;
+        }
 
-        public string PathToPhoto { get; set; }
+        public interfaces.IRole UserRole
+        {
+            //TODO: ApplicationUser сделать имплиментацию UserRole
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
-        public bool IsActive { get; set; }
+        public bool IsActivated
+        {
+            get;
+            set;
+        }
 
-        public long Rating { get; set; }
+        public string PathToPhoto
+        {
+            get;
+            set;
+        }
 
+        public long Rating
+        {
+            get;
+            set;
+        }
     }
 }

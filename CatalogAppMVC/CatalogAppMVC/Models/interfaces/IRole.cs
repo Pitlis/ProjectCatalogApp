@@ -24,7 +24,7 @@ namespace CatalogAppMVC.Models.interfaces
         //TODO: interface IRole Проверить абстракцию типа коллекции.
         ICollection<CatalogAppMVC.Models.LinqToSqlMdl.CatalogCategories> AccessibleCategories { get; }
 
-        //TODO: interface IRole Установка бонуса в МБ за спасибо.
+        long SizeBonus { get; set; }
 
     }
 }

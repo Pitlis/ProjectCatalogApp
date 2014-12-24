@@ -9,7 +9,7 @@ namespace CatalogAppMVC.Models.interfaces
     public interface IUser
     {
 
-        string Id { get; }
+        string Id { get; set; }
 
         string FirstName { get; set; }
 
@@ -17,9 +17,13 @@ namespace CatalogAppMVC.Models.interfaces
 
         string Email { get; set; }
 
-        string PhoneNumber { get; set; }
+        string PasswordHash { get; set; }
 
-        ICollection<IRole> Roles { get; }
+        CatalogAppMVC.Models.interfaces.IRole UserRole { get; set; }
+
+        bool IsActivated { get; set; }
+
+        string PathToPhoto { get; set; }
 
         long Rating { get; set; }
 

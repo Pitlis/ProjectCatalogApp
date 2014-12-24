@@ -135,6 +135,10 @@
     <Content Include="App_Data\DB\CatalogDatabase_log.ldf">
       <DependentUpon>CatalogDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\DB\TestIdentityCatalogDB.mdf" />
+    <Content Include="App_Data\DB\TestIdentityCatalogDB_log.ldf">
+      <DependentUpon>TestIdentityCatalogDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Documents\Images\defaultForHead.png" />
@@ -187,9 +191,11 @@
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\Identity\ApplicationDbContext.cs" />
     <Compile Include="Models\Identity\ApplicationUser.cs" />
+    <Compile Include="Models\Identity\CustomRole.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\interfaces\IAuthorization.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
     <Compile Include="Models\interfaces\IRole.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />

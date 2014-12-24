@@ -76,6 +76,7 @@ namespace CatalogAppMVC.Controllers
                     Email = model.Email
                 };
 
+                //TODO: AccountController. Ошибка валидации модели БД при регистрации.
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
