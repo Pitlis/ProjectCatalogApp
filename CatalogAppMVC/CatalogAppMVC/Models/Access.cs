@@ -12,7 +12,9 @@ namespace CatalogAppMVC.Models
         {
             //TODO: Разрешение на скачивание файла
             //заглушка!!
-            return fileID == 1 ? true : false;
+            if (fileID == 1 || fileID == 7 || fileID == 8 || fileID == 9)
+                return true;
+            return false;
         }
 
         public static bool CanReadCategory(IUser user, int categoryID)
