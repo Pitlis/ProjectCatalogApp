@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CatalogAppMVC.Models.interfaces
 {
-    interface IRole
+    public interface IRole
     {
 
         string Id { get; set; }
@@ -22,7 +22,7 @@ namespace CatalogAppMVC.Models.interfaces
         bool CanDownloadFile { get; set; }
 
         //TODO: interface IRole Проверить абстракцию типа коллекции.
-        ICollection<CatalogAppMVC.Models.LinqToSqlMdl.CatalogCategories> AccessibleCategories();
+        ICollection<CatalogAppMVC.Models.LinqToSqlMdl.CatalogCategories> AccessibleCategories { get; }
 
         //TODO: interface IRole Установка бонуса в МБ за спасибо.
 

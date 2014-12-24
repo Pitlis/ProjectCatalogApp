@@ -29,7 +29,7 @@ namespace CatalogAppMVC.Models.Identity
 
         public bool IsActive { get; set; }
 
-        public double Rating { get; set; }
+        public long Rating { get; set; }
 
     }
 }
