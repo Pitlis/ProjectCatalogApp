@@ -9,20 +9,20 @@ namespace CatalogAppMVC.Models.interfaces
     interface IRole
     {
 
-        public string Id { get; set; }
+        string Id { get; set; }
 
-        public string Name { get; set; }
+        string Name { get; set; }
 
-        public long MaxSizeDownloadFileInternal { get; set; }
+        long MaxSizeDownloadFileInternal { get; set; }
 
-        public long MaxSizeDownloadFileExternal { get; set; }
+        long MaxSizeDownloadFileExternal { get; set; }
 
-        public long MaxSizeDownloadOnDay { get; set; }
+        long MaxSizeDownloadOnDay { get; set; }
 
-        public bool CanDownloadFile { get; set; }
+        bool CanDownloadFile { get; set; }
 
         //TODO: interface IRole Проверить абстракцию типа коллекции.
-        public ICollection<CatalogAppMVC.Models.LinqToSqlMdl.CatalogCategories> AccessibleCategories();
+        ICollection<CatalogAppMVC.Models.LinqToSqlMdl.CatalogCategories> AccessibleCategories();
 
         //TODO: interface IRole Установка бонуса в МБ за спасибо.
 
