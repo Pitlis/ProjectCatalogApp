@@ -22,8 +22,13 @@ namespace CatalogAppMVC.Models.Identity
         }
 
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public string PathToPhoto { get; set; }
+
+        public bool IsActive { get; set; }
+
         public double Rating { get; set; }
 
     }

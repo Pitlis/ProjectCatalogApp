@@ -191,6 +191,7 @@
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
+    <Compile Include="Models\interfaces\IRole.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />
     <Compile Include="Models\MultipleRecordsForCompare.cs" />
     <Compile Include="Models\LinqToSqlMdl\DataClasses.designer.cs">
