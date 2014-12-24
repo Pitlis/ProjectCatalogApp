@@ -20,12 +20,12 @@
     <div class="page-header">
         <h1><small>@Model.Name</small></h1>
     </div>
-        <div id="photo">
-            photo
-        </div>
-        <div id="text">
-            @Model.Description
-        </div>
+    <div id="photo">
+        <img src="@Url.Content(@Image.GetHeadImageFromFiles(Model.Files))" />
+    </div>
+    <div id="text">
+        @Model.Description
+    </div>
 
     <div id="tags">
         @foreach (Tag t in Model.Tags)
@@ -38,7 +38,6 @@
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#specifications" data-toggle="tab">Технические характеристики</a></li>
             <li><a href="#photos" data-toggle="tab">Фото</a></li>
-            <li><a href="#videos" data-toggle="tab">Видео</a></li>
             <li><a href="#documents" data-toggle="tab">Документы</a></li>
         </ul>
         <div class="tab-content">
@@ -57,26 +56,52 @@
                     }
                 </table>
             </div>
-            <div class="tab-pane" id="photos">Фото</div>
-            <div class="tab-pane" id="videos">Видео</div>
+            <div class="tab-pane" id="photos">
+                <table>
+                    @foreach (CatalogAppMVC.Models.File file in Model.Files)
+                    {
+                        if (file.DocumentType == Image.IMAGE)
+                        {
+                            <tr>
+                                <td>
+                                    @file.DocumentName &#91; @file.DocumentType &#93;
+                                </td>
+                                <td>
+                                    размер: @file.Size Мб
+                                </td>
+                                <td>
+                                    загрузил: @file.AuthorName
+                                </td>
+                                <td>
+                                    @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
             <div class="tab-pane" id="documents">
                 <table>
                     @foreach (CatalogAppMVC.Models.File file in Model.Files)
                     {
-                        <tr>
-                            <td>
-                                @file.DocumentName &#91; @file.DocumentType &#93;
-                            </td>
-                            <td>
-                                размер: @file.Size Мб
-                            </td>
-                            <td>
-                                загрузил: @file.AuthorName
-                            </td>
-                            <td>
-                                @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
-                            </td>
-                        </tr>
+                        if (file.DocumentType != Image.IMAGE && file.DocumentType != Image.IMAGEHEAD)
+                        {
+                            <tr>
+                                <td>
+                                    @file.DocumentName &#91; @file.DocumentType &#93;
+                                </td>
+                                <td>
+                                    размер: @file.Size Мб
+                                </td>
+                                <td>
+                                    загрузил: @file.AuthorName
+                                </td>
+                                <td>
+                                    @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
+                                </td>
+                            </tr>
+                        }
                     }
 
                 </table>

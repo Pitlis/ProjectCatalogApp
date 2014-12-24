@@ -44,8 +44,6 @@ namespace CatalogAppMVC.Models
             return FileName + "." + FileType;
         }
 
-
-
         //Методы для работы с БД
 
 
