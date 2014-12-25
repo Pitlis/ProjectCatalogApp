@@ -14,7 +14,7 @@ namespace CatalogAppMVC.Controllers
     public class AccountController : Controller
     {
 
-        
+
 
     }
 }
