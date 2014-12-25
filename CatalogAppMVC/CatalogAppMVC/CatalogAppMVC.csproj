@@ -135,6 +135,10 @@
     <Content Include="App_Data\DB\CatalogDatabase_log.ldf">
       <DependentUpon>CatalogDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\DB\TestIdentityDB.mdf" />
+    <Content Include="App_Data\DB\TestIdentityDB_log.ldf">
+      <DependentUpon>TestIdentityDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Documents\Images\defaultForHead.png" />
@@ -232,6 +236,9 @@
     <Content Include="Views\Records\DownloadFileError.cshtml" />
     <Content Include="Views\Records\TwoRecordsView.cshtml" />
     <Content Include="Views\Records\RecordsOfCategory.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

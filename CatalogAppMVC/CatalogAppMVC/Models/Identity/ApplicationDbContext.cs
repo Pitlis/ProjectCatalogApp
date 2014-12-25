@@ -12,5 +12,10 @@ namespace CatalogAppMVC.Models.Identity
         public ApplicationDbContext() : base("IdentityConnection")
         { }
 
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
+
     }
 }

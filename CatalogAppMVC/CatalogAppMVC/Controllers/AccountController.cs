@@ -48,12 +48,6 @@ namespace CatalogAppMVC.Controllers
             }
         }
 
-        internal AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
         public ActionResult Register()
         {
             return View();
@@ -79,7 +73,7 @@ namespace CatalogAppMVC.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -108,7 +102,7 @@ namespace CatalogAppMVC.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.Failure:
                 default:
                     return View(model);
@@ -120,7 +114,7 @@ namespace CatalogAppMVC.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
     }
