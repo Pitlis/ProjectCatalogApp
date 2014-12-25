@@ -9,7 +9,8 @@ namespace CatalogAppMVC.Models.Identity
     internal class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
 
-        public ApplicationDbContext() : base("IdentityConnection")
+        public ApplicationDbContext()
+            : base("CatalogDatabaseConnectionString")
         { }
 
         public static ApplicationDbContext Create()
