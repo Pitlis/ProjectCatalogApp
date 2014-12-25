@@ -135,10 +135,6 @@
     <Content Include="App_Data\DB\CatalogDatabase_log.ldf">
       <DependentUpon>CatalogDatabase.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\DB\TestIdentityCatalogDB.mdf" />
-    <Content Include="App_Data\DB\TestIdentityCatalogDB_log.ldf">
-      <DependentUpon>TestIdentityCatalogDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Documents\Images\defaultForHead.png" />
@@ -175,10 +171,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\IdentityConfig\ApplicationSignInManager.cs" />
-    <Compile Include="App_Start\IdentityConfig\ApplicationUserManager.cs" />
-    <Compile Include="App_Start\IdentityConfig\EmailService.cs" />
-    <Compile Include="App_Start\IdentityConfig\SmsService.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,15 +181,8 @@
     <Compile Include="Models\Access.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
-    <Compile Include="Models\Identity\ApplicationDbContext.cs" />
-    <Compile Include="Models\Identity\ApplicationUser.cs" />
-    <Compile Include="Models\Identity\CustomRole.cs" />
-    <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
-    <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
     <Compile Include="Models\Image.cs" />
-    <Compile Include="Models\interfaces\IAuthorization.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
-    <Compile Include="Models\interfaces\IRole.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />
     <Compile Include="Models\MultipleRecordsForCompare.cs" />
     <Compile Include="Models\LinqToSqlMdl\DataClasses.designer.cs">
@@ -232,9 +217,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Records\RecordView.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Records\DownloadFileError.cshtml" />
     <Content Include="Views\Records\TwoRecordsView.cshtml" />
     <Content Include="Views\Records\RecordsOfCategory.cshtml" />
@@ -245,7 +227,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Start\IdentityConfig\" />
+    <Folder Include="Models\Identity\IdentityViewModel\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
