@@ -185,6 +185,7 @@
     <Compile Include="Models\Access.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
+    <Compile Include="Models\Identity\ApplicationAuthentication.cs" />
     <Compile Include="Models\Identity\ApplicationDbContext.cs" />
     <Compile Include="Models\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Models\Identity\ApplicationUser.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\interfaces\IMyAppAuthentication.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
     <Compile Include="Models\interfaces\IUser.cs" />
     <Compile Include="Models\MultipleRecordsForCompare.cs" />

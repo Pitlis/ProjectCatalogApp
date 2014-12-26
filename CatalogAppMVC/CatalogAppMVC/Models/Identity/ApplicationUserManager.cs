@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using CatalogAppMVC.Models.interfaces;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace CatalogAppMVC.Models.Identity
