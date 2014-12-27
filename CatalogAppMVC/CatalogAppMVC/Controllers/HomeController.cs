@@ -7,17 +7,16 @@ using System.Web.Mvc;
 using CatalogAppMVC.Models.interfaces;
 using CatalogAppMVC.Models.TESTCODE;
 using CatalogAppMVC.Models;
+using CatalogAppMVC.Models.Identity;
 
 namespace CatalogAppMVC.Controllers
 {
     public class HomeController : Controller
     {
-        IUser user;//активный пользователь
-
-
         // GET: Home
         public ActionResult Index()
         {
+            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
             return View(TestICategory.GetOpenCategory(user));
         }
     }

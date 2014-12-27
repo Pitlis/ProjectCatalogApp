@@ -202,15 +202,12 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\interfaces\IMyAppAuthentication.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
-    <Compile Include="Models\interfaces\IUser.cs" />
     <Compile Include="Models\MultipleRecordsForCompare.cs" />
     <Compile Include="Models\LinqToSqlMdl\DataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Parser\Source\Parser.cs" />
-    <Compile Include="Models\Parser\Source\RecordParser.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Repositories\CatalogCategories.cs" />
     <Compile Include="Models\Repositories\Files.cs" />
@@ -251,7 +248,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Parser\Source\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>

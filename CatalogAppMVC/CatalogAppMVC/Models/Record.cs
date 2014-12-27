@@ -17,14 +17,14 @@ namespace CatalogAppMVC.Models
         public List<Specification> Specifications { get; set; }
         public List<File> Files {get; set;}
 
-        private IUser _userAuthor;
+        private int _userAuthorID;
         private Status _status;
         private int _categoryID;
 
-        public Record(IUser user, int categoryID)
+        public Record(IMyAppAuthentication user, int categoryID)
         {
             _categoryID = categoryID;
-            _userAuthor = user;
+            _userAuthorID = user.GetAuthenticationUserId();
             Specifications = TestISpecification.GetMandatSpecifications(_categoryID);
         }
         

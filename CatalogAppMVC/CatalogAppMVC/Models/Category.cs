@@ -15,12 +15,12 @@ namespace CatalogAppMVC.Models
         
 
         //Методы для работы с БД
-        
-        public static List<Category> GetCategoriesForWrite(IUser user)
+
+        public static List<Category> GetCategoriesForWrite(IMyAppAuthentication user)
         {
             throw new NotImplementedException();
         }
-        public static List<Category> GetOpenCategory(IUser user)
+        public static List<Category> GetOpenCategory(IMyAppAuthentication user)
         {
             throw new NotImplementedException();
         }

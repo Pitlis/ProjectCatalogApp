@@ -11,14 +11,13 @@ using CatalogAppMVC.Models.TESTCODE;
 using System.Configuration;
 using Ninject;
 using CatalogAppMVC.Models.LinqToSqlMdl;
+using CatalogAppMVC.Models.Identity;
 
 
 namespace CatalogAppMVC.Controllers
 {
     public class RecordsController : Controller
     {
-        IUser user;//активный пользователь
-
         #region newRecord
 
         [Inject]
@@ -48,6 +47,7 @@ namespace CatalogAppMVC.Controllers
         [HttpGet]
         public ActionResult AddRecordCategory()
         {
+            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
             ViewBag.Categories = new SelectList(TestICategory.GetCategoriesForWrite(user), "Id", "Name");
             return View();
         }
@@ -55,6 +55,7 @@ namespace CatalogAppMVC.Controllers
         [HttpPost]
         public ActionResult AddRecordCategory(int CategorySelected)
         {
+            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
             //TODO Добавить проверку, правда ли пользователь выбрал одну из доступных ему категорий
             Session["Record"] = new Record(user, CategorySelected);
             return RedirectToAction("AddRecord");
@@ -89,6 +90,7 @@ namespace CatalogAppMVC.Controllers
         }
         public ActionResult TryDownloadFile(int fileID)
         {
+            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
             if (Access.CanDownloadFile(user, fileID))
             {
                 return RedirectToAction("DownloadFile", new { FileID = fileID });
@@ -129,6 +131,7 @@ namespace CatalogAppMVC.Controllers
 
         public ActionResult RecordsOfCategory(int categoryID)
         {
+            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
             if (Access.CanReadCategory(user, categoryID))
             {
                 return View(TESTRecords.GetRecords());
