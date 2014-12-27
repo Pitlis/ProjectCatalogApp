@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using CatalogAppMVC.Models.Identity;
 using CatalogAppMVC.Models.Identity.IdentityViewModel;
+using CatalogAppMVC.Models.WorkLinqToSql;
 
 namespace CatalogAppMVC.Controllers
 {
