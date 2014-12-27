@@ -24,6 +24,9 @@ namespace CatalogAppMVC.Models
         {
             throw new NotImplementedException();
         }
-
+        public static List<Category> GetAllCategory()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

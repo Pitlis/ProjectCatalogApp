@@ -13,9 +13,9 @@ namespace CatalogAppMVC.Models.interfaces
 
         string GetAuthenticationUserName();
 
-        int GetAuthenticationUserRoleId();
+        Task<int> GetAuthenticationUserRoleId();
 
-        long GetAuthenticationUserRating();
+        Task<long> GetAuthenticationUserRating();
 
     }
 }

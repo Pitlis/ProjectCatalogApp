@@ -15,23 +15,25 @@ namespace CatalogAppMVC.Models
         public string Description { get; set; }
         public List<Tag> Tags { get; set; }
         public List<Specification> Specifications { get; set; }
-        public List<File> Files {get; set;}
+        public List<File> Files { get; set; }
+        public int CategoryID { get; set; }
 
         private int _userAuthorID;
         private Status _status;
-        private int _categoryID;
 
         public Record(IMyAppAuthentication user, int categoryID)
         {
-            _categoryID = categoryID;
+            CategoryID = categoryID;
             _userAuthorID = user.GetAuthenticationUserId();
-            Specifications = TestISpecification.GetMandatSpecifications(_categoryID);
+            Specifications = TestISpecification.GetMandatSpecifications(CategoryID);
         }
-        
         public Record()
         {
-            ;
+            CategoryID = 0;
+            _userAuthorID = 0;
         }
+        
+
 
         public void LoadFromPage(Record recordFromPage)
         {
@@ -54,6 +56,10 @@ namespace CatalogAppMVC.Models
         //Методы для работы с БД
 
         public static Record GetRecord(int recordID)
+        {
+            throw new NotImplementedException();
+        }
+        public static List<Record> GetAllRecords()
         {
             throw new NotImplementedException();
         }

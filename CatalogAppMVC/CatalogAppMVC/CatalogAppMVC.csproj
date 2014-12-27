@@ -86,6 +86,9 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="ParserInterfaces">
+      <HintPath>..\..\..\Code\ParserInterfaces\ParserInterfaces\bin\Debug\ParserInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -208,6 +211,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Parser.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Repositories\CatalogCategories.cs" />
     <Compile Include="Models\Repositories\Files.cs" />

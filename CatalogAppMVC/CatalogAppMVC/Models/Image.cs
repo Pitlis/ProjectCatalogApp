@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CatalogAppMVC.Models
 {
-    public class Image
+    public static class Image
     {
         public const string IMAGEHEAD = "ImageHead"; //тип документа для аватарки записи
         public const string IMAGE = "Image"; //тип документа для изображений

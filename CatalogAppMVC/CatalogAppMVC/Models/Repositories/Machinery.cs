@@ -10,7 +10,7 @@ namespace CatalogAppMVC.Models.Repositories
     {
          public Record GetRecord(int recordID)
          {
-             return new Record();
+             throw new NotImplementedException();
          }
 
         public IQueryable<Machinery> Machinerys

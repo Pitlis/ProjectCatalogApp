@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CatalogAppMVC.Models.Identity;
+using CatalogAppMVC.Models.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -41,6 +43,11 @@ namespace CatalogAppMVC.Models.TESTCODE
             record.Tags = Tag.CreateTagsFromString("test1, test2, test3, test4");
             record.Files = TESTDocuments.GetFilesTEST();
             return record;
+        }
+
+        internal static List<Record> GetAllRecords()
+        {
+            return GetRecords();
         }
     }
 }
