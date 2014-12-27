@@ -12,9 +12,9 @@ namespace parser_infofrezer_ru
     {
         const string SITE = "http://infofrezer.ru";
 
-        Dictionary<string, string> IParser.GetCategories(string categoriesURL)
+        Dictionary<string, string> IParser.GetCategories()
         {
-            HtmlDocument html = GetHtmlDocument(categoriesURL);
+            HtmlDocument html = GetHtmlDocument(SITE + "/catalog");
             HtmlNodeCollection categoryNodes = html.DocumentNode.SelectNodes("//div[contains(@class,'category')]/div[@class='spacer']/h2/a");
 
             Dictionary<string, string> categories = new Dictionary<string, string>();
@@ -30,7 +30,7 @@ namespace parser_infofrezer_ru
             }
             catch
             {
-                throw new Exception("Невозможно получить список каталогов - " + categoriesURL);
+                throw new Exception("Невозможно получить список каталогов - " + SITE + "/catalog");
             }
             return categories;
         }
