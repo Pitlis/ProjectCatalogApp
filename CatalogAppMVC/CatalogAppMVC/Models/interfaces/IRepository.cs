@@ -49,7 +49,7 @@ namespace CatalogAppMVC.Models.interfaces
 
         bool CreateTag(CatalogAppMVC.Models.Tag tag, int recordID);
 
-        bool UpdateTag(CatalogAppMVC.Models.Tag tag, int recordID);
+        bool UpdateTag(CatalogAppMVC.Models.Tag tag);
 
         bool RemoveTag(int idTag, int recordID);
 

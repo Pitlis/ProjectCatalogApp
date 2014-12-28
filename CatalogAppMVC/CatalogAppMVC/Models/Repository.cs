@@ -175,9 +175,25 @@ namespace CatalogAppMVC.Models
             return true;
         }
 
-        public bool UpdateSpecifications(Specification specification)
+        public bool UpdateSpecifications(Specification specificationModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                WorkLinqToSql.Specification specification = (from s in context.Specifications where s.Id == specificationModel.ID select s).Single<WorkLinqToSql.Specification>();
+                specification.Name = specificationModel.Name;
+                specification.Value = specificationModel.Value;
+
+                context.Specifications.Context.SubmitChanges();
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool RemoveSpecifications(int idSpecifications)
@@ -252,9 +268,21 @@ namespace CatalogAppMVC.Models
             return true;
         }
 
-        public bool UpdateTag(CatalogAppMVC.Models.Tag tag, int recordID)
+        public bool UpdateTag(CatalogAppMVC.Models.Tag tagModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.Tag tag = (from t in context.Tags where t.Id == tagModel.ID select t).Single<WorkLinqToSql.Tag>();
+
+                tag.Name = tagModel.Name;
+                context.MachineTags.Context.SubmitChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool RemoveTag(int idTags, int recordID)
