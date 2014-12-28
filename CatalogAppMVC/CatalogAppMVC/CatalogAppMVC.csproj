@@ -224,6 +224,7 @@
     <Compile Include="Models\Repositories\Specifications.cs" />
     <Compile Include="Models\Repositories\SqlRepositoryMain.cs" />
     <Compile Include="Models\Repositories\Tags.cs" />
+    <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TESTCODE\TESTDocuments.cs" />

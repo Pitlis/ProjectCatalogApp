@@ -25,20 +25,20 @@ namespace CatalogAppMVC.Models.interfaces
 
         IQueryable<Machinery> Machinerys { get; }
 
-        bool CreateMachinery(Machinery instance);
+        bool CreateMachinery(Record record);
 
-        bool UpdateMachinery(Machinery instance);
+        bool UpdateMachinery(Record record);
 
-        bool RemoveMachinery(int idMachinery);
+        bool RemoveMachinery(int recordID);
 
         #endregion 
         #region Specifications
 
         IQueryable<Specifications> Specifications { get; }
 
-        bool CreateSpecifications(Specifications instance);
+        bool CreateSpecifications(CatalogAppMVC.Models.Specification instance, int recordID);
 
-        bool UpdateSpecifications(Specifications instance);
+        bool UpdateSpecifications(CatalogAppMVC.Models.Specification instance);
 
         bool RemoveSpecifications(int idSpecifications);
 
@@ -47,11 +47,11 @@ namespace CatalogAppMVC.Models.interfaces
 
         IQueryable<Tags> Tags { get; }
 
-        bool CreateTags(Tags instance);
+        bool CreateTag(CatalogAppMVC.Models.Tag tag, int recordID);
 
-        bool UpdateTags(Tags instance);
+        bool UpdateTag(CatalogAppMVC.Models.Tag tag, int recordID);
 
-        bool RemoveTags(int idTags);
+        bool RemoveTag(int idTags);
 
         #endregion 
         

@@ -7,9 +7,10 @@ using System.Web;
 
 namespace CatalogAppMVC.Models
 {
-    enum Status {moder, good}
     public class Record
     {
+        public enum Status { PREMODERATION, APPROVED, DECLINED }
+
         public int ID {get;  set;}
         public string Name { get; set; }
         public string Description { get; set; }
@@ -17,20 +18,19 @@ namespace CatalogAppMVC.Models
         public List<Specification> Specifications { get; set; }
         public List<File> Files { get; set; }
         public int CategoryID { get; set; }
-
-        private int _userAuthorID;
+        public int UserAuthorID { get; set; }
         private Status _status;
 
         public Record(IMyAppAuthentication user, int categoryID)
         {
             CategoryID = categoryID;
-            _userAuthorID = user.GetAuthenticationUserId();
+            UserAuthorID = user.GetAuthenticationUserId();
             Specifications = TestISpecification.GetMandatSpecifications(CategoryID);
         }
         public Record()
         {
             CategoryID = 0;
-            _userAuthorID = 0;
+            UserAuthorID = 0;
         }
         
 
@@ -62,6 +62,12 @@ namespace CatalogAppMVC.Models
         public static List<Record> GetAllRecords()
         {
             throw new NotImplementedException();
+        }
+
+        public void AddToDataBase()
+        {
+            IRepository repository = new Repository();
+            repository.CreateMachinery(this);
         }
     }
 }

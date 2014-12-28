@@ -21,11 +21,11 @@ namespace CatalogAppMVC.Models.Repositories
             }
         }
 
-        public bool CreateMachinery(Machinery instance)
+        public bool CreateMachinery(Record record)
         {
-            if (instance.Id == 0)
+            if (record.ID == 0)
             {
-                Db.Machinery.InsertOnSubmit(instance);
+                //Db.Machinery.InsertOnSubmit(record);
                 Db.Machinery.Context.SubmitChanges();
                 return true;
             }
@@ -33,9 +33,9 @@ namespace CatalogAppMVC.Models.Repositories
             return false;
         }
 
-        public bool UpdateMachinery(Machinery instance)
+        public bool UpdateMachinery(Record record)
         {
-            Machinery cache = Db.Machinery.Where(p => p.Id == instance.Id).FirstOrDefault();
+            Machinery cache = Db.Machinery.Where(p => p.Id == record.ID).FirstOrDefault();
             if (cache != null)
             {
                 //TODO : Update fields for Machinery

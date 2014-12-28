@@ -8,7 +8,7 @@ using System.Web;
 
 namespace CatalogAppMVC.Models.Repositories
 {
-    public partial class SqlRepositoryMain:IRepository
+    public partial class SqlRepositoryMain
     {
         [Inject]
         public DataClassesDataContext Db { get; set; }

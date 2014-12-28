@@ -109,7 +109,6 @@ namespace CatalogAppMVC.Controllers
 
         public ActionResult TwoRecordsView(IEnumerable<Record> records)
         {
-
             //TODO Удалить заглушку
             List<Record> records1 = new List<Record>();
             records1.Add(TESTRecords.GetRecord(1));
@@ -125,6 +124,13 @@ namespace CatalogAppMVC.Controllers
             records1[1].Specifications.Add(new Specification() { Name = "цвет5", Value = "голубой" });
             records = records1;
             //---
+            records1[0].Tags.Add(new Tag() { Name = "tag1" });
+            records1[0].Tags.Add(new Tag() { Name = "tag2" });
+            records1[0].Tags.Add(new Tag() { Name = "tag3" });
+            records1[0].Tags.Add(new Tag() { Name = "tag2" });
+            records1[0].AddToDataBase();
+
+
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);
         }
