@@ -27,7 +27,7 @@
         <classShapeMoniker Id="8cc9317c-d3f4-4f1a-9334-79f49ddaeb48" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.49273076923077 : 0.95); (2.93381808982942 : 1.25616906901793 : JumpStart); (3.07073366896397 : 1.35120538822289 : JumpEnd); (3.40625 : 1.58409515384615); (3.40625 : 1.625); (3.17075140270182 : 1.72244769543373 : JumpStart); (3.01674859729818 : 1.78617299422144 : JumpEnd); (2.95200140270182 : 1.81296493681304 : JumpStart); (2.79799859729818 : 1.87669023560075 : JumpEnd); (2.5 : 2)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.49273076923077 : 0.95); (2.93381808982941 : 1.25616906901792 : JumpStart); (3.07073366896397 : 1.35120538822289 : JumpEnd); (3.40625 : 1.58409515384615); (3.40625 : 1.625); (3.17075140270182 : 1.72244769543373 : JumpStart); (3.01674859729818 : 1.78617299422144 : JumpEnd); (2.95200140270182 : 1.81296493681304 : JumpStart); (2.79799859729818 : 1.87669023560075 : JumpEnd); (2.5 : 2)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/AspNetUser/AspNetUser_AspNetUserRole" />
       <nodes>
         <classShapeMoniker Id="269b823d-fe16-40ee-a39c-87b3bc97c418" />
@@ -78,14 +78,14 @@
         <elementListCompartment Id="819b3cee-1b08-439c-8893-912e7f2a223e" absoluteBounds="3.7649999999999997, 1.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.7812525 : 0.95); (4.7812525 : 1.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.7812525 : 0.95); (4.7812525 : 1.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/CatalogCategory/CatalogCategory_AccessCatalogCategory" />
       <nodes>
         <classShapeMoniker Id="62c2d9d9-1409-4413-9b4d-f06f16f1295d" />
         <classShapeMoniker Id="33ad7b62-7ba7-4ba4-a1e0-dc86170013dc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 1.475); (2.79166666666667 : 1.475 : JumpStart); (2.95833333333333 : 1.475 : JumpEnd); (3.16574700464088 : 1.475 : JumpStart); (3.33241367130755 : 1.475 : JumpEnd); (3.54166666666667 : 1.475 : JumpStart); (3.70833333333333 : 1.475 : JumpEnd); (3.75 : 1.475)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 1.475); (2.79166666666667 : 1.475 : JumpStart); (2.95833333333333 : 1.475 : JumpEnd); (3.16574700464088 : 1.475 : JumpStart); (3.33241367130755 : 1.475 : JumpEnd); (3.75 : 1.475)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/AspNetRole/AspNetRole_AccessCatalogCategory" />
       <nodes>
         <classShapeMoniker Id="5fcc45f0-4a09-433e-8ae9-0138912b36c3" />
@@ -98,27 +98,27 @@
         <elementListCompartment Id="bf3115a4-190a-4074-aea2-8ccc7d31d9b1" absoluteBounds="7.515, 1.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.75 : 0.7875); (7.5 : 0.7875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 0.7875); (7.5 : 0.7875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/CatalogCategory/CatalogCategory_Machinery" />
       <nodes>
         <classShapeMoniker Id="62c2d9d9-1409-4413-9b4d-f06f16f1295d" />
         <classShapeMoniker Id="1ba63252-9978-491d-a424-5683dd1c41e9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 0.725); (3.6875 : 0.725); (3.6875 : 0.4375); (8.5 : 0.4375); (8.5 : 0.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 0.725); (3.6875 : 0.725); (3.6875 : 0.4375); (8.5 : 0.4375); (8.5 : 0.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/AspNetUser/AspNetUser_Machinery" />
       <nodes>
         <classShapeMoniker Id="269b823d-fe16-40ee-a39c-87b3bc97c418" />
         <classShapeMoniker Id="1ba63252-9978-491d-a424-5683dd1c41e9" />
       </nodes>
     </associationConnector>
-    <classShape Id="c3b1c182-ccf1-4969-9634-b4cc7300a8b0" isExpanded="false" absoluteBounds="5.25, 2.875, 2, 0.45">
+    <classShape Id="c3b1c182-ccf1-4969-9634-b4cc7300a8b0" isExpanded="false" absoluteBounds="4.625, 2.5, 2, 0.45">
       <DataClassMoniker Name="/CatalogDatabaseDataContext/MachineSpecification" />
       <nestedChildShapes>
-        <elementListCompartment Id="30165ca8-d191-4d47-905d-8f15faf18fe5" absoluteBounds="5.265, 3.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="30165ca8-d191-4d47-905d-8f15faf18fe5" absoluteBounds="4.64, 2.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.5 : 2.78049967447917); (7.25 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.5 : 2.64024983723958); (6.625 : 2.64024983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/Machinery/Machinery_MachineSpecification" />
       <nodes>
         <classShapeMoniker Id="1ba63252-9978-491d-a424-5683dd1c41e9" />
@@ -144,7 +144,7 @@
         <elementListCompartment Id="3916755d-3b0f-4093-a514-ebd4fba3eb20" absoluteBounds="5.89, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.5937525 : 4.25); (7.5937525 : 3.1312525); (7.46145957835382 : 3.1312525 : JumpStart); (7.29479291168715 : 3.1312525 : JumpEnd); (7.25 : 3.1312525)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.875 : 4.3312475); (4.98437625 : 4.3312475); (4.98437625 : 2.95)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/Specification/Specification_MachineSpecification" />
       <nodes>
         <classShapeMoniker Id="6495a72f-fe84-4f8a-8e36-ff94d533272c" />
@@ -157,7 +157,7 @@
         <elementListCompartment Id="6de2cef8-2b48-4cdd-b2b0-02280ff9dbdd" absoluteBounds="5.89, 5.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.875 : 4.875); (6.875 : 4.7625); (7.9375 : 4.7625); (7.9375 : 3.725); (7.67708583333333 : 3.725 : JumpStart); (7.51041916666667 : 3.725 : JumpEnd); (7.25 : 3.725)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.875 : 4.875); (6.875 : 4.7625); (7.9375 : 4.7625); (7.9375 : 3.725); (7.25 : 3.725)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/Tag/Tag_MachineTag" />
       <nodes>
         <classShapeMoniker Id="3ac22ea6-a08b-4865-9d31-c1e82c04564f" />
@@ -177,7 +177,7 @@
         <classShapeMoniker Id="17e2b9b9-ebac-4d60-9c13-ec16b2ff8264" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.875 : 4.475); (4.7812525 : 4.475); (4.7812525 : 5.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.875 : 4.475); (4.7812525 : 4.475); (4.7812525 : 5.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/Specification/Specification_MandatSpecificCatalogCategory" />
       <nodes>
         <classShapeMoniker Id="6495a72f-fe84-4f8a-8e36-ff94d533272c" />
@@ -190,7 +190,7 @@
         <elementListCompartment Id="88fbbbce-cae7-4523-8a88-c0ef312b6e91" absoluteBounds="3.7649999999999997, 6.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.71875 : 2.78049967447917); (8.71875 : 6.475); (5.75 : 6.475)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.71875 : 2.78049967447917); (8.71875 : 6.475); (5.75 : 6.475)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CatalogDatabaseDataContext/Machinery/Machinery_Document" />
       <nodes>
         <classShapeMoniker Id="1ba63252-9978-491d-a424-5683dd1c41e9" />

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CatalogAppMVC.Models
 {
-    public class Repository:IRepository
+    public class Repository : IRepository
     {
         public IQueryable<LinqToSqlMdl.CatalogCategories> CatalogCategories
         {
@@ -34,7 +34,7 @@ namespace CatalogAppMVC.Models
 
 
 
-        
+
 
 
 
@@ -43,7 +43,7 @@ namespace CatalogAppMVC.Models
         {
             get { throw new NotImplementedException(); }
         }
-        
+
         public bool CreateMachinery(Record record)
         {
             try
@@ -66,7 +66,7 @@ namespace CatalogAppMVC.Models
                         throw new Exception("Невожно создать спецификацию");
                     }
                 }
-                if(record.Tags != null)
+                if (record.Tags != null)
                 {
                     foreach (Tag tag in record.Tags)
                     {
@@ -89,7 +89,45 @@ namespace CatalogAppMVC.Models
 
         public bool RemoveMachinery(int recordID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.Machinery machinery = (from m in context.Machineries where m.Id == recordID select m).Single<WorkLinqToSql.Machinery>();
+
+                var specificationsID = from s in context.MachineSpecifications where s.MachineID == machinery.Id select s.SpecificationID;
+                if (specificationsID.Count() > 0)
+                {
+                    foreach (int spID in specificationsID)
+                    {
+                        RemoveSpecifications(spID);
+                    }
+                }
+                var tagsID = from t in context.MachineTags where t.MachineID == machinery.Id select t.TagID;
+                if (tagsID.Count() > 0)
+                {
+                    foreach (int tagID in tagsID)
+                    {
+                        RemoveTag(tagID, machinery.Id);
+                    }
+                }
+                var filesID = from f in context.Documents where f.MachineID == machinery.Id select f.Id;
+                if(filesID.Count() > 0)
+                {
+                    foreach(int fileID in filesID)
+                    {
+                        RemoveFile(fileID);
+                    }
+                }
+
+                context.Machineries.DeleteOnSubmit(machinery);
+                context.Machineries.Context.SubmitChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
 
@@ -185,11 +223,11 @@ namespace CatalogAppMVC.Models
             try
             {
                 CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
-                WorkLinqToSql.Tag tag = new WorkLinqToSql.Tag(); 
+                WorkLinqToSql.Tag tag = new WorkLinqToSql.Tag();
                 tag.Name = tagModel.Name;
 
                 var tagsInBase = from t in context.Tags where t.Name == tagModel.Name select t;
-                if(tagsInBase.Count() > 0)
+                if (tagsInBase.Count() > 0)
                 {
                     tag = tagsInBase.First();
                 }
@@ -219,7 +257,7 @@ namespace CatalogAppMVC.Models
             throw new NotImplementedException();
         }
 
-        public bool RemoveTag(int idTags)
+        public bool RemoveTag(int idTags, int recordID)
         {
             try
             {
@@ -227,7 +265,7 @@ namespace CatalogAppMVC.Models
 
                 WorkLinqToSql.Tag tag = (from t in context.Tags where t.Id == idTags select t).Single<WorkLinqToSql.Tag>();
 
-                var machineTag = from mt in context.MachineTags where mt.TagID == tag.Id  select mt;
+                var machineTag = from mt in context.MachineTags where (mt.TagID == tag.Id) && (mt.MachineID == recordID) select mt;
 
                 foreach (WorkLinqToSql.MachineTag mt in machineTag)
                 {
@@ -235,9 +273,12 @@ namespace CatalogAppMVC.Models
                 }
                 context.MachineTags.Context.SubmitChanges();
 
-                context.Tags.DeleteOnSubmit(tag);
-                context.Tags.Context.SubmitChanges();
-
+                var otherTagMachine = from mt in context.MachineTags where mt.TagID == tag.Id select mt;
+                if (otherTagMachine.Count() == 0)
+                {
+                    context.Tags.DeleteOnSubmit(tag);
+                    context.Tags.Context.SubmitChanges();
+                }
             }
             catch
             {
@@ -245,12 +286,6 @@ namespace CatalogAppMVC.Models
             }
 
             return true;
-        }
-
-
-        public bool RemoveTag(int idTag, int recordID)
-        {
-            throw new NotImplementedException();
         }
 
 
@@ -272,7 +307,7 @@ namespace CatalogAppMVC.Models
 
         public bool RemoveFile(int fileID)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
