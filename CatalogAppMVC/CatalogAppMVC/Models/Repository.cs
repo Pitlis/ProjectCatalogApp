@@ -246,5 +246,33 @@ namespace CatalogAppMVC.Models
 
             return true;
         }
+
+
+        public bool RemoveTag(int idTag, int recordID)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        public IQueryable<Document> File
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool CreateFile(Document tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateFile(Document tag)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveFile(int fileID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -51,7 +51,18 @@ namespace CatalogAppMVC.Models.interfaces
 
         bool UpdateTag(CatalogAppMVC.Models.Tag tag, int recordID);
 
-        bool RemoveTag(int idTags);
+        bool RemoveTag(int idTag, int recordID);
+
+        #endregion
+        #region Files
+
+        IQueryable<WorkLinqToSql.Document> File { get; }
+
+        bool CreateFile(WorkLinqToSql.Document tag);
+
+        bool UpdateFile(WorkLinqToSql.Document tag);
+
+        bool RemoveFile(int fileID);
 
         #endregion 
         
