@@ -7,6 +7,7 @@ namespace CatalogAppMVC.Models
 {
     public class Specification
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
 

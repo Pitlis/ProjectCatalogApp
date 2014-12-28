@@ -34,7 +34,7 @@ namespace CatalogAppMVC.Models.interfaces
         #endregion 
         #region Specifications
 
-        IQueryable<Specifications> Specifications { get; }
+        IQueryable<WorkLinqToSql.Specification> Specifications { get; }
 
         bool CreateSpecifications(CatalogAppMVC.Models.Specification instance, int recordID);
 

@@ -103,7 +103,7 @@ namespace CatalogAppMVC.Models
 
 
 
-        public IQueryable<LinqToSqlMdl.Specifications> Specifications
+        public IQueryable<WorkLinqToSql.Specification> Specifications
         {
             get { throw new NotImplementedException(); }
         }
@@ -144,8 +144,36 @@ namespace CatalogAppMVC.Models
 
         public bool RemoveSpecifications(int idSpecifications)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                WorkLinqToSql.Specification specification = (from s in context.Specifications where s.Id == idSpecifications select s).Single<WorkLinqToSql.Specification>();
+
+                var macnineSpecifications = from ms in context.MachineSpecifications where ms.SpecificationID == specification.Id select ms;
+
+                foreach (WorkLinqToSql.MachineSpecification ms in macnineSpecifications)
+                {
+                    context.MachineSpecifications.DeleteOnSubmit(ms);
+                }
+                context.MachineSpecifications.Context.SubmitChanges();
+
+                context.Specifications.DeleteOnSubmit(specification);
+                context.Specifications.Context.SubmitChanges();
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
+
+
+
+
+
 
         public IQueryable<LinqToSqlMdl.Tags> Tags
         {
@@ -193,7 +221,30 @@ namespace CatalogAppMVC.Models
 
         public bool RemoveTag(int idTags)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                WorkLinqToSql.Tag tag = (from t in context.Tags where t.Id == idTags select t).Single<WorkLinqToSql.Tag>();
+
+                var machineTag = from mt in context.MachineTags where mt.TagID == tag.Id  select mt;
+
+                foreach (WorkLinqToSql.MachineTag mt in machineTag)
+                {
+                    context.MachineTags.DeleteOnSubmit(mt);
+                }
+                context.MachineTags.Context.SubmitChanges();
+
+                context.Tags.DeleteOnSubmit(tag);
+                context.Tags.Context.SubmitChanges();
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
