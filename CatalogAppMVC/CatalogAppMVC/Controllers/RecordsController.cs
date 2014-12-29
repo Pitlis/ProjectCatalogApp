@@ -129,9 +129,6 @@ namespace CatalogAppMVC.Controllers
             records1[0].Tags.Add(new Tag() { Name = "tag3" });
             records1[0].Tags.Add(new Tag() { Name = "tag2" });
 
-            records1[1].UserAuthorID = 1;
-            records1[1].CategoryID = 1;
-            records1[1].AddToDataBase();
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);
         }

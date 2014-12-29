@@ -12,11 +12,11 @@ namespace CatalogAppMVC.Models.interfaces
 
         #region CatalogCategories
 
-        IQueryable<CatalogCategories> CatalogCategories { get; }
+        IQueryable<WorkLinqToSql.CatalogCategory> CatalogCategories { get; }
 
-        bool CreateCatalogCategories(CatalogCategories instance);
+        int CreateCatalogCategories(Category categoryModel);
 
-        bool UpdateCatalogCategories(CatalogCategories instance);
+        bool UpdateCatalogCategories(Category categoryModel);
 
         bool RemoveCatalogCategories(int idCatalogCategories);
 

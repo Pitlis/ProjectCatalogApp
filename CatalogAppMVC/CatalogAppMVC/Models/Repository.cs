@@ -11,24 +11,101 @@ namespace CatalogAppMVC.Models
     {
 
 
-        public IQueryable<LinqToSqlMdl.CatalogCategories> CatalogCategories
+        public IQueryable<WorkLinqToSql.CatalogCategory> CatalogCategories
         {
             get { throw new NotImplementedException(); }
         }
 
-        public bool CreateCatalogCategories(LinqToSqlMdl.CatalogCategories instance)
+        public int CreateCatalogCategories(Category categoryModel)
         {
-            throw new NotImplementedException();
+            WorkLinqToSql.CatalogCategory category = new CatalogCategory();
+            try
+            {
+                CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
+
+                var categoryNames = from cat in context.CatalogCategories select cat.Name;
+                if (!categoryNames.Contains(categoryModel.Name))
+                {
+                    category.Name = categoryModel.Name;
+                    context.CatalogCategories.InsertOnSubmit(category);
+                    context.CatalogCategories.Context.SubmitChanges();
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+            return category.Id;
         }
 
-        public bool UpdateCatalogCategories(LinqToSqlMdl.CatalogCategories instance)
+        public bool UpdateCatalogCategories(Category categoryModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                var categoryNames = from cat in context.CatalogCategories select cat.Name;
+                if (!categoryNames.Contains(categoryModel.Name))
+                {
+                    WorkLinqToSql.CatalogCategory category = (from c in context.CatalogCategories where c.Id == categoryModel.ID select c).Single<WorkLinqToSql.CatalogCategory>();
+                    category.Name = categoryModel.Name;
+                    context.CatalogCategories.Context.SubmitChanges();
+                }
+
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool RemoveCatalogCategories(int idCatalogCategories)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                WorkLinqToSql.CatalogCategory category = (from c in context.CatalogCategories where c.Id == idCatalogCategories select c).Single<WorkLinqToSql.CatalogCategory>();
+
+                if (category.Name == "Others")
+                    return false;
+
+                var mandatSpecifications = from ms in context.MandatSpecificCatalogCategories where ms.CatalogCategoryID == category.Id select ms;
+                foreach(var ms in mandatSpecifications)
+                {
+                    context.MandatSpecificCatalogCategories.DeleteOnSubmit(ms);
+                }
+                context.MandatSpecificCatalogCategories.Context.SubmitChanges();
+
+                var otherCategory = from c in context.CatalogCategories where c.Name == "Others" select c;
+                int otherCategoryID = 0;
+                if (otherCategory.Count() == 0)
+                {
+                    otherCategoryID = CreateCatalogCategories(new Category() { Name = "Others" });
+                }
+                else
+                {
+                    otherCategoryID = otherCategory.Single<CatalogCategory>().Id;
+                }
+
+                var machineries = from machinery in category.Machineries select machinery;
+                foreach(var machinery in machineries)
+                {
+                    machinery.Category = otherCategoryID;
+                }
+
+                context.CatalogCategories.DeleteOnSubmit(category);
+                context.CatalogCategories.Context.SubmitChanges();
+
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
 
