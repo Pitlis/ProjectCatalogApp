@@ -246,7 +246,10 @@ namespace CatalogAppMVC.Models
         }
 
 
-        IQueryable<WorkLinqToSql.Specification> Specifications { get; }
+        public IQueryable<WorkLinqToSql.Specification> Specifications
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public bool CreateSpecifications(Specification specificationModel, int recordID)
         {
@@ -441,26 +444,81 @@ namespace CatalogAppMVC.Models
 
 #region Convert
 
-        Record ToRecord(WorkLinqToSql.Machinery machinery)
+        public Record ToRecord(WorkLinqToSql.Machinery machinery)
+        {
+            Record record = new Record();
+            record.SetID(machinery.Id);
+            record.Name = machinery.title;
+            record.Description = machinery.Description;
+            record.UserAuthorID = machinery.UserAuthor;
+            record.CategoryID = machinery.Category;
+            record.ChangeStatus((Record.StatusType)machinery.Status);
+
+            record.Specifications = new List<Specification>();
+            foreach(WorkLinqToSql.MachineSpecification mSP in machinery.MachineSpecifications)
+            {
+                record.Specifications.Add(ToSpecification(mSP.Specification));
+            }
+
+            if (machinery.MachineTags.Count() > 0)
+            {
+                record.Tags = new List<Tag>();
+                foreach(WorkLinqToSql.MachineTag mT in machinery.MachineTags)
+                {
+                    record.Tags.Add(ToTag(mT.Tag));
+                }
+            }
+            else
+            {
+                record.Tags = null;
+            }
+
+            if(machinery.Documents.Count() > 0)
+            {
+                record.Files = new List<File>();
+                foreach(WorkLinqToSql.Document document in machinery.Documents)
+                {
+                    record.Files.Add(ToFile(document));
+                }
+            }
+            else
+            {
+                record.Files = null;
+            }
+
+
+            return record;
+        }
+
+        public Category ToCategory(WorkLinqToSql.CatalogCategory catalogCategory)
+        {
+            Category category = new Category();
+            category.ID = catalogCategory.Id;
+            category.Name = catalogCategory.Name;
+            return category;
+        }
+
+        public Specification ToSpecification(WorkLinqToSql.Specification specificationFromBase)
+        {
+            Specification specification = new Specification();
+            specification.ID = specificationFromBase.Id;
+            specification.Name = specificationFromBase.Name;
+            specification.Value = specificationFromBase.Value;
+            return specification;
+        }
+
+        public Tag ToTag(WorkLinqToSql.Tag tagFromBase)
+        {
+            Tag tag = new Tag();
+            tag.ID = tagFromBase.Id;
+            tag.Name = tagFromBase.Name;
+            return tag;
+        }
+
+        public File ToFile(WorkLinqToSql.Document document)
         {
             throw new NotImplementedException();
         }
-
-        Category ToCategory(WorkLinqToSql.CatalogCategory catalogCategory)
-        {
-            throw new NotImplementedException();
-        }
-
-        Specification ToSpecification(WorkLinqToSql.Specification specificationFromBase)
-        {
-            throw new NotImplementedException();
-        }
-
-        Tag ToTag(WorkLinqToSql.Tag tagFromBase)
-        {
-            throw new NotImplementedException();
-        }
-
 #endregion
 
 

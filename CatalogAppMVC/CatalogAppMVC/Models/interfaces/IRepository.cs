@@ -74,6 +74,7 @@ namespace CatalogAppMVC.Models.interfaces
         Category ToCategory(WorkLinqToSql.CatalogCategory catalogCategory);
         Specification ToSpecification(WorkLinqToSql.Specification specificationFromBase);
         Tag ToTag(WorkLinqToSql.Tag tagFromBase);
+        File ToFile(WorkLinqToSql.Document document);
 
         #endregion
     }
