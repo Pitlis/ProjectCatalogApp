@@ -9,8 +9,6 @@ namespace CatalogAppMVC.Models
 {
     public class Repository : IRepository
     {
-
-
         public IQueryable<WorkLinqToSql.CatalogCategory> CatalogCategories
         {
             get { throw new NotImplementedException(); }
@@ -107,14 +105,6 @@ namespace CatalogAppMVC.Models
             }
             return true;
         }
-
-
-
-
-
-
-
-
 
 
 
@@ -256,18 +246,7 @@ namespace CatalogAppMVC.Models
         }
 
 
-
-
-
-
-
-
-
-
-        public IQueryable<WorkLinqToSql.Specification> Specifications
-        {
-            get { throw new NotImplementedException(); }
-        }
+        IQueryable<WorkLinqToSql.Specification> Specifications { get; }
 
         public bool CreateSpecifications(Specification specificationModel, int recordID)
         {
@@ -346,9 +325,6 @@ namespace CatalogAppMVC.Models
 
             return true;
         }
-
-
-
 
 
 
@@ -460,5 +436,36 @@ namespace CatalogAppMVC.Models
         {
             return true;
         }
+
+
+
+#region Convert
+
+        Record ToRecord(WorkLinqToSql.Machinery machinery)
+        {
+            throw new NotImplementedException();
+        }
+
+        Category ToCategory(WorkLinqToSql.CatalogCategory catalogCategory)
+        {
+            throw new NotImplementedException();
+        }
+
+        Specification ToSpecification(WorkLinqToSql.Specification specificationFromBase)
+        {
+            throw new NotImplementedException();
+        }
+
+        Tag ToTag(WorkLinqToSql.Tag tagFromBase)
+        {
+            throw new NotImplementedException();
+        }
+
+#endregion
+
+
+
+
+
     }
 }

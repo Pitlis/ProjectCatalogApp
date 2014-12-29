@@ -83,5 +83,10 @@ namespace CatalogAppMVC.Models
                 }
             }
         }
+
+        public void SetID(int id)
+        {
+            ID = id;
+        }
     }
 }

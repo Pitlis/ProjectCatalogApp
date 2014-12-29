@@ -68,6 +68,13 @@ namespace CatalogAppMVC.Models.interfaces
 
         #endregion 
         
-        
+        #region Convert
+
+        Record ToRecord(WorkLinqToSql.Machinery machinery);
+        Category ToCategory(WorkLinqToSql.CatalogCategory catalogCategory);
+        Specification ToSpecification(WorkLinqToSql.Specification specificationFromBase);
+        Tag ToTag(WorkLinqToSql.Tag tagFromBase);
+
+        #endregion
     }
 }
