@@ -25,11 +25,13 @@ namespace CatalogAppMVC.Models.interfaces
 
         IQueryable<Machinery> Machinerys { get; }
 
-        bool CreateMachinery(Record record);
+        int CreateMachinery(Record record);
 
         bool UpdateMachinery(Record record);
 
         bool RemoveMachinery(int recordID);
+
+        bool UpdateStatusMachinery(Record.StatusType statusNew, int recordID);
 
         #endregion 
         #region Specifications

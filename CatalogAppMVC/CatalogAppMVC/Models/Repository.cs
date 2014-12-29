@@ -9,6 +9,8 @@ namespace CatalogAppMVC.Models
 {
     public class Repository : IRepository
     {
+
+
         public IQueryable<LinqToSqlMdl.CatalogCategories> CatalogCategories
         {
             get { throw new NotImplementedException(); }
@@ -44,18 +46,18 @@ namespace CatalogAppMVC.Models
             get { throw new NotImplementedException(); }
         }
 
-        public bool CreateMachinery(Record record)
+        public int CreateMachinery(Record record)
         {
+            Machinery machinery = new Machinery();
             try
             {
                 CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
-                Machinery machinery = new Machinery();
 
                 machinery.title = record.Name;
                 machinery.Description = record.Description;
-                machinery.Status = (int)Record.Status.PREMODERATION;
-                machinery.Category = 2;
-                machinery.UserAuthor = 1;
+                machinery.Status = (int)Record.StatusType.PREMODERATION;
+                machinery.Category = record.CategoryID;
+                machinery.UserAuthor = record.UserAuthorID;
                 context.Machineries.InsertOnSubmit(machinery);
                 context.Machineries.Context.SubmitChanges();
 
@@ -77,14 +79,44 @@ namespace CatalogAppMVC.Models
             }
             catch
             {
-                return false;
+                return 0;
             }
-            return true;
+            return machinery.Id;
         }
 
         public bool UpdateMachinery(Record record)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.Machinery machinery = (from m in context.Machineries where m.Id == record.ID select m).Single<WorkLinqToSql.Machinery>();
+                
+                machinery.Description = record.Description;
+                machinery.Status = (int)record.Status;
+                machinery.Category = record.CategoryID;
+                machinery.UserAuthor = record.UserAuthorID;
+                context.Machineries.Context.SubmitChanges();
+
+                foreach (Specification sp in record.Specifications)
+                {
+                    if (!UpdateSpecifications(sp))
+                    {
+                        throw new Exception("Ошибка обновления спецификации");
+                    }
+                }
+                if (record.Tags != null)
+                {
+                    foreach (Tag tag in record.Tags)
+                    {
+                        UpdateTag(tag);
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool RemoveMachinery(int recordID)
@@ -130,7 +162,21 @@ namespace CatalogAppMVC.Models
             return true;
         }
 
-
+        public bool UpdateStatusMachinery(Record.StatusType statusNew, int recordID)
+        {
+            try
+            {
+                WorkLinqToSql.CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
+                WorkLinqToSql.Machinery machinery = (from m in context.Machineries where m.Id == recordID select m).Single<WorkLinqToSql.Machinery>();
+                machinery.Status = (int)statusNew;
+                context.Machineries.Context.SubmitChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
 
 
 
