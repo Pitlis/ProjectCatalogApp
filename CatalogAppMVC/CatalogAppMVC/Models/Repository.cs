@@ -503,9 +503,30 @@ namespace CatalogAppMVC.Models
             return true;
         }
 
-        public bool UpdateAccess(AccessRoleCategory accessModel);
+        public bool UpdateAccess(AccessRoleCategory accessModel)
+        {
+            throw new NotImplementedException();
+        }
 
-        public bool RemoveAccess(AccessRoleCategory accessModel);
+        public bool RemoveAccess(AccessRoleCategory accessModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public WorkLinqToSql.AspNetRole GetUserRole(int userID)
+        {
+            CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
+            WorkLinqToSql.AspNetRole role = null;
+            try
+            {
+                role = (from r in context.AspNetUserRoles where r.UserId == userID select r.AspNetRole).Single<AspNetRole>();
+            }
+            catch
+            {
+                return null ;
+            }
+            return role;
+        }
 
 #region Convert
 

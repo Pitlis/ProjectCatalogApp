@@ -10,14 +10,13 @@ using CatalogAppMVC.Models;
 using CatalogAppMVC.Models.Identity;
 
 namespace CatalogAppMVC.Controllers
-{
-    public class HomeController : Controller
+{    public class HomeController : Controller
     {
         // GET: Home
         public ActionResult Index()
         {
             IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            return View(TestICategory.GetOpenCategory(user));
+            return View(Category.GetOpenCategory(user));
         }
     }
 }

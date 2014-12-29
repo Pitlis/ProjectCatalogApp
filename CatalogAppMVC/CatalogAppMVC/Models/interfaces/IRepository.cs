@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace CatalogAppMVC.Models.interfaces
 {
     public interface IRepository
-    {      
+    {
+        WorkLinqToSql.AspNetRole GetUserRole(int userID);
+
 
         #region CatalogCategories
 

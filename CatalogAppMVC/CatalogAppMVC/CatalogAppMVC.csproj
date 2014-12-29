@@ -229,7 +229,6 @@
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TESTCODE\TESTDocuments.cs" />
-    <Compile Include="Models\TESTCODE\TestICategory.cs" />
     <Compile Include="Models\TESTCODE\TestISpecification.cs" />
     <Compile Include="Models\TESTCODE\TESTRecords.cs" />
     <Compile Include="Models\WorkLinqToSql\CatalogDatabase.designer.cs">

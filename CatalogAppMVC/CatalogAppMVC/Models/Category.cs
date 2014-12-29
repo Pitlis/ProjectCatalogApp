@@ -23,18 +23,35 @@ namespace CatalogAppMVC.Models
             {
                 IRepository repository = new Repository();
                 int userID = user.GetAuthenticationUserId();
-                //WorkLinqToSql.AspNetRole = (from r in repository.)
+                int userRoleId = repository.GetUserRole(userID).Id;
 
-                string w = "213";
+                IQueryable<WorkLinqToSql.AccessCatalogCategory> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.W == true) select acc;
+                foreach(WorkLinqToSql.AccessCatalogCategory acc in access)
+                {
+                    list.Add(repository.ToCategory(acc.CatalogCategory));
+                }
             }
             catch { }
             return list;
-            
         }
 
         public static List<Category> GetOpenCategory(IMyAppAuthentication user)
         {
-            throw new NotImplementedException();
+            List<Category> list = new List<Category>();
+            try
+            {
+                IRepository repository = new Repository();
+                int userID = user.GetAuthenticationUserId();
+                int userRoleId = repository.GetUserRole(userID).Id;
+
+                IQueryable<WorkLinqToSql.AccessCatalogCategory> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.R == true) select acc;
+                foreach (WorkLinqToSql.AccessCatalogCategory acc in access)
+                {
+                    list.Add(repository.ToCategory(acc.CatalogCategory));
+                }
+            }
+            catch { }
+            return list;
         }
         public static List<Category> GetAllCategory()
         {

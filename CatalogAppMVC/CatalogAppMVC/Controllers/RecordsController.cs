@@ -50,7 +50,7 @@ namespace CatalogAppMVC.Controllers
         public ActionResult AddRecordCategory()
         {
             IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            ViewBag.Categories = new SelectList(TestICategory.GetCategoriesForWrite(user), "Id", "Name");
+            ViewBag.Categories = new SelectList(Category.GetCategoriesForWrite(user), "Id", "Name");
             return View();
         }
 
@@ -132,13 +132,16 @@ namespace CatalogAppMVC.Controllers
             records1[0].Tags.Add(new Tag() { Name = "tag2" });
 
             IRepository repository = new Repository();
-            Parser parser = new Parser();
+            //Parser parser = new Parser();
             //parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
             //for (int i = 60; i <= 65; i++)
                 //repository.RemoveMachinery(i);
             ApplicationAuthentication AuthUser = new ApplicationAuthentication(HttpContext);
-            Category.GetCategoriesForWrite(AuthUser);
+            //Category.GetCategoriesForWrite(AuthUser);
+            //AccessRoleCategory access = new AccessRoleCategory(1, 11, true, true, true);
+            //repository.CreateAccess(access);
 
+            //Category.GetCategoriesForWrite(AuthUser);
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);
         }
