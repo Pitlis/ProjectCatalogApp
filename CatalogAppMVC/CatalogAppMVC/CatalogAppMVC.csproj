@@ -192,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Access.cs" />
+    <Compile Include="Models\AccessRoleCategory.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\Identity\ApplicationAuthentication.cs" />

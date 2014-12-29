@@ -67,7 +67,15 @@ namespace CatalogAppMVC.Models.interfaces
         bool RemoveFile(int fileID);
 
         #endregion 
-        
+        #region Access
+
+        IQueryable<WorkLinqToSql.AccessCatalogCategory> Access { get; }
+        bool CreateAccess(AccessRoleCategory accessModel);
+        bool UpdateAccess(AccessRoleCategory accessModel);
+        bool RemoveAccess(AccessRoleCategory accessModel);
+
+        #endregion
+
         #region Convert
 
         Record ToRecord(WorkLinqToSql.Machinery machinery);

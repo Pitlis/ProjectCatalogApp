@@ -474,7 +474,38 @@ namespace CatalogAppMVC.Models
             return true;
         }
 
+        public IQueryable<WorkLinqToSql.AccessCatalogCategory> Access
+        {
+            get
+            {
+                return new CatalogDatabaseDataContext().AccessCatalogCategories;
+            }
+        }
 
+        public bool CreateAccess(AccessRoleCategory accessModel)
+        {
+            CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
+            try
+            {
+                WorkLinqToSql.AccessCatalogCategory access = new AccessCatalogCategory();
+                access.F = accessModel.CanDownloadFile;
+                access.R = accessModel.CanRead;
+                access.W = accessModel.CanWrite;
+                access.RoleID = accessModel.RoleID;
+                access.CategoryID = accessModel.CategoryID;
+                context.AccessCatalogCategories.InsertOnSubmit(access);
+                context.AccessCatalogCategories.Context.SubmitChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool UpdateAccess(AccessRoleCategory accessModel);
+
+        public bool RemoveAccess(AccessRoleCategory accessModel);
 
 #region Convert
 

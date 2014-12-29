@@ -18,8 +18,20 @@ namespace CatalogAppMVC.Models
 
         public static List<Category> GetCategoriesForWrite(IMyAppAuthentication user)
         {
-            throw new NotImplementedException();
+            List<Category> list = new List<Category>();
+            try
+            {
+                IRepository repository = new Repository();
+                int userID = user.GetAuthenticationUserId();
+                //WorkLinqToSql.AspNetRole = (from r in repository.)
+
+                string w = "213";
+            }
+            catch { }
+            return list;
+            
         }
+
         public static List<Category> GetOpenCategory(IMyAppAuthentication user)
         {
             throw new NotImplementedException();

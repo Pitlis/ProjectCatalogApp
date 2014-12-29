@@ -23,7 +23,7 @@
       <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
       <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
       <Association Name="AspNetUser_Machinery" Member="Machineries" ThisKey="Id" OtherKey="UserAuthor" Type="Machinery" />
-      <Association Name="AspNetUser_Documents" Member="Document" ThisKey="Id" OtherKey="UserAuthor" Type="Document" />
+      <Association Name="AspNetUser_Document" Member="Document" ThisKey="Id" OtherKey="UserAuthor" Type="Document" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
@@ -98,7 +98,7 @@
       <Column Name="title" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="Machinery_MachineSpecification" Member="MachineSpecifications" ThisKey="Id" OtherKey="MachineID" Type="MachineSpecification" />
       <Association Name="Machinery_MachineTag" Member="MachineTags" ThisKey="Id" OtherKey="MachineID" Type="MachineTag" />
-      <Association Name="Machinery_Documents" Member="Document" ThisKey="Id" OtherKey="MachineID" Type="Document" />
+      <Association Name="Machinery_Document" Member="Document" ThisKey="Id" OtherKey="MachineID" Type="Document" />
       <Association Name="CatalogCategory_Machinery" Member="CatalogCategory" ThisKey="Category" OtherKey="Id" Type="CatalogCategory" IsForeignKey="true" />
       <Association Name="AspNetUser_Machinery" Member="AspNetUser" ThisKey="UserAuthor" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
@@ -155,8 +155,8 @@
       <Column Name="FileName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="FileType" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Size" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Machinery_Documents" Member="Machinery" ThisKey="MachineID" OtherKey="Id" Type="Machinery" IsForeignKey="true" />
-      <Association Name="AspNetUser_Documents" Member="AspNetUser" ThisKey="UserAuthor" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="Machinery_Document" Member="Machinery" ThisKey="MachineID" OtherKey="Id" Type="Machinery" IsForeignKey="true" />
+      <Association Name="AspNetUser_Document" Member="AspNetUser" ThisKey="UserAuthor" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

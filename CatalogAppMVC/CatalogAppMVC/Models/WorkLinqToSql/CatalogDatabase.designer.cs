@@ -720,7 +720,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Documents", Storage="_Document", ThisKey="Id", OtherKey="UserAuthor")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Document", Storage="_Document", ThisKey="Id", OtherKey="UserAuthor")]
 		public EntitySet<Document> Document
 		{
 			get
@@ -2228,7 +2228,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Documents", Storage="_Document", ThisKey="Id", OtherKey="MachineID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Document", Storage="_Document", ThisKey="Id", OtherKey="MachineID")]
 		public EntitySet<Document> Document
 		{
 			get
@@ -3421,7 +3421,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Documents", Storage="_Machinery", ThisKey="MachineID", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Document", Storage="_Machinery", ThisKey="MachineID", OtherKey="Id", IsForeignKey=true)]
 		public Machinery Machinery
 		{
 			get
@@ -3455,7 +3455,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Documents", Storage="_AspNetUser", ThisKey="UserAuthor", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Document", Storage="_AspNetUser", ThisKey="UserAuthor", OtherKey="Id", IsForeignKey=true)]
 		public AspNetUser AspNetUser
 		{
 			get

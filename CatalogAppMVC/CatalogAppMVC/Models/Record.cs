@@ -59,8 +59,20 @@ namespace CatalogAppMVC.Models
 
         public static Record GetRecord(int recordID)
         {
-            throw new NotImplementedException();
+            IRepository repository = new Repository();
+            Record record = null;
+            try
+            {
+                WorkLinqToSql.Machinery mach = (from m in repository.Machinerys where m.Id == recordID select m).Single<WorkLinqToSql.Machinery>();
+                record = repository.ToRecord(mach);
+            }
+            catch
+            {
+                return null;
+            }
+            return record;
         }
+
         public static List<Record> GetAllRecords()
         {
             IRepository repository = new Repository();

@@ -136,7 +136,8 @@ namespace CatalogAppMVC.Controllers
             //parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
             //for (int i = 60; i <= 65; i++)
                 //repository.RemoveMachinery(i);
-
+            ApplicationAuthentication AuthUser = new ApplicationAuthentication(HttpContext);
+            Category.GetCategoriesForWrite(AuthUser);
 
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);

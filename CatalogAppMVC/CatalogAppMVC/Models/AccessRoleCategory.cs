@@ -9,9 +9,9 @@ namespace CatalogAppMVC.Models
     {
         public int RoleID { get; private set; }
         public int CategoryID { get; private set; }
-        bool CanRead { get; private set; }
-        bool CanWrite { get; private set; }
-        bool CanDownloadFile { get; private set; }
+        public bool CanRead { get; private set; }
+        public bool CanWrite { get; private set; }
+        public bool CanDownloadFile { get; private set; }
 
         public AccessRoleCategory(int roleID, int categoryID, bool read, bool write, bool file)
         {
