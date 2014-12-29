@@ -10,6 +10,7 @@ namespace CatalogAppMVC.Models
     public class Parser
     {
         //Parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
+        const int AdminID = 1;
 
         IParser parser;
         Type parserType;
@@ -43,7 +44,7 @@ namespace CatalogAppMVC.Models
             }
 
             //List<Category> categories = Category.GetAllCategory();
-            List<Category> categories = TESTCODE.TestICategory.GetAllCategory();
+            List<Category> categories = Category.GetAllCategory();
             foreach(KeyValuePair<string, string> categorySite in categoriesFromSite)
             {
                 Category category = CategoryInBase(categorySite.Key, categories);
@@ -94,7 +95,13 @@ namespace CatalogAppMVC.Models
                     Record recordNew = LoadRecord(recordFromSite.Value, category);
                     if (recordNew != null)
                     {
-                        //добавление записи в базу
+                        recordNew.AddToDataBase();
+                        int recordID = recordNew.ID;
+                        foreach(File file in recordNew.Files)
+                        {
+                            file.RecordID = recordID;
+                            file.AddToBase();
+                        }
                     }
                 }
             }
@@ -124,6 +131,7 @@ namespace CatalogAppMVC.Models
             record.Name = recordNew.Name;
             record.Description = recordNew.Description;
             record.CategoryID = category.ID;
+            record.UserAuthorID = AdminID;
 
             record.Specifications = new List<Specification>();
             foreach(KeyValuePair<string, string> specificationNew in recordNew.Specifications)
@@ -141,8 +149,11 @@ namespace CatalogAppMVC.Models
             {
                 foreach(KeyValuePair<string, string> fileNew in recordNew.Files)
                 {
-                    //загрузка файла
-                    //сохранение в базе
+                    File file = null;
+                    if((file = File.CreateFileLink(fileNew.Value, fileNew.Key, "/FromSite/")) != null)
+                    {
+                        record.Files.Add(file);
+                    }
                 }
             }
 

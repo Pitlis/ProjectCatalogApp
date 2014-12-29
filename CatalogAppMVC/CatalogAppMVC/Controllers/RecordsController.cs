@@ -12,6 +12,8 @@ using System.Configuration;
 using Ninject;
 using CatalogAppMVC.Models.LinqToSqlMdl;
 using CatalogAppMVC.Models.Identity;
+using System.Reflection;
+using System.Threading;
 
 
 namespace CatalogAppMVC.Controllers
@@ -128,6 +130,13 @@ namespace CatalogAppMVC.Controllers
             records1[0].Tags.Add(new Tag() { Name = "tag2" });
             records1[0].Tags.Add(new Tag() { Name = "tag3" });
             records1[0].Tags.Add(new Tag() { Name = "tag2" });
+
+            IRepository repository = new Repository();
+            Parser parser = new Parser();
+            //parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
+            //for (int i = 60; i <= 65; i++)
+                //repository.RemoveMachinery(i);
+
 
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);

@@ -63,7 +63,14 @@ namespace CatalogAppMVC.Models
         }
         public static List<Record> GetAllRecords()
         {
-            throw new NotImplementedException();
+            IRepository repository = new Repository();
+            List<Record> list = new List<Record>();
+            var recordsFromBase = from r in repository.Machinerys select r;
+            foreach (WorkLinqToSql.Machinery machinery in recordsFromBase)
+            {
+                list.Add(repository.ToRecord(machinery));
+            }
+            return list;
         }
 
         public void AddToDataBase()

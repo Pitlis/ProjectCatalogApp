@@ -26,7 +26,14 @@ namespace CatalogAppMVC.Models
         }
         public static List<Category> GetAllCategory()
         {
-            throw new NotImplementedException();
+            IRepository repository = new Repository();
+            List<Category> list = new List<Category>();
+            var categoriesFromBase = from cat in repository.CatalogCategories select cat;
+            foreach(WorkLinqToSql.CatalogCategory c in categoriesFromBase)
+            {
+                list.Add(repository.ToCategory(c));
+            }
+            return list;
         }
     }
 }

@@ -219,7 +219,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		public System.Data.Linq.Table<Document> Documents
+		public System.Data.Linq.Table<Document> Document
 		{
 			get
 			{
@@ -276,7 +276,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		
 		private EntitySet<Machinery> _Machineries;
 		
-		private EntitySet<Document> _Documents;
+		private EntitySet<Document> _Document;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -324,7 +324,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
 			this._AspNetUserClaims = new EntitySet<AspNetUserClaim>(new Action<AspNetUserClaim>(this.attach_AspNetUserClaims), new Action<AspNetUserClaim>(this.detach_AspNetUserClaims));
 			this._Machineries = new EntitySet<Machinery>(new Action<Machinery>(this.attach_Machineries), new Action<Machinery>(this.detach_Machineries));
-			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
+			this._Document = new EntitySet<Document>(new Action<Document>(this.attach_Document), new Action<Document>(this.detach_Document));
 			OnCreated();
 		}
 		
@@ -720,16 +720,16 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Document", Storage="_Documents", ThisKey="Id", OtherKey="UserAuthor")]
-		public EntitySet<Document> Documents
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Documents", Storage="_Document", ThisKey="Id", OtherKey="UserAuthor")]
+		public EntitySet<Document> Document
 		{
 			get
 			{
-				return this._Documents;
+				return this._Document;
 			}
 			set
 			{
-				this._Documents.Assign(value);
+				this._Document.Assign(value);
 			}
 		}
 		
@@ -801,13 +801,13 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			entity.AspNetUser = null;
 		}
 		
-		private void attach_Documents(Document entity)
+		private void attach_Document(Document entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUser = this;
 		}
 		
-		private void detach_Documents(Document entity)
+		private void detach_Document(Document entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetUser = null;
@@ -2018,7 +2018,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		
 		private EntitySet<MachineTag> _MachineTags;
 		
-		private EntitySet<Document> _Documents;
+		private EntitySet<Document> _Document;
 		
 		private EntityRef<CatalogCategory> _CatalogCategory;
 		
@@ -2048,7 +2048,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		{
 			this._MachineSpecifications = new EntitySet<MachineSpecification>(new Action<MachineSpecification>(this.attach_MachineSpecifications), new Action<MachineSpecification>(this.detach_MachineSpecifications));
 			this._MachineTags = new EntitySet<MachineTag>(new Action<MachineTag>(this.attach_MachineTags), new Action<MachineTag>(this.detach_MachineTags));
-			this._Documents = new EntitySet<Document>(new Action<Document>(this.attach_Documents), new Action<Document>(this.detach_Documents));
+			this._Document = new EntitySet<Document>(new Action<Document>(this.attach_Document), new Action<Document>(this.detach_Document));
 			this._CatalogCategory = default(EntityRef<CatalogCategory>);
 			this._AspNetUser = default(EntityRef<AspNetUser>);
 			OnCreated();
@@ -2228,16 +2228,16 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Document", Storage="_Documents", ThisKey="Id", OtherKey="MachineID")]
-		public EntitySet<Document> Documents
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Documents", Storage="_Document", ThisKey="Id", OtherKey="MachineID")]
+		public EntitySet<Document> Document
 		{
 			get
 			{
-				return this._Documents;
+				return this._Document;
 			}
 			set
 			{
-				this._Documents.Assign(value);
+				this._Document.Assign(value);
 			}
 		}
 		
@@ -2353,13 +2353,13 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			entity.Machinery = null;
 		}
 		
-		private void attach_Documents(Document entity)
+		private void attach_Document(Document entity)
 		{
 			this.SendPropertyChanging();
 			entity.Machinery = this;
 		}
 		
-		private void detach_Documents(Document entity)
+		private void detach_Document(Document entity)
 		{
 			this.SendPropertyChanging();
 			entity.Machinery = null;
@@ -3166,6 +3166,16 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		
 		private int _MachineID;
 		
+		private string _DocumentName;
+		
+		private string _DocumentType;
+		
+		private string _FileName;
+		
+		private string _FileType;
+		
+		private double _Size;
+		
 		private EntityRef<Machinery> _Machinery;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
@@ -3184,6 +3194,16 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
     partial void OnStatusChanged();
     partial void OnMachineIDChanging(int value);
     partial void OnMachineIDChanged();
+    partial void OnDocumentNameChanging(string value);
+    partial void OnDocumentNameChanged();
+    partial void OnDocumentTypeChanging(string value);
+    partial void OnDocumentTypeChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    partial void OnFileTypeChanging(string value);
+    partial void OnFileTypeChanged();
+    partial void OnSizeChanging(double value);
+    partial void OnSizeChanged();
     #endregion
 		
 		public Document()
@@ -3301,7 +3321,107 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Document", Storage="_Machinery", ThisKey="MachineID", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string DocumentName
+		{
+			get
+			{
+				return this._DocumentName;
+			}
+			set
+			{
+				if ((this._DocumentName != value))
+				{
+					this.OnDocumentNameChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentName = value;
+					this.SendPropertyChanged("DocumentName");
+					this.OnDocumentNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentType", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string DocumentType
+		{
+			get
+			{
+				return this._DocumentType;
+			}
+			set
+			{
+				if ((this._DocumentType != value))
+				{
+					this.OnDocumentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentType = value;
+					this.SendPropertyChanged("DocumentType");
+					this.OnDocumentTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string FileName
+		{
+			get
+			{
+				return this._FileName;
+			}
+			set
+			{
+				if ((this._FileName != value))
+				{
+					this.OnFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._FileName = value;
+					this.SendPropertyChanged("FileName");
+					this.OnFileNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileType", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string FileType
+		{
+			get
+			{
+				return this._FileType;
+			}
+			set
+			{
+				if ((this._FileType != value))
+				{
+					this.OnFileTypeChanging(value);
+					this.SendPropertyChanging();
+					this._FileType = value;
+					this.SendPropertyChanged("FileType");
+					this.OnFileTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size", DbType="Float NOT NULL")]
+		public double Size
+		{
+			get
+			{
+				return this._Size;
+			}
+			set
+			{
+				if ((this._Size != value))
+				{
+					this.OnSizeChanging(value);
+					this.SendPropertyChanging();
+					this._Size = value;
+					this.SendPropertyChanged("Size");
+					this.OnSizeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Machinery_Documents", Storage="_Machinery", ThisKey="MachineID", OtherKey="Id", IsForeignKey=true)]
 		public Machinery Machinery
 		{
 			get
@@ -3318,12 +3438,12 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 					if ((previousValue != null))
 					{
 						this._Machinery.Entity = null;
-						previousValue.Documents.Remove(this);
+						previousValue.Document.Remove(this);
 					}
 					this._Machinery.Entity = value;
 					if ((value != null))
 					{
-						value.Documents.Add(this);
+						value.Document.Add(this);
 						this._MachineID = value.Id;
 					}
 					else
@@ -3335,7 +3455,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Document", Storage="_AspNetUser", ThisKey="UserAuthor", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_Documents", Storage="_AspNetUser", ThisKey="UserAuthor", OtherKey="Id", IsForeignKey=true)]
 		public AspNetUser AspNetUser
 		{
 			get
@@ -3352,12 +3472,12 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 					if ((previousValue != null))
 					{
 						this._AspNetUser.Entity = null;
-						previousValue.Documents.Remove(this);
+						previousValue.Document.Remove(this);
 					}
 					this._AspNetUser.Entity = value;
 					if ((value != null))
 					{
-						value.Documents.Add(this);
+						value.Document.Add(this);
 						this._UserAuthor = value.Id;
 					}
 					else

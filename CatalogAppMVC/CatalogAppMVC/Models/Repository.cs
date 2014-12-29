@@ -11,7 +11,7 @@ namespace CatalogAppMVC.Models
     {
         public IQueryable<WorkLinqToSql.CatalogCategory> CatalogCategories
         {
-            get { throw new NotImplementedException(); }
+            get { return new CatalogDatabaseDataContext().CatalogCategories; }
         }
 
         public int CreateCatalogCategories(Category categoryModel)
@@ -108,9 +108,9 @@ namespace CatalogAppMVC.Models
 
 
 
-        public IQueryable<LinqToSqlMdl.Machinery> Machinerys
+        public IQueryable<WorkLinqToSql.Machinery> Machinerys
         {
-            get { throw new NotImplementedException(); }
+            get { return new CatalogDatabaseDataContext().Machineries; }
         }
 
         public int CreateMachinery(Record record)
@@ -209,7 +209,7 @@ namespace CatalogAppMVC.Models
                         RemoveTag(tagID, machinery.Id);
                     }
                 }
-                var filesID = from f in context.Documents where f.MachineID == machinery.Id select f.Id;
+                var filesID = from f in context.Document where f.MachineID == machinery.Id select f.Id;
                 if(filesID.Count() > 0)
                 {
                     foreach(int fileID in filesID)
@@ -331,7 +331,7 @@ namespace CatalogAppMVC.Models
 
 
 
-        public IQueryable<LinqToSqlMdl.Tags> Tags
+        public IQueryable<WorkLinqToSql.Tag> Tags
         {
             get { throw new NotImplementedException(); }
         }
@@ -425,18 +425,52 @@ namespace CatalogAppMVC.Models
             get { throw new NotImplementedException(); }
         }
 
-        public bool CreateFile(Document tag)
+        public bool CreateFile(File file)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.Document document = new WorkLinqToSql.Document();
+                document.UserAuthor = file.AuthorName;
+                document.Status = (int)Record.StatusType.PREMODERATION;
+                document.MachineID = file.RecordID;
+                document.PathToFile = file.PachToFile;
+                document.DocumentName = file.DocumentName;
+                document.DocumentType = file.DocumentType;
+                document.FileName = file.FileName;
+                document.FileType = file.FileType;
+                document.Size = file.Size;
+                document.MachineID = file.RecordID;
+
+                context.Document.InsertOnSubmit(document);
+                context.Document.Context.SubmitChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public bool UpdateFile(Document tag)
+        public bool UpdateFile(File file)
         {
             throw new NotImplementedException();
         }
 
         public bool RemoveFile(int fileID)
         {
+            try
+            {
+                CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
+                WorkLinqToSql.Document doc = (from file in context.Document where file.Id == fileID select file).Single<WorkLinqToSql.Document>();
+                context.Document.DeleteOnSubmit(doc);
+                context.Document.Context.SubmitChanges();
+            }
+            catch
+            {
+                return false;
+            }
             return true;
         }
 
@@ -473,10 +507,10 @@ namespace CatalogAppMVC.Models
                 record.Tags = null;
             }
 
-            if(machinery.Documents.Count() > 0)
+            if(machinery.Document.Count() > 0)
             {
                 record.Files = new List<File>();
-                foreach(WorkLinqToSql.Document document in machinery.Documents)
+                foreach(WorkLinqToSql.Document document in machinery.Document)
                 {
                     record.Files.Add(ToFile(document));
                 }

@@ -23,7 +23,7 @@ namespace CatalogAppMVC.Models.interfaces
         #endregion 
         #region Machinery
 
-        IQueryable<Machinery> Machinerys { get; }
+        IQueryable<WorkLinqToSql.Machinery> Machinerys { get; }
 
         int CreateMachinery(Record record);
 
@@ -47,7 +47,7 @@ namespace CatalogAppMVC.Models.interfaces
         #endregion 
         #region Tags
 
-        IQueryable<Tags> Tags { get; }
+        IQueryable<WorkLinqToSql.Tag> Tags { get; }
 
         bool CreateTag(CatalogAppMVC.Models.Tag tag, int recordID);
 
@@ -60,9 +60,9 @@ namespace CatalogAppMVC.Models.interfaces
 
         IQueryable<WorkLinqToSql.Document> File { get; }
 
-        bool CreateFile(WorkLinqToSql.Document tag);
+        bool CreateFile(File file);
 
-        bool UpdateFile(WorkLinqToSql.Document tag);
+        bool UpdateFile(File file);
 
         bool RemoveFile(int fileID);
 
