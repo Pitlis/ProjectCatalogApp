@@ -212,6 +212,7 @@
     <Compile Include="Models\MultipleRecordsForCompare.cs" />
     <Compile Include="Models\Parser.cs" />
     <Compile Include="Models\Record.cs" />
+    <Compile Include="Models\RecordsViewModel.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -236,13 +237,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Records\RecordView.cshtml" />
     <Content Include="Views\Records\DownloadFileError.cshtml" />
-    <Content Include="Views\Records\TwoRecordsView.cshtml" />
-    <Content Include="Views\Records\RecordsOfCategory.cshtml" />
+    <Content Include="Views\Records\SomeRecordsView.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Records\FileNotFound.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Shared\_AppError.cshtml" />
+=======
+    <Content Include="Views\Records\RecordsOfCategory.cshtml" />
+>>>>>>> c766f6a8c13b09f2fc1430e2d85298c2fe40bb4f
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
