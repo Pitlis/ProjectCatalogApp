@@ -13,7 +13,6 @@ namespace CatalogAppMVC.Models
 
         public static string GetHeadImageFromFiles(IEnumerable<File> files)
         {
-            //TODO Использовать HttpHandler для сокрытия полного пути
             foreach (File file in files)
             {
                 if (file.DocumentType == IMAGEHEAD)

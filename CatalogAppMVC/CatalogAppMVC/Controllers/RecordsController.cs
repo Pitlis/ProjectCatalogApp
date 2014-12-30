@@ -117,40 +117,52 @@ namespace CatalogAppMVC.Controllers
 
         #endregion
 
-        public ActionResult TwoRecordsView(IEnumerable<Record> records)
+        public ActionResult SomeRecordsView()
         {
-            IRepository repository = new Repository();
-            //Parser parser = new Parser();
-            //parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
-            //for (int i = 60; i <= 65; i++)
-                //repository.RemoveMachinery(i);
-            //Category.GetCategoriesForWrite(AuthUser);
-            //AccessRoleCategory access = new AccessRoleCategory(1, 11, true, true, true);
-            //repository.CreateAccess(access);
-
-            //Category.GetCategoriesForWrite(AuthUser);
-            //(new Category() { Name = "Шпиндели и инверторы" }).AddToBase();
-            //(new Category() { Name = "Фрезерные станки на серводвигателях" }).AddToBase();
-            //(new Category() { Name = "Чиллеры" }).AddToBase();
-
+            List<RecordsViewModel.RecordIdBool> records = Session["RecordsForComparison"] as List<RecordsViewModel.RecordIdBool>;
             List<Record> recordList = new List<Record>();
-            foreach(Record r in records)
+            foreach(RecordsViewModel.RecordIdBool rec in records)
             {
-                recordList.Add(Record.GetRecord(r.ID));
+                if (rec.check)
+                    recordList.Add(Record.GetRecord(rec.id));
             }
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(recordList);
             return View(multRecords);
         }
-
+        [HttpGet]
         public ActionResult RecordsOfCategory(int categoryID)
         {
             int userID = Access.GetUserID(User, HttpContext);
             if (Access.CanReadCategory(userID, categoryID))
             {
                 ViewBag.CategoryName = Category.GetCategory(categoryID).Name;
-                return View(Record.GetRecordsOfCategory(categoryID));
+
+                var ViewModel = new RecordsViewModel();
+                ViewModel.records = Record.GetRecordsOfCategory(categoryID);
+                ViewModel.RecordsForView = new List<RecordsViewModel.RecordIdBool>();
+                ViewModel.categoryID = categoryID;
+                for (int i = 0; i < ViewModel.records.Count(); ++i)
+                {
+                    ViewModel.RecordsForView.Add(new RecordsViewModel.RecordIdBool());
+                }
+                return View(ViewModel);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult RecordsOfCategory(RecordsViewModel model, int CategoryID)
+        {
+            bool one = false;
+            foreach(RecordsViewModel.RecordIdBool rec in model.RecordsForView)
+            {
+                if(rec.check)
+                {
+                    Session["RecordsForComparison"] = model.RecordsForView;
+                    return RedirectToAction("SomeRecordsView");
+                }
+            }
+            return RedirectToAction("RecordsOfCategory", new { categoryID = CategoryID });
         }
     }
 }
