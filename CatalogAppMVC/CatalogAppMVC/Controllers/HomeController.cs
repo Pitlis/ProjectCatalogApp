@@ -16,7 +16,8 @@ namespace CatalogAppMVC.Controllers
         public ActionResult Index()
         {
             IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            return View(Category.GetOpenCategory(user));
+            int userID = user.GetAuthenticationUserId();
+            return View(Category.GetOpenCategory(userID));
         }
     }
 }

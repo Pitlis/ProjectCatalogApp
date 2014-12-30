@@ -16,13 +16,12 @@ namespace CatalogAppMVC.Models
 
         //Методы для работы с БД
 
-        public static List<Category> GetCategoriesForWrite(IMyAppAuthentication user)
+        public static List<Category> GetCategoriesForWrite(int userID)
         {
             List<Category> list = new List<Category>();
             try
             {
                 IRepository repository = new Repository();
-                int userID = user.GetAuthenticationUserId();
                 int userRoleId = repository.GetUserRole(userID).Id;
 
                 IQueryable<WorkLinqToSql.AccessCatalogCategory> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.W == true) select acc;
@@ -35,13 +34,12 @@ namespace CatalogAppMVC.Models
             return list;
         }
 
-        public static List<Category> GetOpenCategory(IMyAppAuthentication user)
+        public static List<Category> GetOpenCategory(int userID)
         {
             List<Category> list = new List<Category>();
             try
             {
                 IRepository repository = new Repository();
-                int userID = user.GetAuthenticationUserId();
                 int userRoleId = repository.GetUserRole(userID).Id;
 
                 IQueryable<WorkLinqToSql.AccessCatalogCategory> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.R == true) select acc;

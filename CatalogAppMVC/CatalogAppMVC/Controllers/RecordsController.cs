@@ -50,7 +50,8 @@ namespace CatalogAppMVC.Controllers
         public ActionResult AddRecordCategory()
         {
             IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            ViewBag.Categories = new SelectList(Category.GetCategoriesForWrite(user), "Id", "Name");
+            int userID = user.GetAuthenticationUserId();
+            ViewBag.Categories = new SelectList(Category.GetCategoriesForWrite(userID), "Id", "Name");
             return View();
         }
 
@@ -93,7 +94,8 @@ namespace CatalogAppMVC.Controllers
         public ActionResult TryDownloadFile(int fileID)
         {
             IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            if (Access.CanDownloadFile(user, fileID))
+            int userID = user.GetAuthenticationUserId();
+            if (Access.CanDownloadFile(userID, fileID))
             {
                 return RedirectToAction("DownloadFile", new { FileID = fileID });
             }
@@ -149,7 +151,8 @@ namespace CatalogAppMVC.Controllers
         public ActionResult RecordsOfCategory(int categoryID)
         {
             IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            if (Access.CanReadCategory(user, categoryID))
+            int userID = user.GetAuthenticationUserId();
+            if (Access.CanReadCategory(userID, categoryID))
             {
                 return View(TESTRecords.GetRecords());
             }

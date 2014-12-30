@@ -8,7 +8,7 @@ namespace CatalogAppMVC.Models
 {
     public static class Access
     {
-        public static bool CanDownloadFile(IMyAppAuthentication user, int fileID)
+        public static bool CanDownloadFile(int userID, int fileID)
         {
             //TODO: Разрешение на скачивание файла
             //заглушка!!
@@ -17,7 +17,7 @@ namespace CatalogAppMVC.Models
             return false;
         }
 
-        public static bool CanReadCategory(IMyAppAuthentication user, int categoryID)
+        public static bool CanReadCategory(int userID, int categoryID)
         {
             //TODO: Разрешение на просмотр категории (для защиты от подделки запроса)
             //заглушка!!
