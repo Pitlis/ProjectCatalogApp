@@ -437,7 +437,7 @@ namespace CatalogAppMVC.Models
             {
                 CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
                 WorkLinqToSql.Document document = new WorkLinqToSql.Document();
-                document.UserAuthor = file.AuthorName;
+                document.UserAuthor = file.AuthorID;
                 document.Status = (int)Record.StatusType.PREMODERATION;
                 document.MachineID = file.RecordID;
                 document.PathToFile = file.PachToFile;
@@ -609,7 +609,17 @@ namespace CatalogAppMVC.Models
 
         public File ToFile(WorkLinqToSql.Document document)
         {
-            throw new NotImplementedException();
+            string userName = " ";
+            try
+            {
+                CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
+                var author = (from user in context.AspNetUsers where (document.UserAuthor == user.Id) select user).Single();
+                userName = author.FirstName + author.LastName;
+            }
+            catch{ }
+            CatalogAppMVC.Models.File file = new File(document.Id, document.UserAuthor, document.DocumentName, document.DocumentType, document.FileName, document.FileType, document.Size, document.PathToFile, userName);
+            
+            return file;
         }
 #endregion
 

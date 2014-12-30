@@ -14,7 +14,8 @@ namespace CatalogAppMVC.Models
         public const string TYPEFILES = "multipart/form-data";
 
         public int FileID { get; private set; }
-        public int AuthorName { get; private set; }
+        public int AuthorID { get; private set; }
+        public string AuthorName { get; set; }
         public string DocumentName { get; private set; }
         public string DocumentType { get; private set; }
         public string FileName { get; private set; }
@@ -24,16 +25,17 @@ namespace CatalogAppMVC.Models
 
         public string PachToFile;//путь к файлу относительно каталога, где хранятся файлы
 
-        public File(int ID, int authorName, string documentName, string documentType, string fileName, string fileType, double size, string pachToFile)
+        public File(int ID, int authorID, string documentName, string documentType, string fileName, string fileType, double size, string pachToFile, string authorName)
         {
             FileID = ID;
-            AuthorName = authorName;
+            AuthorID = authorID;
             DocumentName = documentName;
             DocumentType = documentType;
             FileName = fileName;
             FileType = fileType;
             Size = size;
             PachToFile = pachToFile;
+            AuthorName = authorName;
         }
 
 
@@ -53,7 +55,7 @@ namespace CatalogAppMVC.Models
             string ext = Path.GetExtension(fileURL);
             string name = Path.GetFileNameWithoutExtension(fileURL);
             string filesDirectory = ConfigurationManager.AppSettings["FilesDirectory"] as string;
-            File file = new File(0, 1, fileName, ext, name, ext, 0, pachToFile);
+            File file = new File(0, Access.ADMINID, fileName, ext, name, ext, 0, pachToFile, "Администратор");
 
             try
             {
@@ -65,12 +67,26 @@ namespace CatalogAppMVC.Models
                 return null;
             }
             FileInfo fileInfo = new FileInfo(HttpContext.Current.Server.MapPath(@filesDirectory) + pachToFile + name);
-            file.Size = fileInfo.Length;
+            file.Size = Math.Round((double)fileInfo.Length/1024, 1);
 
             return file;
         }
 
         //Методы для работы с БД
+
+        public static File GetFile(int fileID)
+        {
+            IRepository repositpry = new Repository();
+            try
+            {
+                var file = (from f in repositpry.File where f.Id == fileID select f).Single();
+                return repositpry.ToFile(file);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public void AddToBase()
         {

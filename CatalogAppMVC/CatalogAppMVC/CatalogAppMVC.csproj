@@ -228,9 +228,7 @@
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\TESTCODE\TESTDocuments.cs" />
     <Compile Include="Models\TESTCODE\TestISpecification.cs" />
-    <Compile Include="Models\TESTCODE\TESTRecords.cs" />
     <Compile Include="Models\WorkLinqToSql\CatalogDatabase.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -256,6 +254,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Records\FileNotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

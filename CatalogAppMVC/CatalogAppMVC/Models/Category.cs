@@ -62,7 +62,20 @@ namespace CatalogAppMVC.Models
             }
             return list;
         }
+        public static Category GetCategory(int categoryID)
+        {
+            IRepository repository = new Repository();
+            try
+            {
+                var category = (from cat in repository.CatalogCategories where cat.Id == categoryID select cat).Single();
+                return repository.ToCategory(category);
+            }
+            catch
+            {
 
+            }
+            return null;
+        }
 
         public void AddToBase()
         {

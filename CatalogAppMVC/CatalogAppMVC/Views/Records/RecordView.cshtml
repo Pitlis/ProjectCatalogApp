@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>RecordView</title>
+    <title>@Model.Name</title>
     <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/RecordView.js")" type="text/javascript"></script>
 
@@ -67,13 +67,13 @@
                                     @file.DocumentName &#91; @file.DocumentType &#93;
                                 </td>
                                 <td>
-                                    размер: @file.Size Мб
+                                    размер: @(@file.Size/1024) Мб
                                 </td>
                                 <td>
                                     загрузил: @file.AuthorName
                                 </td>
                                 <td>
-                                    @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
+                                    @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { })
                                 </td>
                             </tr>
                         }
@@ -98,7 +98,7 @@
                                     загрузил: @file.AuthorName
                                 </td>
                                 <td>
-                                    @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { }) спасибо
+                                    @Ajax.ActionLink("скачать", "TryDownloadFile", new { fileID = file.FileID }, new AjaxOptions { })
                                 </td>
                             </tr>
                         }

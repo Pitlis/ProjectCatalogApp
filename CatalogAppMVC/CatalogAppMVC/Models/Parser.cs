@@ -83,9 +83,7 @@ namespace CatalogAppMVC.Models
                 //запись в лог ex.Message
                 return;
             }
-
-            //List<Record> allRecord = Record.GetAllRecords();
-            List<Record> allRecord = TESTCODE.TESTRecords.GetAllRecords();
+            List<Record> allRecord = Record.GetAllRecords();
             foreach(KeyValuePair<string, string> recordFromSite in recordsFromSite)
             {
                 if (!RecordInBase(recordFromSite.Key, allRecord))

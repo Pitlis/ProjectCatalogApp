@@ -85,9 +85,9 @@ namespace CatalogAppMVC.Controllers
 
         #region OneRecordView
 
-        public ActionResult RecordView(Record record)
+        public ActionResult RecordView(int recordID)
         {
-            record = TESTRecords.GetRecord(111);
+            Record record = Record.GetRecord(recordID);
             return View(record);
         }
         public ActionResult TryDownloadFile(int fileID)
@@ -100,10 +100,19 @@ namespace CatalogAppMVC.Controllers
             return View("DownloadFileError");
         }
 
-        public FileResult DownloadFile(int FileID)
+        public ActionResult DownloadFile(int FileID)
         {
-            CatalogAppMVC.Models.File file = TESTDocuments.GetFile(FileID);
-            return File(file.GetPatchToFile(), CatalogAppMVC.Models.File.TYPEFILES, file.GetFileName());
+            CatalogAppMVC.Models.File file = CatalogAppMVC.Models.File.GetFile(FileID);
+            if(file != null)
+            {
+                return File(file.GetPatchToFile(), CatalogAppMVC.Models.File.TYPEFILES, file.GetFileName());
+            }
+            return RedirectToAction("FileNotFound");
+        }
+
+        public ActionResult FileNotFound()
+        {
+            return View();
         }
 
 
@@ -111,26 +120,6 @@ namespace CatalogAppMVC.Controllers
 
         public ActionResult TwoRecordsView(IEnumerable<Record> records)
         {
-            //TODO Удалить заглушку
-            List<Record> records1 = new List<Record>();
-            records1.Add(TESTRecords.GetRecord(1));
-            records1[0].Name = "Запись 1";
-            records1.Add(TESTRecords.GetRecord(2));
-            records1[1].Name = "Запись 2";
-            records1[0].Specifications.Add(new Specification() { Name = "цвет1", Value = "зеленый" });
-            records1[0].Specifications.Add(new Specification() { Name = "цвет2", Value = "синий" });
-            records1[0].Specifications.Add(new Specification() { Name = "цвет3", Value = "желтый" });
-
-            records1[1].Specifications.Add(new Specification() { Name = "цвет2", Value = "фиолетовый" });
-            records1[1].Specifications.Add(new Specification() { Name = "цвет4", Value = "красный" });
-            records1[1].Specifications.Add(new Specification() { Name = "цвет5", Value = "голубой" });
-            records = records1;
-            //---
-            records1[0].Tags.Add(new Tag() { Name = "tag1" });
-            records1[0].Tags.Add(new Tag() { Name = "tag2" });
-            records1[0].Tags.Add(new Tag() { Name = "tag3" });
-            records1[0].Tags.Add(new Tag() { Name = "tag2" });
-
             IRepository repository = new Repository();
             //Parser parser = new Parser();
             //parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
@@ -144,7 +133,13 @@ namespace CatalogAppMVC.Controllers
             //(new Category() { Name = "Шпиндели и инверторы" }).AddToBase();
             //(new Category() { Name = "Фрезерные станки на серводвигателях" }).AddToBase();
             //(new Category() { Name = "Чиллеры" }).AddToBase();
-            MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
+
+            List<Record> recordList = new List<Record>();
+            foreach(Record r in records)
+            {
+                recordList.Add(Record.GetRecord(r.ID));
+            }
+            MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(recordList);
             return View(multRecords);
         }
 
@@ -153,7 +148,8 @@ namespace CatalogAppMVC.Controllers
             int userID = Access.GetUserID(User, HttpContext);
             if (Access.CanReadCategory(userID, categoryID))
             {
-                return View(TESTRecords.GetRecords());
+                ViewBag.CategoryName = Category.GetCategory(categoryID).Name;
+                return View(Record.GetRecordsOfCategory(categoryID));
             }
             return RedirectToAction("Index", "Home");
         }

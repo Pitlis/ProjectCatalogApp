@@ -65,6 +65,12 @@ namespace CatalogAppMVC.Models
             {
                 WorkLinqToSql.Machinery mach = (from m in repository.Machinerys where m.Id == recordID select m).Single<WorkLinqToSql.Machinery>();
                 record = repository.ToRecord(mach);
+                if (record.Tags == null)
+                    record.Tags = new List<Tag>();
+                if (record.Files == null)
+                    record.Files = new List<File>();
+                if (record.Specifications == null)
+                    record.Specifications = new List<Specification>();
             }
             catch
             {
@@ -83,6 +89,26 @@ namespace CatalogAppMVC.Models
                 list.Add(repository.ToRecord(machinery));
             }
             return list;
+        }
+
+        public static List<Record> GetRecordsOfCategory(int categoryID)
+        {
+            List<Record> recordList = new List<Record>();
+            IRepository repository = new Repository();
+
+            try
+            {
+                var records = from rec in repository.Machinerys where rec.CatalogCategory.Id == categoryID select rec;
+                foreach(var rec in records)
+                {
+                    recordList.Add(repository.ToRecord(rec));
+                }
+            }
+            catch
+            {
+                return new List<Record>();
+            }
+            return recordList;
         }
 
         public void AddToDataBase()
