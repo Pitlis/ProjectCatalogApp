@@ -49,8 +49,7 @@ namespace CatalogAppMVC.Controllers
         [HttpGet]
         public ActionResult AddRecordCategory()
         {
-            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            int userID = user.GetAuthenticationUserId();
+            int userID = Access.GetUserID(User, HttpContext);
             ViewBag.Categories = new SelectList(Category.GetCategoriesForWrite(userID), "Id", "Name");
             return View();
         }
@@ -58,9 +57,9 @@ namespace CatalogAppMVC.Controllers
         [HttpPost]
         public ActionResult AddRecordCategory(int CategorySelected)
         {
-            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
+            int userID = Access.GetUserID(User, HttpContext);
             //TODO Добавить проверку, правда ли пользователь выбрал одну из доступных ему категорий
-            Session["Record"] = new Record(user, CategorySelected);
+            Session["Record"] = new Record(userID, CategorySelected);
             return RedirectToAction("AddRecord");
         }
 
@@ -93,8 +92,7 @@ namespace CatalogAppMVC.Controllers
         }
         public ActionResult TryDownloadFile(int fileID)
         {
-            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            int userID = user.GetAuthenticationUserId();
+            int userID = Access.GetUserID(User, HttpContext);
             if (Access.CanDownloadFile(userID, fileID))
             {
                 return RedirectToAction("DownloadFile", new { FileID = fileID });
@@ -138,7 +136,6 @@ namespace CatalogAppMVC.Controllers
             //parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
             //for (int i = 60; i <= 65; i++)
                 //repository.RemoveMachinery(i);
-            ApplicationAuthentication AuthUser = new ApplicationAuthentication(HttpContext);
             //Category.GetCategoriesForWrite(AuthUser);
             //AccessRoleCategory access = new AccessRoleCategory(1, 11, true, true, true);
             //repository.CreateAccess(access);
@@ -150,8 +147,7 @@ namespace CatalogAppMVC.Controllers
 
         public ActionResult RecordsOfCategory(int categoryID)
         {
-            IMyAppAuthentication user = new ApplicationAuthentication(HttpContext);
-            int userID = user.GetAuthenticationUserId();
+            int userID = Access.GetUserID(User, HttpContext);
             if (Access.CanReadCategory(userID, categoryID))
             {
                 return View(TESTRecords.GetRecords());

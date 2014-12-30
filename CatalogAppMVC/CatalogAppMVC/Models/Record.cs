@@ -21,11 +21,11 @@ namespace CatalogAppMVC.Models
         public int UserAuthorID { get; set; }
         public StatusType Status { get; private set; }
 
-        public Record(IMyAppAuthentication user, int categoryID)
+        public Record(int userID, int categoryID)
         {
             ID = 0;
             CategoryID = categoryID;
-            UserAuthorID = user.GetAuthenticationUserId();
+            UserAuthorID = userID;
             Specifications = TestISpecification.GetMandatSpecifications(CategoryID);
         }
         public Record()
