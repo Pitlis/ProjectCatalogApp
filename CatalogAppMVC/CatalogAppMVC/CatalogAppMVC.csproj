@@ -180,6 +180,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageAccountController.cs" />
     <Compile Include="Controllers\RecordsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -199,6 +200,10 @@
     <Compile Include="Models\Identity\CustomUserLogin.cs" />
     <Compile Include="Models\Identity\CustomUserRole.cs" />
     <Compile Include="Models\Identity\CustomUserStore.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\ActivateUserViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\AddRoleViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\AddUserToRoleViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\DeleteUserViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
     <Compile Include="Models\Image.cs" />
@@ -237,6 +242,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Records\FileNotFound.cshtml" />
+    <Content Include="Views\Shared\_AppError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -246,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Parser\Source\" />
+    <Folder Include="Views\ManageAccount\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

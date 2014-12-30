@@ -52,7 +52,7 @@ namespace CatalogAppMVC.Models
         public static int GetUserID(System.Security.Principal.IPrincipal userSecurity, HttpContextBase httpContext)
         {
             int userID = GUESTID;
-            if(userSecurity.Identity.IsAuthenticated)
+            if (userSecurity.Identity.IsAuthenticated)
             {
                 IMyAppAuthentication user = new ApplicationAuthentication(httpContext);
                 userID = user.GetAuthenticationUserId();
