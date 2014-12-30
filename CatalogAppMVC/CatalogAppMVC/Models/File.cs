@@ -42,11 +42,11 @@ namespace CatalogAppMVC.Models
         public string GetPatchToFile()
         {
             string filesDirectory = ConfigurationManager.AppSettings["FilesDirectory"] as string;
-            return filesDirectory + PachToFile + FileName + "." + FileType;
+            return filesDirectory + PachToFile + FileName;
         }
         public string GetFileName()
         {
-            return FileName + "." + FileType;
+            return FileName + FileType;
         }
 
         public static File CreateFileLink(string fileURL, string fileName, string pachToFile)

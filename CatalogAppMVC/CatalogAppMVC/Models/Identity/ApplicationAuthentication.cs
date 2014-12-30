@@ -26,7 +26,7 @@ namespace CatalogAppMVC.Models.Identity
         public int GetAuthenticationUserId()
         {
             string name = _context.Authentication.User.Identity.Name;
-            var user = _userManager.FindByNameAsync(name);
+            var user = _userManager.FindByNameAsync(name).Result;
 
             return user.Id;
         }

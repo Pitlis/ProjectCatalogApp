@@ -428,7 +428,7 @@ namespace CatalogAppMVC.Models
 
         public IQueryable<Document> File
         {
-            get { throw new NotImplementedException(); }
+            get { return new CatalogDatabaseDataContext().Document; }
         }
 
         public bool CreateFile(File file)
