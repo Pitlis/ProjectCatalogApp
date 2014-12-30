@@ -51,9 +51,6 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
     partial void InsertCatalogCategory(CatalogCategory instance);
     partial void UpdateCatalogCategory(CatalogCategory instance);
     partial void DeleteCatalogCategory(CatalogCategory instance);
-    partial void InsertAccessCatalogCategory(AccessCatalogCategory instance);
-    partial void UpdateAccessCatalogCategory(AccessCatalogCategory instance);
-    partial void DeleteAccessCatalogCategory(AccessCatalogCategory instance);
     partial void InsertMachinery(Machinery instance);
     partial void UpdateMachinery(Machinery instance);
     partial void DeleteMachinery(Machinery instance);
@@ -75,6 +72,9 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
     partial void InsertDocument(Document instance);
     partial void UpdateDocument(Document instance);
     partial void DeleteDocument(Document instance);
+    partial void InsertAccessCatalogCategories(AccessCatalogCategories instance);
+    partial void UpdateAccessCatalogCategories(AccessCatalogCategories instance);
+    partial void DeleteAccessCatalogCategories(AccessCatalogCategories instance);
     #endregion
 		
 		public CatalogDatabaseDataContext() : 
@@ -163,14 +163,6 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		public System.Data.Linq.Table<AccessCatalogCategory> AccessCatalogCategories
-		{
-			get
-			{
-				return this.GetTable<AccessCatalogCategory>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Machinery> Machineries
 		{
 			get
@@ -224,6 +216,14 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			get
 			{
 				return this.GetTable<Document>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AccessCatalogCategories> AccessCatalogCategories
+		{
+			get
+			{
+				return this.GetTable<AccessCatalogCategories>();
 			}
 		}
 	}
@@ -826,7 +826,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		
 		private EntitySet<AspNetUserRole> _AspNetUserRoles;
 		
-		private EntitySet<AccessCatalogCategory> _AccessCatalogCategories;
+		private EntitySet<AccessCatalogCategories> _AccessCatalogCategories;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -841,7 +841,7 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		public AspNetRole()
 		{
 			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
-			this._AccessCatalogCategories = new EntitySet<AccessCatalogCategory>(new Action<AccessCatalogCategory>(this.attach_AccessCatalogCategories), new Action<AccessCatalogCategory>(this.detach_AccessCatalogCategories));
+			this._AccessCatalogCategories = new EntitySet<AccessCatalogCategories>(new Action<AccessCatalogCategories>(this.attach_AccessCatalogCategories), new Action<AccessCatalogCategories>(this.detach_AccessCatalogCategories));
 			OnCreated();
 		}
 		
@@ -898,8 +898,8 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRole_AccessCatalogCategory", Storage="_AccessCatalogCategories", ThisKey="Id", OtherKey="RoleID")]
-		public EntitySet<AccessCatalogCategory> AccessCatalogCategories
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRole_AccessCatalogCategories", Storage="_AccessCatalogCategories", ThisKey="Id", OtherKey="RoleID")]
+		public EntitySet<AccessCatalogCategories> AccessCatalogCategories
 		{
 			get
 			{
@@ -943,13 +943,13 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			entity.AspNetRole = null;
 		}
 		
-		private void attach_AccessCatalogCategories(AccessCatalogCategory entity)
+		private void attach_AccessCatalogCategories(AccessCatalogCategories entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetRole = this;
 		}
 		
-		private void detach_AccessCatalogCategories(AccessCatalogCategory entity)
+		private void detach_AccessCatalogCategories(AccessCatalogCategories entity)
 		{
 			this.SendPropertyChanging();
 			entity.AspNetRole = null;
@@ -1594,11 +1594,11 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		
 		private string _Name;
 		
-		private EntitySet<AccessCatalogCategory> _AccessCatalogCategories;
-		
 		private EntitySet<Machinery> _Machineries;
 		
 		private EntitySet<MandatSpecificCatalogCategory> _MandatSpecificCatalogCategories;
+		
+		private EntitySet<AccessCatalogCategories> _AccessCatalogCategories;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -1612,9 +1612,9 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 		
 		public CatalogCategory()
 		{
-			this._AccessCatalogCategories = new EntitySet<AccessCatalogCategory>(new Action<AccessCatalogCategory>(this.attach_AccessCatalogCategories), new Action<AccessCatalogCategory>(this.detach_AccessCatalogCategories));
 			this._Machineries = new EntitySet<Machinery>(new Action<Machinery>(this.attach_Machineries), new Action<Machinery>(this.detach_Machineries));
 			this._MandatSpecificCatalogCategories = new EntitySet<MandatSpecificCatalogCategory>(new Action<MandatSpecificCatalogCategory>(this.attach_MandatSpecificCatalogCategories), new Action<MandatSpecificCatalogCategory>(this.detach_MandatSpecificCatalogCategories));
+			this._AccessCatalogCategories = new EntitySet<AccessCatalogCategories>(new Action<AccessCatalogCategories>(this.attach_AccessCatalogCategories), new Action<AccessCatalogCategories>(this.detach_AccessCatalogCategories));
 			OnCreated();
 		}
 		
@@ -1658,19 +1658,6 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CatalogCategory_AccessCatalogCategory", Storage="_AccessCatalogCategories", ThisKey="Id", OtherKey="CategoryID")]
-		public EntitySet<AccessCatalogCategory> AccessCatalogCategories
-		{
-			get
-			{
-				return this._AccessCatalogCategories;
-			}
-			set
-			{
-				this._AccessCatalogCategories.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CatalogCategory_Machinery", Storage="_Machineries", ThisKey="Id", OtherKey="Category")]
 		public EntitySet<Machinery> Machineries
 		{
@@ -1697,6 +1684,19 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CatalogCategory_AccessCatalogCategories", Storage="_AccessCatalogCategories", ThisKey="Id", OtherKey="CategoryID")]
+		public EntitySet<AccessCatalogCategories> AccessCatalogCategories
+		{
+			get
+			{
+				return this._AccessCatalogCategories;
+			}
+			set
+			{
+				this._AccessCatalogCategories.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1715,18 +1715,6 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_AccessCatalogCategories(AccessCatalogCategory entity)
-		{
-			this.SendPropertyChanging();
-			entity.CatalogCategory = this;
-		}
-		
-		private void detach_AccessCatalogCategories(AccessCatalogCategory entity)
-		{
-			this.SendPropertyChanging();
-			entity.CatalogCategory = null;
 		}
 		
 		private void attach_Machineries(Machinery entity)
@@ -1752,245 +1740,17 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 			this.SendPropertyChanging();
 			entity.CatalogCategory = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AccessCatalogCategories")]
-	public partial class AccessCatalogCategory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RoleID;
-		
-		private int _CategoryID;
-		
-		private bool _R;
-		
-		private bool _W;
-		
-		private bool _F;
-		
-		private EntityRef<CatalogCategory> _CatalogCategory;
-		
-		private EntityRef<AspNetRole> _AspNetRole;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnCategoryIDChanging(int value);
-    partial void OnCategoryIDChanged();
-    partial void OnRChanging(bool value);
-    partial void OnRChanged();
-    partial void OnWChanging(bool value);
-    partial void OnWChanged();
-    partial void OnFChanging(bool value);
-    partial void OnFChanged();
-    #endregion
-		
-		public AccessCatalogCategory()
+		private void attach_AccessCatalogCategories(AccessCatalogCategories entity)
 		{
-			this._CatalogCategory = default(EntityRef<CatalogCategory>);
-			this._AspNetRole = default(EntityRef<AspNetRole>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.CatalogCategory = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int RoleID
+		private void detach_AccessCatalogCategories(AccessCatalogCategories entity)
 		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					if (this._AspNetRole.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CategoryID
-		{
-			get
-			{
-				return this._CategoryID;
-			}
-			set
-			{
-				if ((this._CategoryID != value))
-				{
-					if (this._CatalogCategory.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R", DbType="Bit NOT NULL")]
-		public bool R
-		{
-			get
-			{
-				return this._R;
-			}
-			set
-			{
-				if ((this._R != value))
-				{
-					this.OnRChanging(value);
-					this.SendPropertyChanging();
-					this._R = value;
-					this.SendPropertyChanged("R");
-					this.OnRChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_W", DbType="Bit NOT NULL")]
-		public bool W
-		{
-			get
-			{
-				return this._W;
-			}
-			set
-			{
-				if ((this._W != value))
-				{
-					this.OnWChanging(value);
-					this.SendPropertyChanging();
-					this._W = value;
-					this.SendPropertyChanged("W");
-					this.OnWChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Bit NOT NULL")]
-		public bool F
-		{
-			get
-			{
-				return this._F;
-			}
-			set
-			{
-				if ((this._F != value))
-				{
-					this.OnFChanging(value);
-					this.SendPropertyChanging();
-					this._F = value;
-					this.SendPropertyChanged("F");
-					this.OnFChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CatalogCategory_AccessCatalogCategory", Storage="_CatalogCategory", ThisKey="CategoryID", OtherKey="Id", IsForeignKey=true)]
-		public CatalogCategory CatalogCategory
-		{
-			get
-			{
-				return this._CatalogCategory.Entity;
-			}
-			set
-			{
-				CatalogCategory previousValue = this._CatalogCategory.Entity;
-				if (((previousValue != value) 
-							|| (this._CatalogCategory.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CatalogCategory.Entity = null;
-						previousValue.AccessCatalogCategories.Remove(this);
-					}
-					this._CatalogCategory.Entity = value;
-					if ((value != null))
-					{
-						value.AccessCatalogCategories.Add(this);
-						this._CategoryID = value.Id;
-					}
-					else
-					{
-						this._CategoryID = default(int);
-					}
-					this.SendPropertyChanged("CatalogCategory");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRole_AccessCatalogCategory", Storage="_AspNetRole", ThisKey="RoleID", OtherKey="Id", IsForeignKey=true)]
-		public AspNetRole AspNetRole
-		{
-			get
-			{
-				return this._AspNetRole.Entity;
-			}
-			set
-			{
-				AspNetRole previousValue = this._AspNetRole.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetRole.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetRole.Entity = null;
-						previousValue.AccessCatalogCategories.Remove(this);
-					}
-					this._AspNetRole.Entity = value;
-					if ((value != null))
-					{
-						value.AccessCatalogCategories.Add(this);
-						this._RoleID = value.Id;
-					}
-					else
-					{
-						this._RoleID = default(int);
-					}
-					this.SendPropertyChanged("AspNetRole");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.CatalogCategory = null;
 		}
 	}
 	
@@ -3485,6 +3245,246 @@ namespace CatalogAppMVC.Models.WorkLinqToSql
 						this._UserAuthor = default(int);
 					}
 					this.SendPropertyChanged("AspNetUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AccessCatalogCategories")]
+	public partial class AccessCatalogCategories : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RoleID;
+		
+		private int _CategoryID;
+		
+		private bool _R;
+		
+		private bool _W;
+		
+		private bool _F;
+		
+		private EntityRef<CatalogCategory> _CatalogCategory;
+		
+		private EntityRef<AspNetRole> _AspNetRole;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnCategoryIDChanging(int value);
+    partial void OnCategoryIDChanged();
+    partial void OnRChanging(bool value);
+    partial void OnRChanged();
+    partial void OnWChanging(bool value);
+    partial void OnWChanged();
+    partial void OnFChanging(bool value);
+    partial void OnFChanged();
+    #endregion
+		
+		public AccessCatalogCategories()
+		{
+			this._CatalogCategory = default(EntityRef<CatalogCategory>);
+			this._AspNetRole = default(EntityRef<AspNetRole>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					if (this._AspNetRole.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					if (this._CatalogCategory.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryID = value;
+					this.SendPropertyChanged("CategoryID");
+					this.OnCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_R", DbType="Bit NOT NULL")]
+		public bool R
+		{
+			get
+			{
+				return this._R;
+			}
+			set
+			{
+				if ((this._R != value))
+				{
+					this.OnRChanging(value);
+					this.SendPropertyChanging();
+					this._R = value;
+					this.SendPropertyChanged("R");
+					this.OnRChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_W", DbType="Bit NOT NULL")]
+		public bool W
+		{
+			get
+			{
+				return this._W;
+			}
+			set
+			{
+				if ((this._W != value))
+				{
+					this.OnWChanging(value);
+					this.SendPropertyChanging();
+					this._W = value;
+					this.SendPropertyChanged("W");
+					this.OnWChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Bit NOT NULL")]
+		public bool F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this.OnFChanging(value);
+					this.SendPropertyChanging();
+					this._F = value;
+					this.SendPropertyChanged("F");
+					this.OnFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CatalogCategory_AccessCatalogCategories", Storage="_CatalogCategory", ThisKey="CategoryID", OtherKey="Id", IsForeignKey=true)]
+		public CatalogCategory CatalogCategory
+		{
+			get
+			{
+				return this._CatalogCategory.Entity;
+			}
+			set
+			{
+				CatalogCategory previousValue = this._CatalogCategory.Entity;
+				if (((previousValue != value) 
+							|| (this._CatalogCategory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CatalogCategory.Entity = null;
+						previousValue.AccessCatalogCategories.Remove(this);
+					}
+					this._CatalogCategory.Entity = value;
+					if ((value != null))
+					{
+						value.AccessCatalogCategories.Add(this);
+						this._CategoryID = value.Id;
+					}
+					else
+					{
+						this._CategoryID = default(int);
+					}
+					this.SendPropertyChanged("CatalogCategory");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRole_AccessCatalogCategories", Storage="_AspNetRole", ThisKey="RoleID", OtherKey="Id", IsForeignKey=true)]
+		public AspNetRole AspNetRole
+		{
+			get
+			{
+				return this._AspNetRole.Entity;
+			}
+			set
+			{
+				AspNetRole previousValue = this._AspNetRole.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetRole.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetRole.Entity = null;
+						previousValue.AccessCatalogCategories.Remove(this);
+					}
+					this._AspNetRole.Entity = value;
+					if ((value != null))
+					{
+						value.AccessCatalogCategories.Add(this);
+						this._RoleID = value.Id;
+					}
+					else
+					{
+						this._RoleID = default(int);
+					}
+					this.SendPropertyChanged("AspNetRole");
 				}
 			}
 		}

@@ -10,8 +10,6 @@ namespace CatalogAppMVC.Models
     public class Parser
     {
         //Parser.ParseSite(Assembly.LoadFrom("D:\\parser_infofrezer_ru.dll"));
-        const int AdminID = 1;
-
         IParser parser;
         Type parserType;
         Type parserRecordType;
@@ -131,7 +129,7 @@ namespace CatalogAppMVC.Models
             record.Name = recordNew.Name;
             record.Description = recordNew.Description;
             record.CategoryID = category.ID;
-            record.UserAuthorID = AdminID;
+            record.UserAuthorID = Access.ADMINID;
 
             record.Specifications = new List<Specification>();
             foreach(KeyValuePair<string, string> specificationNew in recordNew.Specifications)

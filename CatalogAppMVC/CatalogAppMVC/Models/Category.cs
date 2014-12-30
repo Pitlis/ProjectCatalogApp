@@ -24,8 +24,8 @@ namespace CatalogAppMVC.Models
                 IRepository repository = new Repository();
                 int userRoleId = repository.GetUserRole(userID).Id;
 
-                IQueryable<WorkLinqToSql.AccessCatalogCategory> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.W == true) select acc;
-                foreach(WorkLinqToSql.AccessCatalogCategory acc in access)
+                IQueryable<WorkLinqToSql.AccessCatalogCategories> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.W == true) select acc;
+                foreach(WorkLinqToSql.AccessCatalogCategories acc in access)
                 {
                     list.Add(repository.ToCategory(acc.CatalogCategory));
                 }
@@ -42,8 +42,8 @@ namespace CatalogAppMVC.Models
                 IRepository repository = new Repository();
                 int userRoleId = repository.GetUserRole(userID).Id;
 
-                IQueryable<WorkLinqToSql.AccessCatalogCategory> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.R == true) select acc;
-                foreach (WorkLinqToSql.AccessCatalogCategory acc in access)
+                IQueryable<WorkLinqToSql.AccessCatalogCategories> access = from acc in repository.Access where (acc.RoleID == userRoleId) && (acc.R == true) select acc;
+                foreach (WorkLinqToSql.AccessCatalogCategories acc in access)
                 {
                     list.Add(repository.ToCategory(acc.CatalogCategory));
                 }
@@ -61,6 +61,23 @@ namespace CatalogAppMVC.Models
                 list.Add(repository.ToCategory(c));
             }
             return list;
+        }
+
+
+        public void AddToBase()
+        {
+            IRepository repository = new Repository();
+            ID = repository.CreateCatalogCategories(this);
+            if(ID != 0)
+            {
+                WorkLinqToSql.AspNetRole role = repository.GetUserRole(Access.ADMINID);
+                if (role != null)
+                {
+                    AccessRoleCategory access = new AccessRoleCategory(1, ID, true, true, true);
+                    repository.CreateAccess(access);
+                }
+
+            }
         }
     }
 }

@@ -9,7 +9,8 @@ namespace CatalogAppMVC.Models
 {
     public static class Access
     {
-        const int GUESTID = 2;
+        public const int GUESTID = 2;
+        public const int ADMINID = 1;
 
         public static bool CanDownloadFile(int userID, int fileID)
         {

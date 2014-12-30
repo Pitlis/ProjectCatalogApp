@@ -31,7 +31,7 @@ namespace CatalogAppMVC.Models
             }
             catch
             {
-                return -1;
+                return 0;
             }
             return category.Id;
         }
@@ -95,6 +95,12 @@ namespace CatalogAppMVC.Models
                     machinery.Category = otherCategoryID;
                 }
 
+                var accesses = from acc in category.AccessCatalogCategories select acc;
+                foreach(var acc in accesses)
+                {
+                    context.AccessCatalogCategories.DeleteOnSubmit(acc);
+                }
+                context.AccessCatalogCategories.Context.SubmitChanges();
                 context.CatalogCategories.DeleteOnSubmit(category);
                 context.CatalogCategories.Context.SubmitChanges();
 
@@ -474,7 +480,7 @@ namespace CatalogAppMVC.Models
             return true;
         }
 
-        public IQueryable<WorkLinqToSql.AccessCatalogCategory> Access
+        public IQueryable<WorkLinqToSql.AccessCatalogCategories> Access
         {
             get
             {
@@ -487,7 +493,7 @@ namespace CatalogAppMVC.Models
             CatalogDatabaseDataContext context = new CatalogDatabaseDataContext();
             try
             {
-                WorkLinqToSql.AccessCatalogCategory access = new AccessCatalogCategory();
+                WorkLinqToSql.AccessCatalogCategories access = new AccessCatalogCategories();
                 access.F = accessModel.CanDownloadFile;
                 access.R = accessModel.CanRead;
                 access.W = accessModel.CanWrite;

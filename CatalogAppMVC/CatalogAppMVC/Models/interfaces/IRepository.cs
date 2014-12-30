@@ -71,7 +71,7 @@ namespace CatalogAppMVC.Models.interfaces
         #endregion 
         #region Access
 
-        IQueryable<WorkLinqToSql.AccessCatalogCategory> Access { get; }
+        IQueryable<WorkLinqToSql.AccessCatalogCategories> Access { get; }
         bool CreateAccess(AccessRoleCategory accessModel);
         bool UpdateAccess(AccessRoleCategory accessModel);
         bool RemoveAccess(AccessRoleCategory accessModel);

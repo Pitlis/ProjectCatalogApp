@@ -141,6 +141,9 @@ namespace CatalogAppMVC.Controllers
             //repository.CreateAccess(access);
 
             //Category.GetCategoriesForWrite(AuthUser);
+            //(new Category() { Name = "Шпиндели и инверторы" }).AddToBase();
+            //(new Category() { Name = "Фрезерные станки на серводвигателях" }).AddToBase();
+            //(new Category() { Name = "Чиллеры" }).AddToBase();
             MultipleRecordsForCompare multRecords = new MultipleRecordsForCompare(records);
             return View(multRecords);
         }

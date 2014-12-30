@@ -31,7 +31,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
-      <Association Name="AspNetRole_AccessCatalogCategory" Member="AccessCatalogCategories" ThisKey="Id" OtherKey="RoleID" Type="AccessCatalogCategory" />
+      <Association Name="AspNetRole_AccessCatalogCategories" Member="AccessCatalogCategories" ThisKey="Id" OtherKey="RoleID" Type="AccessCatalogCategories" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
@@ -71,20 +71,9 @@
     <Type Name="CatalogCategory">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="CatalogCategory_AccessCatalogCategory" Member="AccessCatalogCategories" ThisKey="Id" OtherKey="CategoryID" Type="AccessCatalogCategory" />
       <Association Name="CatalogCategory_Machinery" Member="Machineries" ThisKey="Id" OtherKey="Category" Type="Machinery" />
       <Association Name="CatalogCategory_MandatSpecificCatalogCategory" Member="MandatSpecificCatalogCategories" ThisKey="Id" OtherKey="CatalogCategoryID" Type="MandatSpecificCatalogCategory" />
-    </Type>
-  </Table>
-  <Table Name="dbo.AccessCatalogCategories" Member="AccessCatalogCategories">
-    <Type Name="AccessCatalogCategory">
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="R" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="W" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="F" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="CatalogCategory_AccessCatalogCategory" Member="CatalogCategory" ThisKey="CategoryID" OtherKey="Id" Type="CatalogCategory" IsForeignKey="true" />
-      <Association Name="AspNetRole_AccessCatalogCategory" Member="AspNetRole" ThisKey="RoleID" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" />
+      <Association Name="CatalogCategory_AccessCatalogCategories" Member="AccessCatalogCategories" ThisKey="Id" OtherKey="CategoryID" Type="AccessCatalogCategories" />
     </Type>
   </Table>
   <Table Name="dbo.Machinery" Member="Machineries">
@@ -157,6 +146,17 @@
       <Column Name="Size" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Machinery_Document" Member="Machinery" ThisKey="MachineID" OtherKey="Id" Type="Machinery" IsForeignKey="true" />
       <Association Name="AspNetUser_Document" Member="AspNetUser" ThisKey="UserAuthor" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccessCatalogCategories" Member="AccessCatalogCategories">
+    <Type Name="AccessCatalogCategories">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="R" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="W" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="F" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="CatalogCategory_AccessCatalogCategories" Member="CatalogCategory" ThisKey="CategoryID" OtherKey="Id" Type="CatalogCategory" IsForeignKey="true" />
+      <Association Name="AspNetRole_AccessCatalogCategories" Member="AspNetRole" ThisKey="RoleID" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
