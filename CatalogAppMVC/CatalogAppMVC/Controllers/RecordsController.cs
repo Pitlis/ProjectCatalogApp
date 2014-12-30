@@ -10,7 +10,6 @@ using System.Web.Mvc;
 using CatalogAppMVC.Models.TESTCODE;
 using System.Configuration;
 using Ninject;
-using CatalogAppMVC.Models.LinqToSqlMdl;
 using CatalogAppMVC.Models.Identity;
 using System.Reflection;
 using System.Threading;

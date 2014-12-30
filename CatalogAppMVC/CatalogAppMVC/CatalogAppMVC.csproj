@@ -155,13 +155,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Models\LinqToSqlMdl\DataClasses.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Models\snippets\SqlTable.snippet" />
-    <Content Include="Models\snippets\table.snippet" />
     <Content Include="Models\Parser\dll.zip" />
     <Content Include="Models\WorkLinqToSql\CatalogDatabase.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -212,19 +205,8 @@
     <Compile Include="Models\interfaces\IMyAppAuthentication.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
     <Compile Include="Models\MultipleRecordsForCompare.cs" />
-    <Compile Include="Models\LinqToSqlMdl\DataClasses.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Parser.cs" />
     <Compile Include="Models\Record.cs" />
-    <Compile Include="Models\Repositories\CatalogCategories.cs" />
-    <Compile Include="Models\Repositories\Files.cs" />
-    <Compile Include="Models\Repositories\Machinery.cs" />
-    <Compile Include="Models\Repositories\Specifications.cs" />
-    <Compile Include="Models\Repositories\SqlRepositoryMain.cs" />
-    <Compile Include="Models\Repositories\Tags.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
@@ -267,11 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Models\LinqToSqlMdl\DataClasses.dbml.layout">
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\WorkLinqToSql\CatalogDatabase.dbml.layout">
