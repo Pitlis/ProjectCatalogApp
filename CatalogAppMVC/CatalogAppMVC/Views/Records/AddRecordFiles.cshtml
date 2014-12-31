@@ -1,6 +1,7 @@
-﻿
+﻿@model CatalogAppMVC.Models.FileView
+
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,11 +13,25 @@
 </head>
 <body>
     <p>Шаг 3: добавление файлов</p>
-    <div> 
-        @using (Html.BeginForm())
-        {
-            <p><input type="submit" value="Далее" /></p>
-        }
-    </div>
+@using (Html.BeginForm("AddRecordFiles", "Records", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="Email">
+                Загрузите файл:
+            </label>
+            <div class="controls">
+                @Html.TextBox("UploadedFile", Model.UploadedFile, new { type = "file", @class = "input-xlarge" })
+                @Html.ValidationMessage("UploadedFile")
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                Загрузить
+            </button>
+        </div>
+    </fieldset>
+}
+    @Html.ActionLink("Создать запись", "CreateRecord")
 </body>
 </html>

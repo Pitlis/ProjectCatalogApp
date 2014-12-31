@@ -9,7 +9,7 @@ namespace CatalogAppMVC.Models.interfaces
     public interface IRepository
     {
         WorkLinqToSql.AspNetRole GetUserRole(int userID);
-
+        IQueryable<WorkLinqToSql.AspNetUser> Users { get; }
 
         #region CatalogCategories
 

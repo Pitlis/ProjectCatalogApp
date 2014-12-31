@@ -189,6 +189,7 @@
     <Compile Include="Models\AccessRoleCategory.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileView.cs" />
     <Compile Include="Models\Identity\ApplicationAuthentication.cs" />
     <Compile Include="Models\Identity\ApplicationDbContext.cs" />
     <Compile Include="Models\Identity\ApplicationSignInManager.cs" />

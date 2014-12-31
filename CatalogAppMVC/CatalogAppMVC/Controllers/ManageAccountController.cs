@@ -163,7 +163,7 @@ namespace CatalogAppMVC.Controllers
                     _user = await UserManager.FindByNameAsync(model.Name);
                 }
 
-                if (_user.Id != 1 & _user.Id != 2)
+                if (_user.Id != Access.ADMINID & _user.Id != Access.GUESTID)
                 {
                     await UserManager.DeleteAsync(_user);
                     return RedirectToAction("GetListUsers");

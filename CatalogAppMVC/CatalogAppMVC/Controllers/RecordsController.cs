@@ -35,6 +35,7 @@ namespace CatalogAppMVC.Controllers
         public ActionResult AddRecord(Record recordNew, string TagsString)
         {
             Record record = Session["Record"] as Record;
+            record.Files = new List<Models.File>();
             record.LoadFromPage(recordNew);
             record.LoadTagsFromString(TagsString);
 
@@ -68,15 +69,46 @@ namespace CatalogAppMVC.Controllers
         [HttpGet]
         public ActionResult AddRecordFiles()
         {
-            return View();
+            return View(new FileView());
         }
 
         [HttpPost]
-        public ActionResult AddRecordFiles(object obl)
+        public ActionResult AddRecordFiles(FileView fileView)
         {
             Record record = Session["Record"] as Record;
-           
-            return View("Добавлено");
+            int userID = Access.GetUserID(User, HttpContext);
+            if(fileView.UploadedFile != null)
+            {
+                CatalogAppMVC.Models.File file = CatalogAppMVC.Models.File.UploadFile(fileView.UploadedFile.FileName, "/", userID, fileView.UploadedFile);
+                if (file != null)
+                    record.Files.Add(file);
+            }
+            else
+            {
+                return View(new FileView());
+            }
+
+            return View(new FileView());
+        }
+
+        public ActionResult CreateRecord()
+        {
+            Record record = Session["Record"] as Record;
+            try
+            {
+                record.AddToDataBase();
+                foreach(CatalogAppMVC.Models.File file in record.Files)
+                {
+                    file.RecordID = record.ID;
+                    file.AddToBase();
+                }
+            }
+            catch
+            {
+
+                
+            }
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -153,7 +185,6 @@ namespace CatalogAppMVC.Controllers
         [HttpPost]
         public ActionResult RecordsOfCategory(RecordsViewModel model, int CategoryID)
         {
-            bool one = false;
             foreach(RecordsViewModel.RecordIdBool rec in model.RecordsForView)
             {
                 if(rec.check)
