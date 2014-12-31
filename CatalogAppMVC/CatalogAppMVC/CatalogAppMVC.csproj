@@ -256,6 +256,9 @@
     <Content Include="Views\ManageAccount\DeleteUserFromRole.cshtml" />
     <Content Include="Views\ManageAccount\AddRole.cshtml" />
     <Content Include="Views\ManageAccount\DeleteRole.cshtml" />
+    <Content Include="Views\ManageAccount\ListCategory.cshtml" />
+    <Content Include="Views\ManageAccount\CreateCategory.cshtml" />
+    <Content Include="Views\ManageAccount\EditCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
