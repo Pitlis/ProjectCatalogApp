@@ -189,6 +189,7 @@
     <Compile Include="Models\AccessRoleCategory.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileView.cs" />
     <Compile Include="Models\Identity\ApplicationAuthentication.cs" />
     <Compile Include="Models\Identity\ApplicationDbContext.cs" />
     <Compile Include="Models\Identity\ApplicationSignInManager.cs" />
@@ -258,6 +259,9 @@
     <Content Include="Views\ManageAccount\AddRole.cshtml" />
     <Content Include="Views\ManageAccount\DeleteRole.cshtml" />
     <Content Include="Views\ManageAccount\GetListRoles.cshtml" />
+    <Content Include="Views\ManageAccount\ListCategory.cshtml" />
+    <Content Include="Views\ManageAccount\CreateCategory.cshtml" />
+    <Content Include="Views\ManageAccount\EditCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

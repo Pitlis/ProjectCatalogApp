@@ -163,7 +163,7 @@ namespace CatalogAppMVC.Controllers
                     _user = await UserManager.FindByNameAsync(model.Name);
                 }
 
-                if (_user.Id != 1 & _user.Id != 2)
+                if (_user.Id != Access.ADMINID & _user.Id != Access.GUESTID)
                 {
                     await UserManager.DeleteAsync(_user);
                     return RedirectToAction("GetListUsers");
@@ -307,5 +307,47 @@ namespace CatalogAppMVC.Controllers
 
             return View("_AppError");
         }
+
+
+        #region Category
+        public ActionResult ListCategory()
+        {
+            List<Category> listCategory;
+            listCategory = Category.GetAllCategory();
+            return View(listCategory);
+        }
+
+        [HttpGet]
+        public ActionResult CreateCategory()
+        {
+            return View(new Category());
+        }
+        [HttpPost]
+        public ActionResult CreateCategory(Category categoryNew)
+        {
+            categoryNew.AddToBase();
+            return RedirectToAction("ListCategory");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCategory(int categoryId)
+        {
+            Category.DeleteCategory(categoryId);
+            return RedirectToAction("ListCategory");
+        }
+
+        [HttpGet]
+        public ActionResult EditCategory(int categoryId)
+        {
+            return View(Category.GetCategory(categoryId));
+        }
+        [HttpPost]
+        public ActionResult EditCategory(Category categoryNew)
+        {
+            Category.EditCategory(categoryNew);
+            return RedirectToAction("ListCategory");
+        }
+
+        #endregion
     }
 }

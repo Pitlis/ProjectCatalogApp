@@ -617,14 +617,20 @@ namespace CatalogAppMVC.Models
                 userName = author.FirstName + author.LastName;
             }
             catch{ }
-            CatalogAppMVC.Models.File file = new File(document.Id, document.UserAuthor, document.DocumentName, document.DocumentType, document.FileName, document.FileType, document.Size, document.PathToFile, userName);
+            CatalogAppMVC.Models.File file = new File(document.Id, document.UserAuthor, document.DocumentName, document.DocumentType, document.FileName, document.FileType, document.Size, document.PathToFile);
             
             return file;
         }
 #endregion
 
 
-
+        public IQueryable<WorkLinqToSql.AspNetUser> Users
+        {
+            get
+            {
+                return new CatalogDatabaseDataContext().AspNetUsers;
+            }
+        }
 
 
     }

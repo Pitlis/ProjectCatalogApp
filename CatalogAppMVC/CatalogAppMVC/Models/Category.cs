@@ -34,6 +34,16 @@ namespace CatalogAppMVC.Models
             return list;
         }
 
+        public static void DeleteCategory(int categoryID)
+        {
+            IRepository repository = new Repository();
+            repository.RemoveCatalogCategories(categoryID);
+        }
+        public static void EditCategory(Category categoryNew)
+        {
+            IRepository repository = new Repository();
+            repository.UpdateCatalogCategories(categoryNew);
+        }
         public static List<Category> GetOpenCategory(int userID)
         {
             List<Category> list = new List<Category>();
