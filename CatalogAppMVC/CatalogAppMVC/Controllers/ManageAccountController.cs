@@ -69,48 +69,55 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult GetListUsers()
         {
-            var listUsers = UserManager.Users.ToList<ApplicationUser>();
-
-            if (listUsers != null)
+            try
             {
-                List<ApplicationUser> sortListUser = new List<ApplicationUser>();
+                var listUsers = UserManager.Users.ToList<ApplicationUser>();
 
-                foreach (var user in listUsers)
+                if (listUsers != null)
                 {
-                    if (user.IsActivated == false)
+                    List<ApplicationUser> sortListUser = new List<ApplicationUser>();
+
+                    foreach (var user in listUsers)
                     {
-                        sortListUser.Add(user);
+                        if (user.IsActivated == false)
+                        {
+                            sortListUser.Add(user);
+                        }
                     }
-                }
-                foreach (var user in listUsers)
-                {
-                    if (user.IsActivated == true)
+                    foreach (var user in listUsers)
                     {
-                        sortListUser.Add(user);
+                        if (user.IsActivated == true)
+                        {
+                            sortListUser.Add(user);
+                        }
                     }
-                }
 
-                UsersViewModel model = new UsersViewModel();
-                model.Users = new List<UserViewModel>();
+                    UsersViewModel model = new UsersViewModel();
+                    model.Users = new List<UserViewModel>();
 
-                for (int i = 0; i < sortListUser.Count; i++)
-                {
-
-                    UserViewModel userModel = new UserViewModel()
+                    for (int i = 0; i < sortListUser.Count; i++)
                     {
-                        UserName = sortListUser[i].UserName,
-                        Email = sortListUser[i].Email,                        
-                        IsActivate = sortListUser[i].IsActivated
-                    };
 
-                    model.Users.Add(userModel);
+                        UserViewModel userModel = new UserViewModel()
+                        {
+                            UserName = sortListUser[i].UserName,
+                            Email = sortListUser[i].Email,
+                            IsActivate = sortListUser[i].IsActivated
+                        };
 
+                        model.Users.Add(userModel);
+
+                    }
+
+                    return View(model);
                 }
 
-                return View(model);
+                return View();
             }
-
-            return View();
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
         [Authorize(Roles = "Administrator")]
@@ -130,23 +137,30 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> ActivateUser(ActivateUserViewModel model)
         {
-            if (model != null)
+            try
             {
-                var _user = await UserManager.FindByEmailAsync(model.Email);
+                if (model != null)
+                {
+                    var _user = await UserManager.FindByEmailAsync(model.Email);
 
-                if (_user != null)
-                {
-                    _user.IsActivated = true;
-                    await UserManager.UpdateAsync(_user);
-                    return RedirectToAction("GetListUsers");
+                    if (_user != null)
+                    {
+                        _user.IsActivated = true;
+                        await UserManager.UpdateAsync(_user);
+                        return RedirectToAction("GetListUsers");
+                    }
+                    else
+                    {
+                        return View("_AppError");
+                    }
                 }
-                else
-                {
-                    return View("_AppError");
-                }
+
+                return View();
             }
-
-            return View();
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
         [Authorize(Roles = "Administrator")]
@@ -160,27 +174,34 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteUser(DeleteUserViewModel model)
         {
-            if (model != null)
+            try
             {
-                var _user = await UserManager.FindByEmailAsync(model.Email);
+                if (model != null)
+                {
+                    var _user = await UserManager.FindByEmailAsync(model.Email);
 
-                if (_user == null)
-                {
-                    _user = await UserManager.FindByNameAsync(model.Name);
+                    if (_user == null)
+                    {
+                        _user = await UserManager.FindByNameAsync(model.Name);
+                    }
+
+                    if (_user.Id != Access.ADMINID & _user.Id != Access.GUESTID)
+                    {
+                        await UserManager.DeleteAsync(_user);
+                        return RedirectToAction("GetListUsers");
+                    }
+                    else
+                    {
+                        return View("_AppError");
+                    }
                 }
 
-                if (_user.Id != Access.ADMINID & _user.Id != Access.GUESTID)
-                {
-                    await UserManager.DeleteAsync(_user);
-                    return RedirectToAction("GetListUsers");
-                }
-                else
-                {
-                    return View("_AppError");
-                }
+                return View();
             }
-
-            return View();
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
         [Authorize(Roles = "Administrator")]
@@ -194,22 +215,29 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddUserToRole(AddUserToRoleViewModel model)
         {
-            if (model != null)
+            try
             {
-                var _user = await UserManager.FindByEmailAsync(model.Email);
+                if (model != null)
+                {
+                    var _user = await UserManager.FindByEmailAsync(model.Email);
 
-                if (_user != null)
-                {
-                    await UserManager.AddToRoleAsync(_user.Id, model.NameRole);
-                    return RedirectToAction("GetListUsers");
+                    if (_user != null)
+                    {
+                        await UserManager.AddToRoleAsync(_user.Id, model.NameRole);
+                        return RedirectToAction("GetListUsers");
+                    }
+                    else
+                    {
+                        return View("_AppError");
+                    }
                 }
-                else
-                {
-                    return View("_AppError");
-                }
+
+                return View();
             }
-
-            return View();
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
         [Authorize(Roles = "Administrator")]
@@ -223,51 +251,65 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteUserFromRole(AddUserToRoleViewModel model)
         {
-            if (model != null)
+            try
             {
-                var _user = await UserManager.FindByEmailAsync(model.Email);
-
-                if (_user != null)
+                if (model != null)
                 {
-                    if (_user.Id != 1 & model.NameRole != "Administrator")
+                    var _user = await UserManager.FindByEmailAsync(model.Email);
+
+                    if (_user != null)
                     {
-                        if (_user.Id != 2 & model.NameRole != "Guest")
+                        if (_user.Id != 1 & model.NameRole != "Administrator")
                         {
-                            await UserManager.AddToRoleAsync(_user.Id, model.NameRole);
-                            return RedirectToAction("GetListUsers");
+                            if (_user.Id != 2 & model.NameRole != "Guest")
+                            {
+                                await UserManager.AddToRoleAsync(_user.Id, model.NameRole);
+                                return RedirectToAction("GetListUsers");
+                            }
                         }
+
+                        return View("_AppError");
                     }
-
-                    return View("_AppError");
                 }
-            }
 
-            return View();
+                return View();
+            }
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
         [Authorize(Roles = "Administrator")]
         public ActionResult GetListRoles()
         {
-            var listRoles = RoleStore.Roles.ToList();
-            
-            if (listRoles != null)
+            try
             {
+                var listRoles = RoleStore.Roles.ToList();
 
-                RolesViewModel model = new RolesViewModel();
-                model.Roles = new List<RoleViewModel>();
-
-                foreach (var role in listRoles)
+                if (listRoles != null)
                 {
 
-                    RoleViewModel roleModel = new RoleViewModel() { Name = role.Name };
-                    model.Roles.Add(roleModel);
+                    RolesViewModel model = new RolesViewModel();
+                    model.Roles = new List<RoleViewModel>();
 
+                    foreach (var role in listRoles)
+                    {
+
+                        RoleViewModel roleModel = new RoleViewModel() { Name = role.Name };
+                        model.Roles.Add(roleModel);
+
+                    }
+
+                    return View(model);
                 }
 
-                return View(model);
+                return View();
             }
-
-            return View();
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
         [Authorize(Roles = "Administrator")]
@@ -281,15 +323,22 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddRole(AddRoleViewModel model)
         {
-            if (model != null)
+            try
             {
-                CustomRole _customRole = new CustomRole(model.Name);
-                await RoleStore.CreateAsync(_customRole);
-                return RedirectToAction("GetListRoles");
+                if (model != null)
+                {
+                    CustomRole _customRole = new CustomRole(model.Name);
+                    await RoleStore.CreateAsync(_customRole);
+                    return RedirectToAction("GetListRoles");
+                }
+                else
+                {
+                    return View();
+                }
             }
-            else
+            catch
             {
-                return View();
+                return View("_AppError");
             }
         }
 
@@ -304,23 +353,30 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteRole(AddRoleViewModel model)
         {
-            if (model != null)
+            try
             {
-                var _role = await RoleStore.FindByNameAsync(model.Name);
-
-                if (_role.Name != "Administrators" & _role.Id != 1)
+                if (model != null)
                 {
-                    if (_role.Name != "Guest" & _role.Id != 2)
+                    var _role = await RoleStore.FindByNameAsync(model.Name);
+
+                    if (_role.Name != "Administrators" & _role.Id != 1)
                     {
-                        await RoleStore.DeleteAsync(_role);
-                        return RedirectToAction("GetListRoles");
+                        if (_role.Name != "Guest" & _role.Id != 2)
+                        {
+                            await RoleStore.DeleteAsync(_role);
+                            return RedirectToAction("GetListRoles");
+                        }
                     }
+
+                    return View("_AppError");
                 }
 
                 return View("_AppError");
             }
-
-            return View("_AppError");
+            catch
+            {
+                return View("_AppError");
+            }
         }
 
 
