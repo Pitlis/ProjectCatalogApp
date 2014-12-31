@@ -66,6 +66,7 @@ namespace CatalogAppMVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult GetListUsers()
         {
             var listUsers = UserManager.Users.ToList<ApplicationUser>();
@@ -112,18 +113,21 @@ namespace CatalogAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult ActivateUser()
         {
             ActivateUserViewModel model = new ActivateUserViewModel();
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> ActivateUser(ActivateUserViewModel model)
         {
             if (model != null)
@@ -145,6 +149,7 @@ namespace CatalogAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteUser()
         {
             DeleteUserViewModel model = new DeleteUserViewModel();
@@ -152,6 +157,7 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteUser(DeleteUserViewModel model)
         {
             if (model != null)
@@ -177,6 +183,7 @@ namespace CatalogAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddUserToRole()
         {
             AddUserToRoleViewModel model = new AddUserToRoleViewModel();
@@ -184,6 +191,7 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddUserToRole(AddUserToRoleViewModel model)
         {
             if (model != null)
@@ -204,6 +212,7 @@ namespace CatalogAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteUserFromRole()
         {
             AddUserToRoleViewModel model = new AddUserToRoleViewModel();
@@ -211,6 +220,7 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteUserFromRole(AddUserToRoleViewModel model)
         {
             if (model != null)
@@ -235,6 +245,7 @@ namespace CatalogAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult GetListRoles()
         {
             var listRoles = RoleStore.Roles.ToList();
@@ -259,6 +270,7 @@ namespace CatalogAppMVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddRole()
         {
             AddRoleViewModel model = new AddRoleViewModel();
@@ -266,6 +278,7 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddRole(AddRoleViewModel model)
         {
             if (model != null)
@@ -280,6 +293,7 @@ namespace CatalogAppMVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteRole()
         {
             AddRoleViewModel model = new AddRoleViewModel();
@@ -287,6 +301,7 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteRole(AddRoleViewModel model)
         {
             if (model != null)
@@ -310,6 +325,8 @@ namespace CatalogAppMVC.Controllers
 
 
         #region Category
+
+        [Authorize(Roles = "Administrator")]
         public ActionResult ListCategory()
         {
             List<Category> listCategory;
@@ -318,11 +335,14 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult CreateCategory()
         {
             return View(new Category());
         }
+
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult CreateCategory(Category categoryNew)
         {
             categoryNew.AddToBase();
@@ -330,6 +350,7 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteCategory(int categoryId)
         {
             Category.DeleteCategory(categoryId);
@@ -337,11 +358,14 @@ namespace CatalogAppMVC.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditCategory(int categoryId)
         {
             return View(Category.GetCategory(categoryId));
         }
+
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditCategory(Category categoryNew)
         {
             Category.EditCategory(categoryNew);

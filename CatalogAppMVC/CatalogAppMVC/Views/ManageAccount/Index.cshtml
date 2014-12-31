@@ -4,3 +4,41 @@
 }
 
 @Html.Partial("_AdminNavPartial")
+
+<br />
+
+<h3>Добро пожаловать в административную панель.</h3>
+
+<br />
+
+<ul class="list-group">
+    
+    <li class="list-group-item">
+        @Html.ActionLink("Пользователи", "GetListUsers", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Группы", "GetListRoles", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Активировать польз.", "ActivateUser", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Удалить польз.", "DeleteUser", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Добавить в гр.", "AddUserToRole", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Удалить из гр.", "DeleteUserFromRole", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Добавить группу", "AddRole", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Удалить группу", "DeleteRole", "ManageAccount")
+    </li>
+    <li class="list-group-item">
+        @Html.ActionLink("Категории", "ListCategory", "ManageAccount")
+    </li>
+
+</ul>
