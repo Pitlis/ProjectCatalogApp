@@ -1,0 +1,29 @@
+﻿<ul class="nav nav-pills">
+    <li class="active">
+        @Html.ActionLink("Пользователи", "GetListUsers", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Группы", "GetListRoles", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Активировать польз.", "ActivateUser", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Удалить польз.", "DeleteUser", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Добавить в гр.", "AddUserToRole", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Удалить из гр.", "DeleteUserFromRole", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Добавить группу", "AddRole", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Удалить группу", "DeleteRole", "ManageAccount")
+    </li>
+    <li>
+        @Html.ActionLink("Прочее", "Index", "ManageAccount")
+    </li>
+</ul>

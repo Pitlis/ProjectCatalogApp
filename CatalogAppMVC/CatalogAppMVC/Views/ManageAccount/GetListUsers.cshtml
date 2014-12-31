@@ -1,0 +1,26 @@
+﻿@model CatalogAppMVC.Models.Identity.IdentityViewModel.UsersViewModel
+
+@{
+    ViewBag.Title = "GetListUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_AdminNavPartial")
+
+@using (Html.BeginForm())
+{
+    <ul class="list-group">
+
+        @for (int i = 0; i < Model.Users.Count; i++)
+        {
+            <li class="list-group-item">
+                Логин: @Model.Users[i].UserName
+                <br />
+                E-mail: @Model.Users[i].Email
+                <br />
+                Модерация: @Model.Users[i].IsActivate
+            </li>
+        }
+
+    </ul>
+}

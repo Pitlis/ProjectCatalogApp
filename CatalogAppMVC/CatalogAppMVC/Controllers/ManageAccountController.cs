@@ -81,7 +81,6 @@ namespace CatalogAppMVC.Controllers
                         sortListUser.Add(user);
                     }
                 }
-
                 foreach (var user in listUsers)
                 {
                     if (user.IsActivated == true)
@@ -90,7 +89,24 @@ namespace CatalogAppMVC.Controllers
                     }
                 }
 
-                return View(sortListUser);
+                UsersViewModel model = new UsersViewModel();
+                model.Users = new List<UserViewModel>();
+
+                for (int i = 0; i < sortListUser.Count; i++)
+                {
+
+                    UserViewModel userModel = new UserViewModel()
+                    {
+                        UserName = sortListUser[i].UserName,
+                        Email = sortListUser[i].Email,                        
+                        IsActivate = sortListUser[i].IsActivated
+                    };
+
+                    model.Users.Add(userModel);
+
+                }
+
+                return View(model);
             }
 
             return View();
@@ -100,6 +116,11 @@ namespace CatalogAppMVC.Controllers
         {
             ActivateUserViewModel model = new ActivateUserViewModel();
             return View(model);
+        }
+
+        public ActionResult Index()
+        {
+            return View();
         }
 
         [HttpPost]

@@ -206,6 +206,8 @@
     <Compile Include="Models\Identity\IdentityViewModel\DeleteUserViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\UsersViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\UserViewModel.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\interfaces\IMyAppAuthentication.cs" />
     <Compile Include="Models\interfaces\IRepository.cs" />
@@ -244,6 +246,15 @@
     <Content Include="Views\Records\FileNotFound.cshtml" />
     <Content Include="Views\Shared\_AppError.cshtml" />
     <Content Include="Views\Records\RecordsOfCategory.cshtml" />
+    <Content Include="Views\ManageAccount\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminNavPartial.cshtml" />
+    <Content Include="Views\ManageAccount\GetListUsers.cshtml" />
+    <Content Include="Views\ManageAccount\ActivateUser.cshtml" />
+    <Content Include="Views\ManageAccount\DeleteUser.cshtml" />
+    <Content Include="Views\ManageAccount\AddUserToRole.cshtml" />
+    <Content Include="Views\ManageAccount\DeleteUserFromRole.cshtml" />
+    <Content Include="Views\ManageAccount\AddRole.cshtml" />
+    <Content Include="Views\ManageAccount\DeleteRole.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -253,7 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Parser\Source\" />
-    <Folder Include="Views\ManageAccount\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

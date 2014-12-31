@@ -9,6 +9,7 @@
             <li>
                 @Html.ActionLink("Привет " + User.Identity.GetUserName() + "!", "Index")
             </li>
+            <li>@Html.ActionLink("Управление", "Index", "ManageAccount")</li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
         </ul>
     }
