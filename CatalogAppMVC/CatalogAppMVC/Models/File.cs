@@ -65,7 +65,7 @@ namespace CatalogAppMVC.Models
             return FileName + FileType;
         }
 
-        public static File CreateFileLink(string fileURL, string fileName, string pachToFile)
+        public static File CreateFileLink(string fileURL, string fileName, string pachToFile, HttpContextBase http)
         {
             WebClient webclient = new WebClient();
             string ext = Path.GetExtension(fileURL);
@@ -75,13 +75,13 @@ namespace CatalogAppMVC.Models
 
             try
             {
-                webclient.DownloadFile(new Uri(fileURL), HttpContext.Current.Server.MapPath(@filesDirectory) + pachToFile + name);
+                webclient.DownloadFile(new Uri(fileURL), http.Server.MapPath(@filesDirectory) + pachToFile + name);
             }
             catch
             {
                 return null;
             }
-            FileInfo fileInfo = new FileInfo(HttpContext.Current.Server.MapPath(@filesDirectory) + pachToFile + name);
+            FileInfo fileInfo = new FileInfo(http.Server.MapPath(@filesDirectory) + pachToFile + name);
             file.Size = Math.Round((double)fileInfo.Length/1024, 1);
 
             return file;

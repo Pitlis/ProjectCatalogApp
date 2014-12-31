@@ -138,10 +138,6 @@
     <Content Include="App_Data\DB\CatalogDatabase_log.ldf">
       <DependentUpon>CatalogDatabase.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\DB\TestIdentityDB.mdf" />
-    <Content Include="App_Data\DB\TestIdentityDB_log.ldf">
-      <DependentUpon>TestIdentityDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Documents\Images\defaultForHead.png" />

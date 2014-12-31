@@ -20,11 +20,11 @@ namespace CatalogAppMVC.Models
             Parser parser = new Parser();
             string p = ConfigurationManager.AppSettings["parser"];
             string patch = httpContext.Server.MapPath(p);
-            parser.ParseSite(Assembly.LoadFrom(patch));
+            parser.ParseSite(Assembly.LoadFrom(patch), httpContext);
         }
 
         //TODO Добавить записи в логи
-        public void ParseSite(Assembly parserDLL)
+        public void ParseSite(Assembly parserDLL, HttpContextBase http)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace CatalogAppMVC.Models
                 Category category = CategoryInBase(categorySite.Key, categories);
                 if(category != null)
                 {
-                    LoadNewRecords(categorySite.Value, category);
+                    LoadNewRecords(categorySite.Value, category, http);
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace CatalogAppMVC.Models
         }
 
 
-        void LoadNewRecords(string categoryURL, Category category)
+        void LoadNewRecords(string categoryURL, Category category, HttpContextBase http)
         {
             Dictionary<string, string> recordsFromSite;
             try
@@ -97,7 +97,7 @@ namespace CatalogAppMVC.Models
             {
                 if (!RecordInBase(recordFromSite.Key, allRecord))
                 {
-                    Record recordNew = LoadRecord(recordFromSite.Value, category);
+                    Record recordNew = LoadRecord(recordFromSite.Value, category, http);
                     if (recordNew != null)
                     {
                         recordNew.AddToDataBase();
@@ -120,7 +120,7 @@ namespace CatalogAppMVC.Models
             }
             return false;
         }
-        Record LoadRecord(string recordURL, Category category)
+        Record LoadRecord(string recordURL, Category category, HttpContextBase http)
         {
             IRecord recordNew;
             try
@@ -155,7 +155,7 @@ namespace CatalogAppMVC.Models
                 foreach(KeyValuePair<string, string> fileNew in recordNew.Files)
                 {
                     File file = null;
-                    if((file = File.CreateFileLink(fileNew.Value, fileNew.Key, "/FromSite/")) != null)
+                    if((file = File.CreateFileLink(fileNew.Value, fileNew.Key, "/FromSite/", http)) != null)
                     {
                         record.Files.Add(file);
                     }
