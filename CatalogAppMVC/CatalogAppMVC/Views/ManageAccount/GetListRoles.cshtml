@@ -1,0 +1,22 @@
+﻿@model CatalogAppMVC.Models.Identity.IdentityViewModel.RolesViewModel
+
+@{
+    ViewBag.Title = "GetListRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_AdminNavPartial")
+
+@using (Html.BeginForm())
+{
+    <ul class="list-group">
+
+        @for (int i = 0; i < Model.Roles.Count; i++)
+        {
+            <li class="list-group-item">
+                Группа: @Model.Roles[i].Name
+            </li>
+        }
+
+    </ul>
+}

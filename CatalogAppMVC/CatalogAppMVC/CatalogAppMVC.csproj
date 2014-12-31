@@ -206,6 +206,8 @@
     <Compile Include="Models\Identity\IdentityViewModel\DeleteUserViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\LoginViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\RegisterViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\RolesViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityViewModel\RoleViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\UsersViewModel.cs" />
     <Compile Include="Models\Identity\IdentityViewModel\UserViewModel.cs" />
     <Compile Include="Models\Image.cs" />
@@ -255,6 +257,7 @@
     <Content Include="Views\ManageAccount\DeleteUserFromRole.cshtml" />
     <Content Include="Views\ManageAccount\AddRole.cshtml" />
     <Content Include="Views\ManageAccount\DeleteRole.cshtml" />
+    <Content Include="Views\ManageAccount\GetListRoles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

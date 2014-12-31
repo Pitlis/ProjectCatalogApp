@@ -68,7 +68,7 @@ namespace CatalogAppMVC.Controllers
 
         public ActionResult GetListUsers()
         {
-            var listUsers = UserManager.Users.ToList();
+            var listUsers = UserManager.Users.ToList<ApplicationUser>();
 
             if (listUsers != null)
             {
@@ -241,7 +241,19 @@ namespace CatalogAppMVC.Controllers
             
             if (listRoles != null)
             {
-                return View(listRoles);
+
+                RolesViewModel model = new RolesViewModel();
+                model.Roles = new List<RoleViewModel>();
+
+                foreach (var role in listRoles)
+                {
+
+                    RoleViewModel roleModel = new RoleViewModel() { Name = role.Name };
+                    model.Roles.Add(roleModel);
+
+                }
+
+                return View(model);
             }
 
             return View();
