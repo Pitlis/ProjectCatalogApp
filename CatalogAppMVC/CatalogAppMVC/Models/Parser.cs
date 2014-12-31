@@ -1,6 +1,7 @@
 ﻿using ParserInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -13,6 +14,14 @@ namespace CatalogAppMVC.Models
         IParser parser;
         Type parserType;
         Type parserRecordType;
+
+        public static void ParserStart(HttpContextBase httpContext)
+        {
+            Parser parser = new Parser();
+            string p = ConfigurationManager.AppSettings["parser"];
+            string patch = httpContext.Server.MapPath(p);
+            parser.ParseSite(Assembly.LoadFrom(patch));
+        }
 
         //TODO Добавить записи в логи
         public void ParseSite(Assembly parserDLL)

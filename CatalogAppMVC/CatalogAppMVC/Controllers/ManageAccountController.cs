@@ -10,6 +10,8 @@ using CatalogAppMVC.Models;
 using CatalogAppMVC.Models.WorkLinqToSql;
 using CatalogAppMVC.Models.Identity.IdentityViewModel;
 using System.Threading.Tasks;
+using System.Threading;
+using CatalogAppMVC.Models.interfaces;
 
 namespace CatalogAppMVC.Controllers
 {
@@ -391,5 +393,20 @@ namespace CatalogAppMVC.Controllers
         }
 
         #endregion
+
+        [HttpGet]
+        public ActionResult ParserContr()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ParserContr(bool? start)
+        {
+           Thread parser = new Thread(() => Parser.ParserStart(HttpContext));
+           parser.Start();
+
+           while (!parser.IsAlive) { }
+           return View();
+        }
     }
 }

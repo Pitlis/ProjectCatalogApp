@@ -266,6 +266,7 @@
     <Content Include="Views\ManageAccount\AccessCategoryList.cshtml" />
     <Content Include="Views\ManageAccount\EditAccess.cshtml" />
     <Content Include="Views\ManageAccount\CreateAccess.cshtml" />
+    <Content Include="Views\ManageAccount\ParserContr.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
