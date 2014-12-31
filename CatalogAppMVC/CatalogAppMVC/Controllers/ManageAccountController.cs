@@ -100,7 +100,7 @@ namespace CatalogAppMVC.Controllers
                     UserViewModel userModel = new UserViewModel()
                     {
                         UserName = sortListUser[i].UserName,
-                        Email = sortListUser[i].Email,                        
+                        Email = sortListUser[i].Email,
                         IsActivate = sortListUser[i].IsActivated
                     };
 
@@ -240,7 +240,7 @@ namespace CatalogAppMVC.Controllers
         public ActionResult GetListRoles()
         {
             var listRoles = RoleStore.Roles.ToList();
-            
+
             if (listRoles != null)
             {
 
@@ -394,6 +394,7 @@ namespace CatalogAppMVC.Controllers
 
         #endregion
 
+        #region Parser
         [HttpGet]
         public ActionResult ParserContr()
         {
@@ -402,11 +403,47 @@ namespace CatalogAppMVC.Controllers
         [HttpPost]
         public ActionResult ParserContr(bool? start)
         {
-           Thread parser = new Thread(() => Parser.ParserStart(HttpContext));
-           parser.Start();
+            Thread parser = new Thread(() => Parser.ParserStart(HttpContext));
+            parser.Start();
 
-           while (!parser.IsAlive) { }
-           return View();
+            while (!parser.IsAlive) { }
+            return View();
         }
+        #endregion
+
+        #region MandatSpecification
+
+        public ActionResult MandatSpecification()
+        {
+            return View(Category.GetAllCategory());
+        }
+
+        public ActionResult ListMandatSpecification(int categoryID)
+        {
+            ViewBag.CategoryID = categoryID;
+            return View(CatalogAppMVC.Models.Specification.GetMandatSpecifications(categoryID));
+        }
+        public ActionResult DeleteMandatSpecification(int specificationID, int categoryId)
+        {
+            CatalogAppMVC.Models.Specification.DeleteMandatSpecification(specificationID);
+            return RedirectToAction("ListMandatSpecification", new { categoryID = categoryId });
+        }
+
+        [HttpGet]
+        public ActionResult CreateMandatSpecification(int categoryId)
+        {
+            ViewBag.CategoryId = categoryId;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateMandatSpecification(CatalogAppMVC.Models.Specification sp, int categoryId)
+        {
+            CatalogAppMVC.Models.Specification.CreateMandatSpecification(sp, categoryId);
+
+
+            return RedirectToAction("ListMandatSpecification", new { categoryID = categoryId });
+        }
+
+        #endregion
     }
 }

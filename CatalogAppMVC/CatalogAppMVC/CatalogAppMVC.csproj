@@ -222,7 +222,6 @@
     <Compile Include="Models\RoleView.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\TESTCODE\TestISpecification.cs" />
     <Compile Include="Models\WorkLinqToSql\CatalogDatabase.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -267,6 +266,9 @@
     <Content Include="Views\ManageAccount\EditAccess.cshtml" />
     <Content Include="Views\ManageAccount\CreateAccess.cshtml" />
     <Content Include="Views\ManageAccount\ParserContr.cshtml" />
+    <Content Include="Views\ManageAccount\MandatSpecification.cshtml" />
+    <Content Include="Views\ManageAccount\ListMandatSpecification.cshtml" />
+    <Content Include="Views\ManageAccount\CreateMandatSpecification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

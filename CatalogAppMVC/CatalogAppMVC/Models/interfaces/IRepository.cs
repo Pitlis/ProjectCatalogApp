@@ -87,6 +87,9 @@ namespace CatalogAppMVC.Models.interfaces
         File ToFile(WorkLinqToSql.Document document);
         CatalogAppMVC.Models.AccessRoleCategory ToAccess(WorkLinqToSql.AccessCatalogCategories accessFromBase);
 
+        void RemoveMandatSpecification(int specificationID);
+        void CreateMandatSpecification(Specification specificationModel, int categoryID);
+
         #endregion
     }
 }

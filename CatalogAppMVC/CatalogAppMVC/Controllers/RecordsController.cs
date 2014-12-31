@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 
 
-using CatalogAppMVC.Models.TESTCODE;
 using System.Configuration;
 using Ninject;
 using CatalogAppMVC.Models.Identity;

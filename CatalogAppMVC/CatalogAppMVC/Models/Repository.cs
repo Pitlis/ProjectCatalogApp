@@ -678,5 +678,47 @@ namespace CatalogAppMVC.Models
         }
 
 
+        public void RemoveMandatSpecification(int specificationID)
+        {
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.Specification specification = new WorkLinqToSql.Specification();
+
+                var mSpecification = (from s in context.MandatSpecificCatalogCategories where (s.SpecificationID == specificationID) select s).Single();
+
+
+                context.MandatSpecificCatalogCategories.DeleteOnSubmit(mSpecification);
+                context.MandatSpecificCatalogCategories.Context.SubmitChanges();
+            }
+            catch
+            {
+
+            }
+        }
+        public void CreateMandatSpecification(Specification specificationModel, int categoryID)
+        {
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.MandatSpecificCatalogCategory mSpecification = new WorkLinqToSql.MandatSpecificCatalogCategory();
+                WorkLinqToSql.Specification Specification = new WorkLinqToSql.Specification();
+
+                Specification.Name = specificationModel.Name;
+                Specification.Value = "-";
+                context.Specifications.InsertOnSubmit(Specification);
+                context.Specifications.Context.SubmitChanges();
+
+                mSpecification.CatalogCategoryID = categoryID;
+                mSpecification.SpecificationID = Specification.Id;
+                context.MandatSpecificCatalogCategories.InsertOnSubmit(mSpecification);
+                context.MandatSpecificCatalogCategories.Context.SubmitChanges();
+            }
+            catch
+            {
+
+            }
+        }
+
     }
 }

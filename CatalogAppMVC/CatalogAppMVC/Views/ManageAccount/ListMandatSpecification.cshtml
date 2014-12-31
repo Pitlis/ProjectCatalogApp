@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CatalogAppMVC.Models.Specification>
+
+@{
+    ViewBag.Title = "ListMandatSpecification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Обязательные спецификации</h2>
+
+<p>
+    @Html.ActionLink("Создать", "CreateMandatSpecification", new { categoryId = (int)ViewBag.CategoryID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Название")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Удалить", "DeleteMandatSpecification", new { specificationID = item.ID, categoryId = (int)ViewBag.CategoryID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 
 using CatalogAppMVC.Models.interfaces;
-using CatalogAppMVC.Models.TESTCODE;
 using CatalogAppMVC.Models;
 using CatalogAppMVC.Models.Identity;
 
