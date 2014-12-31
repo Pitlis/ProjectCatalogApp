@@ -349,5 +349,47 @@ namespace CatalogAppMVC.Controllers
         }
 
         #endregion
+
+        #region Access
+
+        public ActionResult AccessCategoryList()
+        {
+            return View(AccessRoleCategory.GetAllAccess());
+        }
+        public ActionResult DeleteAccess(int roleID, int categoryID)
+        {
+            AccessRoleCategory.DeleteAccess(categoryID, roleID);
+            return RedirectToAction("AccessCategoryList");
+        }
+
+        [HttpGet]
+        public ActionResult EditAccess(int roleID, int categoryID)
+        {
+            return View(AccessRoleCategory.GetAccess(categoryID, roleID));
+        }
+
+        [HttpPost]
+        public ActionResult EditAccess(AccessRoleCategory accessNew)
+        {
+            AccessRoleCategory.EditAccess(accessNew);
+            return RedirectToAction("AccessCategoryList");
+        }
+
+        [HttpGet]
+        public ActionResult CreateAccess()
+        {
+            ViewBag.Roles = new SelectList(AccessRoleCategory.GetAllRoles(), "ID", "Name");
+            ViewBag.Categories = new SelectList(Category.GetAllCategory(), "ID", "Name");
+            return View(new AccessRoleCategory());
+        }
+
+        [HttpPost]
+        public ActionResult CreateAccess(AccessRoleCategory accessNew)
+        {
+            accessNew.AddToBase();
+            return RedirectToAction("AccessCategoryList");
+        }
+
+        #endregion
     }
 }

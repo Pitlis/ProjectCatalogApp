@@ -219,6 +219,7 @@
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\RecordsViewModel.cs" />
     <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\RoleView.cs" />
     <Compile Include="Models\Specification.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TESTCODE\TestISpecification.cs" />
@@ -262,6 +263,9 @@
     <Content Include="Views\ManageAccount\ListCategory.cshtml" />
     <Content Include="Views\ManageAccount\CreateCategory.cshtml" />
     <Content Include="Views\ManageAccount\EditCategory.cshtml" />
+    <Content Include="Views\ManageAccount\AccessCategoryList.cshtml" />
+    <Content Include="Views\ManageAccount\EditAccess.cshtml" />
+    <Content Include="Views\ManageAccount\CreateAccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
