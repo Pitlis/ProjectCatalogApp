@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CatalogAppMVC.Models.Category>
+
+@{
+    ViewBag.Title = "MandatSpecification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Категории</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Название")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Обязательные спецификации", "ListMandatSpecification", new { categoryID = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

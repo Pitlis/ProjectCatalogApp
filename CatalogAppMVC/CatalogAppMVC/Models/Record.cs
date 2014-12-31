@@ -1,5 +1,4 @@
 ﻿using CatalogAppMVC.Models.interfaces;
-using CatalogAppMVC.Models.TESTCODE;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace CatalogAppMVC.Models
             ID = 0;
             CategoryID = categoryID;
             UserAuthorID = userID;
-            Specifications = TestISpecification.GetMandatSpecifications(CategoryID);
+            Specifications = Specification.GetMandatSpecifications(CategoryID);
         }
         public Record()
         {

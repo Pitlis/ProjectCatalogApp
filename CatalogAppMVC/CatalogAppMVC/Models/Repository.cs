@@ -511,12 +511,44 @@ namespace CatalogAppMVC.Models
 
         public bool UpdateAccess(AccessRoleCategory accessModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                WorkLinqToSql.AccessCatalogCategories access = (from acc in context.AccessCatalogCategories where (acc.CategoryID == accessModel.CategoryID) && (acc.RoleID == accessModel.RoleID) select acc).Single();
+                access.R = accessModel.CanRead;
+                access.W = accessModel.CanWrite;
+                access.F = accessModel.CanDownloadFile;
+
+                context.AccessCatalogCategories.Context.SubmitChanges();
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool RemoveAccess(AccessRoleCategory accessModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+
+                WorkLinqToSql.AccessCatalogCategories access = (from acc in context.AccessCatalogCategories where (acc.CategoryID == accessModel.CategoryID) && (acc.RoleID == accessModel.RoleID) select acc).Single();
+
+                context.AccessCatalogCategories.DeleteOnSubmit(access);
+                context.AccessCatalogCategories.Context.SubmitChanges();
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public WorkLinqToSql.AspNetRole GetUserRole(int userID)
@@ -621,6 +653,12 @@ namespace CatalogAppMVC.Models
             
             return file;
         }
+
+        public CatalogAppMVC.Models.AccessRoleCategory ToAccess(WorkLinqToSql.AccessCatalogCategories accessFromBase)
+        {
+            CatalogAppMVC.Models.AccessRoleCategory access = new AccessRoleCategory(accessFromBase.RoleID, accessFromBase.CategoryID, accessFromBase.R, accessFromBase.W, accessFromBase.F);
+            return access;
+        }
 #endregion
 
 
@@ -631,7 +669,56 @@ namespace CatalogAppMVC.Models
                 return new CatalogDatabaseDataContext().AspNetUsers;
             }
         }
+        public IQueryable<WorkLinqToSql.AspNetRole> Roles
+        {
+            get
+            {
+                return new CatalogDatabaseDataContext().AspNetRoles;
+            }
+        }
 
+
+        public void RemoveMandatSpecification(int specificationID)
+        {
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.Specification specification = new WorkLinqToSql.Specification();
+
+                var mSpecification = (from s in context.MandatSpecificCatalogCategories where (s.SpecificationID == specificationID) select s).Single();
+
+
+                context.MandatSpecificCatalogCategories.DeleteOnSubmit(mSpecification);
+                context.MandatSpecificCatalogCategories.Context.SubmitChanges();
+            }
+            catch
+            {
+
+            }
+        }
+        public void CreateMandatSpecification(Specification specificationModel, int categoryID)
+        {
+            try
+            {
+                CatalogDatabaseDataContext context = new WorkLinqToSql.CatalogDatabaseDataContext();
+                WorkLinqToSql.MandatSpecificCatalogCategory mSpecification = new WorkLinqToSql.MandatSpecificCatalogCategory();
+                WorkLinqToSql.Specification Specification = new WorkLinqToSql.Specification();
+
+                Specification.Name = specificationModel.Name;
+                Specification.Value = "-";
+                context.Specifications.InsertOnSubmit(Specification);
+                context.Specifications.Context.SubmitChanges();
+
+                mSpecification.CatalogCategoryID = categoryID;
+                mSpecification.SpecificationID = Specification.Id;
+                context.MandatSpecificCatalogCategories.InsertOnSubmit(mSpecification);
+                context.MandatSpecificCatalogCategories.Context.SubmitChanges();
+            }
+            catch
+            {
+
+            }
+        }
 
     }
 }

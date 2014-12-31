@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "ParserContr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Парсер</h2>
+
+@using (Html.BeginForm("ParserContr", "ManageAccount", FormMethod.Post, new {start = true }))
+{
+ 
+         <input type="submit" value="Запустить парсер" class="btn btn-block" />
+
+}

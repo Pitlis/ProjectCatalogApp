@@ -10,6 +10,8 @@ using CatalogAppMVC.Models;
 using CatalogAppMVC.Models.WorkLinqToSql;
 using CatalogAppMVC.Models.Identity.IdentityViewModel;
 using System.Threading.Tasks;
+using System.Threading;
+using CatalogAppMVC.Models.interfaces;
 
 namespace CatalogAppMVC.Controllers
 {
@@ -97,7 +99,6 @@ namespace CatalogAppMVC.Controllers
 
                     for (int i = 0; i < sortListUser.Count; i++)
                     {
-
                         UserViewModel userModel = new UserViewModel()
                         {
                             UserName = sortListUser[i].UserName,
@@ -106,13 +107,13 @@ namespace CatalogAppMVC.Controllers
                         };
 
                         model.Users.Add(userModel);
-
                     }
 
                     return View(model);
                 }
 
                 return View();
+
             }
             catch
             {
@@ -283,6 +284,7 @@ namespace CatalogAppMVC.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult GetListRoles()
         {
+
             try
             {
                 var listRoles = RoleStore.Roles.ToList();
@@ -290,18 +292,24 @@ namespace CatalogAppMVC.Controllers
                 if (listRoles != null)
                 {
 
-                    RolesViewModel model = new RolesViewModel();
-                    model.Roles = new List<RoleViewModel>();
-
-                    foreach (var role in listRoles)
+                    if (listRoles != null)
                     {
 
-                        RoleViewModel roleModel = new RoleViewModel() { Name = role.Name };
-                        model.Roles.Add(roleModel);
+                        RolesViewModel model = new RolesViewModel();
+                        model.Roles = new List<RoleViewModel>();
 
+                        foreach (var role in listRoles)
+                        {
+
+                            RoleViewModel roleModel = new RoleViewModel() { Name = role.Name };
+                            model.Roles.Add(roleModel);
+
+                        }
+
+                        return View(model);
                     }
 
-                    return View(model);
+                    return View();
                 }
 
                 return View();
@@ -426,6 +434,100 @@ namespace CatalogAppMVC.Controllers
         {
             Category.EditCategory(categoryNew);
             return RedirectToAction("ListCategory");
+        }
+
+        #endregion
+
+        #region Access
+
+        public ActionResult AccessCategoryList()
+        {
+            return View(AccessRoleCategory.GetAllAccess());
+        }
+        public ActionResult DeleteAccess(int roleID, int categoryID)
+        {
+            AccessRoleCategory.DeleteAccess(categoryID, roleID);
+            return RedirectToAction("AccessCategoryList");
+        }
+
+        [HttpGet]
+        public ActionResult EditAccess(int roleID, int categoryID)
+        {
+            return View(AccessRoleCategory.GetAccess(categoryID, roleID));
+        }
+
+        [HttpPost]
+        public ActionResult EditAccess(AccessRoleCategory accessNew)
+        {
+            AccessRoleCategory.EditAccess(accessNew);
+            return RedirectToAction("AccessCategoryList");
+        }
+
+        [HttpGet]
+        public ActionResult CreateAccess()
+        {
+            ViewBag.Roles = new SelectList(AccessRoleCategory.GetAllRoles(), "ID", "Name");
+            ViewBag.Categories = new SelectList(Category.GetAllCategory(), "ID", "Name");
+            return View(new AccessRoleCategory());
+        }
+
+        [HttpPost]
+        public ActionResult CreateAccess(AccessRoleCategory accessNew)
+        {
+            accessNew.AddToBase();
+            return RedirectToAction("AccessCategoryList");
+        }
+
+        #endregion
+
+        #region Parser
+        [HttpGet]
+        public ActionResult ParserContr()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ParserContr(bool? start)
+        {
+            Thread parser = new Thread(() => Parser.ParserStart(HttpContext));
+            parser.Start();
+
+            while (!parser.IsAlive) { }
+            return View();
+        }
+        #endregion
+
+        #region MandatSpecification
+
+        public ActionResult MandatSpecification()
+        {
+            return View(Category.GetAllCategory());
+        }
+
+        public ActionResult ListMandatSpecification(int categoryID)
+        {
+            ViewBag.CategoryID = categoryID;
+            return View(CatalogAppMVC.Models.Specification.GetMandatSpecifications(categoryID));
+        }
+        public ActionResult DeleteMandatSpecification(int specificationID, int categoryId)
+        {
+            CatalogAppMVC.Models.Specification.DeleteMandatSpecification(specificationID);
+            return RedirectToAction("ListMandatSpecification", new { categoryID = categoryId });
+        }
+
+        [HttpGet]
+        public ActionResult CreateMandatSpecification(int categoryId)
+        {
+            ViewBag.CategoryId = categoryId;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateMandatSpecification(CatalogAppMVC.Models.Specification sp, int categoryId)
+        {
+            CatalogAppMVC.Models.Specification.CreateMandatSpecification(sp, categoryId);
+
+
+            return RedirectToAction("ListMandatSpecification", new { categoryID = categoryId });
         }
 
         #endregion

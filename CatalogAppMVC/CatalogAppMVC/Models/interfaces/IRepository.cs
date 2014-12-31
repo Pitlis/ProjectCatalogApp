@@ -10,6 +10,7 @@ namespace CatalogAppMVC.Models.interfaces
     {
         WorkLinqToSql.AspNetRole GetUserRole(int userID);
         IQueryable<WorkLinqToSql.AspNetUser> Users { get; }
+        IQueryable<WorkLinqToSql.AspNetRole> Roles { get; }
 
         #region CatalogCategories
 
@@ -84,6 +85,10 @@ namespace CatalogAppMVC.Models.interfaces
         Specification ToSpecification(WorkLinqToSql.Specification specificationFromBase);
         Tag ToTag(WorkLinqToSql.Tag tagFromBase);
         File ToFile(WorkLinqToSql.Document document);
+        CatalogAppMVC.Models.AccessRoleCategory ToAccess(WorkLinqToSql.AccessCatalogCategories accessFromBase);
+
+        void RemoveMandatSpecification(int specificationID);
+        void CreateMandatSpecification(Specification specificationModel, int categoryID);
 
         #endregion
     }
